@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register page</title>
+    <link rel="stylesheet" href="../../css/register.css">
 </head>
 <body>
     <h1>welcome to my register page</h1>
+
+    <form action="/saveRecords" method="post">
+        <input type="text" name="nome" id="inome" placeholder="Seu nome aqui..." required>
+        <input type="email" name="email" id="iemail" placeholder="Seu email aqui..." required>
+        <input type="password" name="senha" id="isenha" placeholder="Sua senha aqui..." required>
+        <button>Cadastrar</button>
+    </form>
 </body>
 </html>
