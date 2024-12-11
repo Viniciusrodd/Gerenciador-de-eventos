@@ -9,45 +9,14 @@
 <body>
     <h1>welcome to my register page</h1>
     <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
-    <form method="post" action="/saveRecords" enctype="multipart/form-data">
+    <form method="post" action="/saveRecords">
         <input type="text" name="fullname" id="inome" placeholder="Seu nome completo aqui..." required>
         <input type="text" name="username" id="iusername" placeholder="Seu nome de usuário aqui...">
         <input type="email" name="email" id="iemail" placeholder="Seu email aqui..." required>
-        <input type="password" name="password" id="ipassword" placeholder="Sua senha aqui..." required>
-        
-        <div id="div-imagem-capa">
-            <div id="div-imagem-perfil">
-                <input type="file" id="input-edit-imagem" name="imageFile">
-            </div>
-        </div>
-
+        <input type="password" name="password" id="isenha" placeholder="Sua senha aqui..." required>
+    
         <button>Cadastrar</button>
     </form>
 </body>
-
-<script>
-
-    document.getElementById('input-edit-imagem').addEventListener('change', function(event) {
-        const file = event.target.files[0];  // Pega o primeiro arquivo (se existir)
-            if (file) {
-                const reader = new FileReader();  // Cria um novo FileReader
-
-                reader.onload = function(e) {
-                    const imgElement = document.createElement('img');  // Cria um elemento de imagem
-                    imgElement.src = e.target.result;  // Define o src como o conteúdo do arquivo carregado
-                    imgElement.classList.add('imagem-perfil')
-
-                    const divImagemPerfil = document.getElementById('div-imagem-perfil');
-                    divImagemPerfil.innerHTML = '';  // Limpa o conteúdo anterior da div
-                    divImagemPerfil.appendChild(imgElement);  // Adiciona a nova imagem dentro da div
-                };
-
-                reader.readAsDataURL(file);  // Lê o arquivo e o converte em uma URL de dados
-            }
-        });
-
-
-</script>
-
 
 </html>

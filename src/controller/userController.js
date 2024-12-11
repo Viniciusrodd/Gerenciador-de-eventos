@@ -8,7 +8,7 @@ const sequelize = require('sequelize');
 
 
 //config do multer
-const storage = multer.memoryStorage(); // Armazena a imagem na memória
+/*const storage = multer.memoryStorage(); // Armazena a imagem na memória
 const image = multer({ 
     storage: storage,
     fileFilter: (req, file, cb) => {
@@ -19,7 +19,7 @@ const image = multer({
         }
         cb(null, true);
     }
- });
+ });*/
 
 
 
@@ -29,15 +29,10 @@ router.get('/register', (req, res) =>{
 
 
 
-router.post('/saveRecords', image.single('imageFile'), async (req, res) =>{
-    console.log(req.file);
+router.post('/saveRecords', async (req, res) =>{
+    //console.log(req.file);
     try{
         const {fullname, username, email, password} = req.body;
-
-        // Verificações básicas
-        if (!req.file) {
-            return res.status(400).send('Any file send.');
-        }
 
         if (!fullname || !username || !email || !password) {
             return res.redirect('/register');
@@ -55,8 +50,7 @@ router.post('/saveRecords', image.single('imageFile'), async (req, res) =>{
             fullName: fullname,
             userName: username,
             email: email,
-            password: hash,
-            image: req.file.buffer
+            password: hash
         });
 
         console.log('Record sucess create')

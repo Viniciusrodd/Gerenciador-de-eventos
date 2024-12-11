@@ -2,12 +2,11 @@
 
 const {Sequelize, DataTypes} = require('sequelize');
 const Conection = require('../database/conection');
-const { FORCE } = require('sequelize/lib/index-hints');
 
 const Record = Conection.define('Record',{
-    fullname: {
+    fullName: {
         type: DataTypes.STRING,
-        allownull: false
+        allowNull: false
     },
     userName: {
         type: DataTypes.STRING,
@@ -20,15 +19,11 @@ const Record = Conection.define('Record',{
     password: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    image: {
-        type: DataTypes.BLOB('long'),        
-        allowNull: true
     }
 })
 
 
-Record.sync({FORCE: false})
+Record.sync({force: false})
     .then(() =>{
         console.log('Record table sync')
     })
