@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const router = require('./src/controller/userController');
 const path = require('path');
 const conection = require('./src/database/conection');
 
@@ -29,7 +28,8 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', router);
+const userController = require('./src/controller/userController');
+app.use('/', userController);
 
 
 app.listen(7070, () =>{
