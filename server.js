@@ -4,6 +4,16 @@ const app = express();
 const bodyParser = require('body-parser');
 const router = require('./src/controller/userController');
 const path = require('path');
+const conection = require('./src/database/conection');
+
+
+conection.authenticate()
+    .then(() =>{
+        console.log('Data base authenticated');
+    })
+    .catch((error) =>{
+        console.log(error)
+    })
 
 
 app.use(bodyParser.urlencoded({extended: true}));
