@@ -9,14 +9,14 @@
 <body>
     <h1>welcome to my register page</h1>
     <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
-    <form action="/saveRecords" method="post" enctype="multipart/form-data">
-        <input type="text" name="nome" id="inome" placeholder="Seu nome aqui..." required>
+    <form method="post" action="/saveRecords" enctype="multipart/form-data">
+        <input type="text" name="fullname" id="inome" placeholder="Seu nome completo aqui..." required>
+        <input type="text" name="username" id="iusername" placeholder="Seu nome de usuário aqui...">
         <input type="email" name="email" id="iemail" placeholder="Seu email aqui..." required>
-        <input type="password" name="senha" id="isenha" placeholder="Sua senha aqui..." required>
+        <input type="password" name="password" id="ipassword" placeholder="Sua senha aqui..." required>
         
         <div id="div-imagem-capa">
             <div id="div-imagem-perfil">
-                <label for="file">Escolha um arquivo:</label>
                 <input type="file" id="input-edit-imagem" name="imageFile">
             </div>
         </div>

@@ -6,7 +6,7 @@ const path = require('path');
 const conection = require('./src/database/conection');
 
 
-const recordsModel = require('./src/models/recordsModel');
+const recordModel = require('./src/models/recordModel');
 
 
 conection.authenticate()
@@ -19,7 +19,7 @@ conection.authenticate()
 
 
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
