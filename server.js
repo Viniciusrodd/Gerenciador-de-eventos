@@ -7,6 +7,9 @@ const path = require('path');
 const conection = require('./src/database/conection');
 
 
+const recordsModel = require('./src/models/recordsModel');
+
+
 conection.authenticate()
     .then(() =>{
         console.log('Data base authenticated');
@@ -14,6 +17,7 @@ conection.authenticate()
     .catch((error) =>{
         console.log(error)
     })
+
 
 
 app.use(bodyParser.urlencoded({extended: true}));
