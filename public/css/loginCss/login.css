@@ -1,5 +1,101 @@
 @charset "UTF-8";
 
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+#div-pai{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: url(../../imagens/section-img-5.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#div-filho{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+    width: 40%;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px,
+    rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, 
+    rgba(240, 46, 170, 0.05) -25px 25px;
+}
+
 h1{
-    color: red;
+    color: black;
+    text-shadow: 5px 5px 8px white;
+    margin: 0px 0px 20px 0px;
+    font-size: 40px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+input{
+    height: 40px;
+    width: 70%;
+    border: none;
+    font-size: 17px;
+    margin: 0px 0px 10px 0px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(255, 255, 255, 0);
+    border-bottom: 2px solid black;
+}
+
+input:focus {
+    outline: none; 
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.35);
+}
+
+p{
+    font-size: 23px;
+    font-weight: bold;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+button{
+    height: 40px;
+    width: 30%;
+    border: none;
+    background-color: rgba(240, 46, 169, 0.676);
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+button:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.378);
+    outline: none;
+    transform: scale(1.08);
 }
