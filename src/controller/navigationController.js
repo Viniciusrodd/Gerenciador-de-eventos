@@ -6,12 +6,17 @@ const userAuth = require('../middleware/userAuth');
 
 
 router.get('/registro', (req, res) =>{
-    res.render('register')
+    res.render('register');
 })
 
 
 router.get('/login', (req, res) =>{
-    res.render('login')
+    res.render('login');
+})
+
+
+router.get('/homepage',userAuth ,(req, res) =>{
+    res.render('homepage');
 })
 
 

@@ -77,7 +77,7 @@ router.post('/authenticateLogin', (req, res) =>{
                     email: dadosLogin.email,
                     userName: dadosLogin.userName
                 }
-                res.render('login')
+                res.redirect('/homepage')
                 console.log('Login sucess')
             }else{
                 res.redirect('/login')
