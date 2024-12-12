@@ -66,6 +66,28 @@ router.post('/authenticateLogin', (req, res) =>{
             email: emailVar,
         }
     })
+    .then((dadosLogin) =>{
+        if(dadosLogin != undefined){
+            //validar senha com Bcrypt
+            var correct = bcrypt.compareSync(passwordVar, dadosLogin.password)
+            if(correct){
+                //criando sessão
+                req.session.user = {
+                    id: dadosLogin.id,
+                    email: dadosLogin.email,
+                    userName: dadosLogin.userName
+                }
+                res.render('login')
+                console.log('Login sucess')
+            }else{
+                res.redirect('/login')
+                console.log('Wrong password')
+            }
+        }else{
+            res.redirect('/login')
+            console.log('Wrong login data')
+        }
+    })
 
 
 })
