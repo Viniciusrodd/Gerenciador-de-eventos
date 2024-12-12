@@ -23,8 +23,14 @@ const image = multer({
 
 
 
-router.get('/register', (req, res) =>{
+router.get('/registro', (req, res) =>{
     res.render('register')
+})
+
+
+
+router.get('/login', (req, res) =>{
+    res.render('login')
 })
 
 
@@ -35,12 +41,12 @@ router.post('/saveRecords', async (req, res) =>{
         const {fullname, username, email, password} = req.body;
 
         if (!fullname || !username || !email || !password) {
-            return res.redirect('/register');
+            return res.redirect('/registro');
         }
 
         const userExists = await recordModel.findOne({ where: { email: email } });
         if (userExists) {
-            return res.redirect('/register');
+            return res.redirect('/registro');
         }
 
         const salt = bcrypt.genSaltSync(10);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../../css/loginCss/">
+</head>
+<body>
+    <div id="div-pai">
+        <div id="div-filho">
+
+            <form method="post" action="/authenticateLogin">
+                <h1>Login</h1>
+
+                <input type="text" name="email" id="iemail" placeholder="Email">
+                <input type="password" name="password" id="ipassword" placeholder="Password">
+
+                <p><a href="/register">Don't have an account ?</a></p>
+                
+                <button>Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
