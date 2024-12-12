@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register page</title>
     <link rel="stylesheet" href="../../css/register.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <h1>welcome to my register page</h1>
-    <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
-    <form method="post" action="/saveRecords">
-        <input type="text" name="fullname" id="inome" placeholder="Seu nome completo aqui..." required>
-        <input type="text" name="username" id="iusername" placeholder="Seu nome de usuário aqui...">
-        <input type="email" name="email" id="iemail" placeholder="Seu email aqui..." required>
-        <input type="password" name="password" id="isenha" placeholder="Sua senha aqui..." required>
-    
-        <button>Cadastrar</button>
-    </form>
+    <div id="div-pai">
+        <div id="div-filho">
+            <h1>Registre-se</h1>
+            <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
+            <form method="post" action="/saveRecords">
+                <input type="text" name="fullname" id="inome" placeholder="Nome completo" required>
+                <input type="text" name="username" id="iusername" placeholder="Nome de usuário">
+                <input type="email" name="email" id="iemail" placeholder="Email" required>
+                <input type="password" name="password" id="isenha" placeholder="Senha" required>
+            
+                <p id="p-registro"><a href="#">Already have an account</a></p>
+                <button>Cadastrar</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
