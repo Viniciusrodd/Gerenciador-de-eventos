@@ -4,6 +4,19 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const conection = require('./src/database/conection');
+const session = require('express-session');
+
+
+app.use(session({
+    secret: 'textoqualquerparaaumentarsegurançadesessão',
+    resave: false, // Evita gravações desnecessárias quando a sessão não muda
+    saveUninitialized: false, // Não cria sessões "vazias" automaticamente
+    cookie: {
+        maxAge: 3000000, // Tempo de vida do cookie em milissegundos (50 minutos aqui)
+        httpOnly: true, // O cookie só pode ser acessado pelo servidor
+        secure: false // true se estiver em produção com HTTPS
+    }
+}))
 
 
 const recordModel = require('./src/models/recordModel');

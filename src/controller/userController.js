@@ -57,4 +57,18 @@ router.post('/saveRecords', async (req, res) =>{
 })
 
 
+router.post('/authenticateLogin', (req, res) =>{
+    var emailVar = req.body.email
+    var passwordVar = req.body.password
+
+    recordModel.findOne({
+        where: {
+            email: emailVar,
+        }
+    })
+
+
+})
+
+
 module.exports = router;
