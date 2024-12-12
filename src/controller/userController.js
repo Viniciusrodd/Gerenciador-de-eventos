@@ -23,18 +23,6 @@ const image = multer({
 
 
 
-router.get('/registro', (req, res) =>{
-    res.render('register')
-})
-
-
-
-router.get('/login', (req, res) =>{
-    res.render('login')
-})
-
-
-
 router.post('/saveRecords', async (req, res) =>{
     //console.log(req.file);
     try{

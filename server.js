@@ -29,7 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 const userController = require('./src/controller/userController');
+const navigationController = require('./src/controller/navigationController');
 app.use('/', userController);
+app.use('/', navigationController);
 
 
 app.listen(7070, () =>{
