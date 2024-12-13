@@ -1,5 +1,60 @@
 @charset "UTF-8";
 
+:root{
+    --cor01: #212121
+}
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 15vh;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    background-color: var(--cor01);
+    border-bottom: 2px solid white;
+}
+
 h1{
-    color: red;
+    color: white;
+}
+
+#header-image{
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    border-radius: 100px;
+    margin: 0px 15px 0px 15px;
+}
+
+#div-pai{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 2% 0px 10% 0px;
+    width: 100%;
+    background-color: var(--cor01);
+}
+
+#profile-homepage{
+    height: 60vh;
+    width: 20%;
+    background-color: white;
+}
+
+#publications-homepage{
+    height: 60vh;
+    width: 70%;
+    background-color: white;
 }

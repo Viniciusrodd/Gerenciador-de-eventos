@@ -15,7 +15,7 @@ router.get('/login', (req, res) =>{
 })
 
 
-router.get('/homepage',userAuth ,(req, res) =>{
+router.get('/homepage', (req, res) =>{
     res.render('homepage');
 })
 
