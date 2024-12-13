@@ -21,18 +21,26 @@ header{
     height: 15vh;
     width: 100%;
     padding: 10px 0px 10px 0px;
-    background-color: var(--cor01);
-    border-bottom: 2px solid white;
+    background-image: url(../../imagens/section-img-5.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid white;
 }
 
-h1{
+.titulo{
     color: white;
+    font-size: 45px;
+    font-weight: 100;
+    font-style: italic;
 }
 
 #header-image{
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
     background-color: white;
+    background-image: url(../../imagens/logo-2.png);
+    background-size: cover;
+    background-position: top;
     border-radius: 100px;
     margin: 0px 15px 0px 15px;
 }
@@ -44,17 +52,82 @@ h1{
     flex-direction: row;
     padding: 2% 0px 10% 0px;
     width: 100%;
-    background-color: var(--cor01);
+    background-image: url(../../imagens/section-img-5.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #profile-homepage{
     height: 60vh;
     width: 20%;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.306) -5px 5px, rgba(47, 10, 33, 0.3) -10px 10px,
+    rgba(60, 19, 45, 0.2) -15px 15px, rgba(82, 25, 61, 0.1) -20px 20px, 
+    rgba(240, 46, 170, 0.05) -25px 25px;
+    border-radius: 20px;
 }
 
 #publications-homepage{
-    height: 60vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 10%;
     width: 70%;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(47, 10, 33, 0.3) -10px 10px,
+    rgba(60, 19, 45, 0.2) -15px 15px, rgba(82, 25, 61, 0.1) -20px 20px, 
+    rgba(240, 46, 170, 0.05) -25px 25px;
+    border-radius: 20px;
+}
+
+#event-banner{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-direction: row;
+    height: 40vh;
+    width: 100%;
+    background-image: url(../../imagens/natal.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;    
+    border-radius: 20px 20px 0px 0px;
+
+    & #event-data{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 70px;
+        width: 70px;
+        padding: 5px;
+        margin: 20px;
+        background-color: rgba(0, 0, 0, 0.391);
+        border: 2px solid white;
+        border-radius: 10px;
+
+        & #p-event-data{
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            margin: 0px;
+        }
+    }
+
+    & #event-title{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 30%;
+        width: 80%;
+        margin-bottom: 20px;
+
+        & #p-event-title{
+            font-size: 40px;
+            color: white;
+            font-style: italic;
+            font-family: serif;
+        }
+    }
 }
