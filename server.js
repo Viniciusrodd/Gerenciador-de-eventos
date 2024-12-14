@@ -20,6 +20,7 @@ app.use(session({
 
 
 const recordModel = require('./src/models/recordModel');
+const eventModel = require('./src/models/eventModel');
 
 
 conection.authenticate()
