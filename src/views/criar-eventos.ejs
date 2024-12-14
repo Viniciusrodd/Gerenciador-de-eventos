@@ -7,28 +7,63 @@
     <link rel="stylesheet" href="../../css/criar-eventosCss/criar-eventos.css">
 </head>
 <body>
-    <div>
-        <h1>welcome to create events</h1>
-
-        <input type="text" name="" id="" placeholder="nome do evento">
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <div id="header-image">
+    
+            </div>
+            <h1 class="titulo">Eventos</h1>
+        </header>
         
-        <select name="tipo" id="itipo"> 
-            <option value="" selected>Tipo de evento</option>        
-            <option value="privado">Privado</option>
-            <option value="publico">Público</option>
-        </select>
 
-        <input type="text" name="" id="" placeholder="organizador">
-        <input type="date" name="" id="">
-        <input type="time" name="" id="">
-        <input type="text" name="" id="" placeholder="endereço">
-        <fieldset>
-            <legend>Descrição</legend>
-            <p>até 600 caracteres</p>
-            <textarea name="" id="" style="width: 300px; height: 300px;">
+        <div id="div-filho">
+            <h1 id="titulo-evento">Crie seu evento</h1>
 
-            </textarea>
-        </fieldset>
+            
+            <label for="nomeEvento">Nome do evento</label>
+            <input type="text" name="nomeEvento" id="inomeEvento">
+            
+            
+            <label for="tipo">Tipo de evento</label>
+            <select name="tipo" id="itipo"> 
+                <option value="" selected></option>        
+                <option value="privado">Privado</option>
+                <option value="publico">Público</option>
+            </select>
+
+            
+            <label for="organizador">Organizador do evento</label>
+            <input type="text" name="organizador" id="iorganizador">
+            
+            
+            <label for="data">Data do evento</label>
+            <input type="date" name="data" id="idata">
+            
+            
+            <label for="hora_inicio">Horário de inicio</label>
+            <input type="time" name="hora_inicio" id="ihora_inicio">
+
+            
+            <label for="hora_fim">Horário de término</label>
+            <input type="time" name="hora_fim" id="ihora_fim">
+
+            
+            <label for="endereco">Endereço do evento</label>
+            <input type="text" name="endereco" id="iendereco">
+            
+            <fieldset>
+                <legend>Descrição</legend>
+                <p id="p-textarea">*até 600 caracteres</p>
+                <textarea name="descricao" id="idescricao">
+
+                </textarea>
+            </fieldset>
+
+            
+            <label for="imagem">Imagem de fundo (opcional)</label>
+            <input type="file" name="imagem" id="iimagem">
+        </div>
     </div>
 </body>
 </html>
