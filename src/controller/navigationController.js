@@ -19,5 +19,9 @@ router.get('/homepage', (req, res) =>{
     res.render('homepage');
 })
 
+router.get('/criarEventos', (req, res) =>{
+    res.render('criar-eventos')
+})
+
 
 module.exports = router;
