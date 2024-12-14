@@ -32,7 +32,9 @@ router.post('/saveRecords', async (req, res) =>{
             return res.redirect('/registro');
         }
 
-        const userExists = await recordModel.findOne({ where: { email: email } });
+        const userExists = await recordModel.findOne({ 
+            where: { email: email } 
+        });
         if (userExists) {
             return res.redirect('/registro');
         }
@@ -68,10 +70,8 @@ router.post('/authenticateLogin', (req, res) =>{
     })
     .then((dadosLogin) =>{
         if(dadosLogin != undefined){
-            //validar senha com Bcrypt
             var correct = bcrypt.compareSync(passwordVar, dadosLogin.password)
             if(correct){
-                //criando sessão
                 req.session.user = {
                     id: dadosLogin.id,
                     email: dadosLogin.email,

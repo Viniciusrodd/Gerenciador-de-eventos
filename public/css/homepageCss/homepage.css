@@ -13,6 +13,18 @@ html, body{
     padding: 0px;
 }
 
+#div-pai{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0% 0px 0% 0px;
+    width: 100%;
+    background-image: url(../../imagens/section-img-4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 header{
     display: flex;
     justify-content: center;
@@ -21,10 +33,7 @@ header{
     height: 15vh;
     width: 100%;
     padding: 10px 0px 10px 0px;
-    background-image: url(../../imagens/section-img-4.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-bottom: 1px solid white;
+    background-color: transparent;
 }
 
 .titulo{
@@ -45,16 +54,15 @@ header{
     margin: 0px 15px 0px 15px;
 }
 
-#div-pai{
+#container-homepage{
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     flex-direction: row;
-    padding: 2% 0px 10% 0px;
+    padding: 0% 0px 10% 0px;
     width: 100%;
-    background-image: url(../../imagens/section-img-4.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: transparent;
+    margin-top: 30px;
 }
 
 #profile-homepage{
