@@ -38,6 +38,28 @@ router.get('/homepage', userAuth, (req, res) =>{
                 if (event.image ) {
                     event.imageBase64 = Buffer.from(event.image).toString('base64');
                 }
+
+                // Trabalhando com a data
+                const date = new Date(event.data);
+                event.day = date.getDate() ;       // Extrai o dia
+                event.month = date.getMonth() + 1; // Extrai o mês (0-11, por isso adicionamos 1)
+                event.year = date.getFullYear(); // Extrai o ano
+
+
+                // Trabalhando com o horário
+                if (event.hora_inicio) { // Valida se o campo de horário de início existe
+                    const [startHours, startMinutes, startSeconds] = event.hora_inicio.split(':');
+                    event.startHours = startHours;
+                    event.startMinutes = startMinutes;
+                    event.startSeconds = startSeconds;
+                }
+
+                if (event.hora_fim) { // Valida se o campo de horário de fim existe
+                    const [endHours, endMinutes, endSeconds] = event.hora_fim.split(':');
+                    event.endHours = endHours;
+                    event.endMinutes = endMinutes;
+                    event.endSeconds = endSeconds;
+                }
             });
     
             res.render('homepage', {

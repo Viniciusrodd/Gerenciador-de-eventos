@@ -65,7 +65,7 @@
 
                         <div id="event-title">
                             <div id="event-data">
-                                <p id="p-event-data">25 dez</p>
+                                <p id="p-event-data"><%= dados.day %> / <%= dados.month %></p>
                             </div>
                         
                             <p id="p-event-title"><%= dados.nome %></p>
@@ -82,7 +82,9 @@
                             <hr>
                             <li>
                                 <i class="material-icons">schedule</i>
-                                <%= dados.data %>
+                                Dia <%= dados.day %> do mês <%= dados.month %>
+                                às <%= dados.startHours %>:<%= dados.startMinutes %>
+                                - <%= dados.endHours %>:<%= dados.endMinutes %>
                             </li>
                             <hr>
                             <li>
