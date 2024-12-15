@@ -23,11 +23,11 @@
 
             
             <label for="nomeEvento">NOME DO EVENTO</label>
-            <input type="text" name="nomeEvento" id="inomeEvento">
+            <input type="text" name="nomeEvento" id="inomeEvento" required>
             
             
             <label for="tipo">TIPO DE EVENTO</label>
-            <select name="tipo" id="itipo"> 
+            <select name="tipo" id="itipo" required> 
                 <option value="" selected></option>        
                 <option value="Privado">Privado</option>
                 <option value="Público">Público</option>
@@ -35,35 +35,35 @@
 
             
             <label for="organizador">ORGANIZADOR DO EVENTO</label>
-            <input type="text" name="organizador" id="iorganizador">
+            <input type="text" name="organizador" id="iorganizador" required>
             
             
             <label for="data">DATA DO EVENTO</label>
-            <input type="date" name="data" id="idata">
+            <input type="date" name="data" id="idata" required>
             
             
             <label for="hora_inicio">HORÁRIO DE INÍCIO</label>
-            <input type="time" name="hora_inicio" id="ihora_inicio">
+            <input type="time" name="hora_inicio" id="ihora_inicio" required>
 
             
             <label for="hora_fim">HORÁRIO DE TÉRMINO</label>
-            <input type="time" name="hora_fim" id="ihora_fim">
+            <input type="time" name="hora_fim" id="ihora_fim" required>
 
             
             <label for="endereco">ENDEREÇO DO EVENTO</label>
-            <input type="text" name="endereco" id="iendereco">
+            <input type="text" name="endereco" id="iendereco" required>
             
             <fieldset>
                 <legend>DESCRIÇÃO</legend>
                 <p id="p-textarea">*até 600 caracteres</p>
-                <textarea name="descricao" id="idescricao">
+                <textarea name="descricao" id="idescricao" required>
 
                 </textarea>
             </fieldset>
 
             
             <label for="imagem">Imagem de fundo (opcional)</label>
-            <input type="file" name="imagem" id="iimagem">
+            <input type="file" name="imagem" id="iimagem" required>
 
             <button id="btt-evento">Publicar</button>
         </form>

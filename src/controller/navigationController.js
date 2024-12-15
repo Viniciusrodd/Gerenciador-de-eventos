@@ -4,6 +4,7 @@ const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
 const sequelize = require('sequelize');
 const userAuth = require('../middleware/userAuth');
+const moment = require('moment-timezone');
 
 
 router.get('/registro', (req, res) =>{
@@ -40,25 +41,27 @@ router.get('/homepage', userAuth, (req, res) =>{
                 }
 
                 // Trabalhando com a data
-                const date = new Date(event.data);
-                event.day = date.getDate() ;       // Extrai o dia
-                event.month = date.getMonth() + 1; // Extrai o mês (0-11, por isso adicionamos 1)
-                event.year = date.getFullYear(); // Extrai o ano
+                
+                    const eventDate = moment(event.data).tz('America/Sao_Paulo', true);
+                    event.day = eventDate.date();  // Extrai o dia
+                    event.month = eventDate.month() + 1;  // Extrai o mês (0-11, por isso adicionamos 1)
+                    event.year = eventDate.year();  // Extrai o ano
+                
 
 
                 // Trabalhando com o horário
                 if (event.hora_inicio) { // Valida se o campo de horário de início existe
-                    const [startHours, startMinutes, startSeconds] = event.hora_inicio.split(':');
-                    event.startHours = startHours;
-                    event.startMinutes = startMinutes;
-                    event.startSeconds = startSeconds;
+                    const startTime = moment(event.hora_inicio, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                    event.startHours = startTime.hours();
+                    event.startMinutes = startTime.minutes();
+                    event.startSeconds = startTime.seconds();
                 }
 
                 if (event.hora_fim) { // Valida se o campo de horário de fim existe
-                    const [endHours, endMinutes, endSeconds] = event.hora_fim.split(':');
-                    event.endHours = endHours;
-                    event.endMinutes = endMinutes;
-                    event.endSeconds = endSeconds;
+                    const endTime = moment(event.hora_fim, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                    event.endHours = endTime.hours();
+                    event.endMinutes = endTime.minutes();
+                    event.endSeconds = endTime.seconds();
                 }
             });
     

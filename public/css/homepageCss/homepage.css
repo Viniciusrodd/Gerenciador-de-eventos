@@ -14,6 +14,11 @@ html, body{
     padding: 0px;
 }
 
+hr{
+    height: 1px;
+    background-color: black;
+}
+
 
 /*DIV-PAI*/
 
@@ -25,8 +30,8 @@ html, body{
     flex-direction: column;
     padding: 0% 0px 0% 0px;
     width: 100%;
-    background-image: url(../../imagens/section-img-4.jpg);
-    background-position: bottom center;
+    background-image: url(../../imagens/section-img-7.jpg);
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -48,8 +53,8 @@ header{
 
 .titulo{
     color: white;
-    text-shadow: 4px 4px black;
-    font-size: 45px;
+    text-shadow: 4px 4px var(--cor02);
+    font-size: 55px;
     font-style: italic;
 }
 
@@ -210,7 +215,7 @@ a:hover{
     justify-content: flex-start;
     align-items: flex-end;
     flex-direction: row;
-    height: 60vh;
+    height: 70vh;
     width: 100%;
     background-size: cover;
     background-position: center center;
@@ -225,28 +230,6 @@ a:hover{
     border-radius: 20px 20px 0px 0px;
 }
 
-#event-data{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 70px;
-    width: 70px;
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.6); /* Transparente, mas escuro para destacar o texto */        border: 2px solid white;
-    border: 2px solid white;
-    border-radius: 10px;
-    z-index: 1; /* Garante que o conteúdo do texto fique sobre a imagem */
-}
-
-#p-event-data{
-    font-size: 30px;
-    color: white;
-    text-align: center;
-    margin: 0px;
-}
-    
-
 #event-title{
     position: absolute; /* Posiciona o título sobre a imagem */
     display: flex;
@@ -254,19 +237,51 @@ a:hover{
     align-items: center;
     flex-direction: row;
     height: 20%;
-    width: 30%;
+    padding: 0px 20px 0px 20px;
     border-radius: 0px 20px 0px 0px;
     z-index: 1;
     margin: 0px;
-    background-color: black;
+    background-color: transparent;
+}
+
+#event-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90px;
+    width: 90px;
+    padding: 5px;
+    margin-right: 40px;
+    background-color: rgba(0, 0, 0, 0.6); /* Transparente, mas escuro para destacar o texto */        border: 2px solid white;
+    border: 2px solid white;
+    border-radius: 10px;
+    z-index: 1; /* Garante que o conteúdo do texto fique sobre a imagem */
+
+    & hr{
+        height: 1px;
+        width: 100%;
+        background-color: white;
+    }
+}
+
+.p-event-data{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    margin: 0px;
 }
 
 #p-event-title{
     font-size: 50px;
     border-radius: 10px;
     color: white;
+    background-color: rgba(0, 0, 0, 0.647);
+    text-shadow: 3px 3px black;
+    padding: 5px;
     font-style: italic;
     font-family: serif;
+    margin: 0px;
 }
 
 #event-info-container{

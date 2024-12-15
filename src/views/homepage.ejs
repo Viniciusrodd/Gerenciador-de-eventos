@@ -60,12 +60,15 @@
                     <div id="event-banner">
                         <% if (dados.imageBase64) { %>
                             <img id="img-banner" src="data:image/jpeg;base64,<%= dados.imageBase64 %>" alt="">
+                        <% } else { %>
+                            <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
                         <% } %>
-                        
 
                         <div id="event-title">
                             <div id="event-data">
-                                <p id="p-event-data"><%= dados.day %> / <%= dados.month %></p>
+                                <p class="p-event-data"><%= dados.day %></p>
+                                <hr>
+                                <p class="p-event-data"><%= dados.month %></p>
                             </div>
                         
                             <p id="p-event-title"><%= dados.nome %></p>
@@ -82,9 +85,8 @@
                             <hr>
                             <li>
                                 <i class="material-icons">schedule</i>
-                                Dia <%= dados.day %> do mês <%= dados.month %>
-                                às <%= dados.startHours %>:<%= dados.startMinutes %>
-                                - <%= dados.endHours %>:<%= dados.endMinutes %>
+                                Dia <%= dados.day %>, do mês <%= dados.month %> - 
+                                das <%= dados.hora_inicio %> às <%= dados.hora_fim %>
                             </li>
                             <hr>
                             <li>
