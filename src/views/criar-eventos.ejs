@@ -10,9 +10,10 @@
     <div id="div-pai">
         <header>
             <h1 class="titulo">Gerência</h1>
-            <div id="header-image">
-    
-            </div>
+            <a href="/homepage">
+                <div id="header-image">
+                </div>
+            </a>
             <h1 class="titulo">Eventos</h1>
         </header>
         
@@ -21,11 +22,11 @@
             <h1 id="titulo-evento">Crie seu evento</h1>
 
             
-            <label for="nomeEvento">Nome do evento</label>
+            <label for="nomeEvento">NOME DO EVENTO</label>
             <input type="text" name="nomeEvento" id="inomeEvento">
             
             
-            <label for="tipo">Tipo de evento</label>
+            <label for="tipo">TIPO DE EVENTO</label>
             <select name="tipo" id="itipo"> 
                 <option value="" selected></option>        
                 <option value="privado">Privado</option>
@@ -33,27 +34,27 @@
             </select>
 
             
-            <label for="organizador">Organizador do evento</label>
+            <label for="organizador">ORGANIZADOR DO EVENTO</label>
             <input type="text" name="organizador" id="iorganizador">
             
             
-            <label for="data">Data do evento</label>
+            <label for="data">DATA DO EVENTO</label>
             <input type="date" name="data" id="idata">
             
             
-            <label for="hora_inicio">Horário de inicio</label>
+            <label for="hora_inicio">HORÁRIO DE INÍCIO</label>
             <input type="time" name="hora_inicio" id="ihora_inicio">
 
             
-            <label for="hora_fim">Horário de término</label>
+            <label for="hora_fim">HORÁRIO DE TÉRMINO</label>
             <input type="time" name="hora_fim" id="ihora_fim">
 
             
-            <label for="endereco">Endereço do evento</label>
+            <label for="endereco">ENDEREÇO DO EVENTO</label>
             <input type="text" name="endereco" id="iendereco">
             
             <fieldset>
-                <legend>Descrição</legend>
+                <legend>DESCRIÇÃO</legend>
                 <p id="p-textarea">*até 600 caracteres</p>
                 <textarea name="descricao" id="idescricao">
 
@@ -63,6 +64,8 @@
             
             <label for="imagem">Imagem de fundo (opcional)</label>
             <input type="file" name="imagem" id="iimagem">
+
+            <button id="btt-evento">Publicar</button>
         </div>
     </div>
 </body>
