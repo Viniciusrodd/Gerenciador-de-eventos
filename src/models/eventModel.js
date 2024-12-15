@@ -14,7 +14,7 @@ const Events = Conection.define('Events', {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isIn: [['privado', 'publico']], // Validação para aceitar apenas os valores permitidos
+            isIn: [['Privado', 'Público']], // Validação para aceitar apenas os valores permitidos
         }
     },
     organizador: {
