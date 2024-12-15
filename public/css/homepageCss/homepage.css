@@ -104,21 +104,22 @@ header{
     height: 30vh;
     width: 70%;
     margin-top: 30px;
-
-    & #profile-image{
-        height: 100px;
-        width: 100px;
-        background-image: url(../../imagens/user.jpg);
-        background-size: cover;
-        border-radius: 100px;
-        background-color: transparent;
-    }
-
-    & .profile-name{
-        font-size: 22px;
-        margin: 0px;
-    }
 }
+
+#profile-image{
+    height: 100px;
+    width: 100px;
+    background-image: url(../../imagens/user.jpg);
+    background-size: cover;
+    border-radius: 100px;
+    background-color: transparent;
+}
+
+.profile-name{
+    font-size: 22px;
+    margin: 0px;
+}
+
 
 a{
     font-size: 20px;
@@ -157,20 +158,21 @@ a:hover{
     flex-direction: column;
     height: 23vh;
     width: 70%;
-
-    & li{
-        font-size: 20px;
-        text-align: left;
-        list-style-type: none;
-        margin-bottom: 3px;
-        cursor: pointer;
-        transition: 0.5s;
-    }
-    & li:hover{
-        transform: scale(1.02);
-        text-decoration: underline;
-    }
 }
+
+li{
+    font-size: 20px;
+    text-align: left;
+    list-style-type: none;
+    margin-bottom: 3px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+li:hover{
+    transform: scale(1.02);
+    text-decoration: underline;
+}
+
 
 
 /*PUBLICATIONS-CONTAINER*/
@@ -191,54 +193,69 @@ a:hover{
 }
 
 #event-banner{
+    position: relative; /* Necessário para posicionar elementos dentro dele */
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
+    justify-content: center;  /* Para centralizar o conteúdo horizontalmente */
+    align-items: center; /* Para centralizar o conteúdo verticalmente */
     flex-direction: row;
     height: 40vh;
     width: 100%;
-    background-image: url(../../imagens/natal.jpg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;    
     border-radius: 20px 20px 0px 0px;
+}
 
-    & #event-data{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        height: 70px;
-        width: 70px;
-        padding: 5px;
-        margin: 20px;
-        background-color: rgba(0, 0, 0, 0.391);
-        border: 2px solid white;
-        border-radius: 10px;
+#img-banner{
+    position: absolute; /* Posiciona a imagem como fundo */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+    object-fit: cover; /* Garante que a imagem cubra toda a área */
+    z-index: -1; /* Garante que a imagem fique atrás dos outros conteúdos */
+}
 
-        & #p-event-data{
-            font-size: 30px;
-            color: white;
-            text-align: center;
-            margin: 0px;
-        }
-    }
+#event-data{
+    position: absolute; /* Posiciona o texto sobre a imagem */
+    bottom: 20px; /* Distância da parte inferior */
+    left: 20px; /* Distância da parte esquerda */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 70px;
+    width: 70px;
+    padding: 5px;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Transparente, mas escuro para destacar o texto */        border: 2px solid white;
+    border-radius: 10px;
+    z-index: 1; /* Garante que o conteúdo do texto fique sobre a imagem */
+}
 
-    & #event-title{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        height: 30%;
-        width: 80%;
-        margin-bottom: 20px;
+#p-event-data{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    margin: 0px;
+}
+    
 
-        & #p-event-title{
-            font-size: 45px;
-            color: white;
-            font-style: italic;
-            font-family: serif;
-        }
-    }
+#event-title{
+    position: absolute; /* Posiciona o título sobre a imagem */
+    bottom: 70px; /* Distância da parte inferior (acima do evento-data) */
+    left: 20px;
+    width: 80%;
+    text-align: left;
+    z-index: 1;
+}
+
+#p-event-title{
+    font-size: 45px;
+    color: black;
+    font-style: italic;
+    font-family: serif;
 }
 
 #event-info-container{

@@ -18,7 +18,7 @@ router.get('/login', (req, res) =>{
 
 router.get('/homepage', userAuth, (req, res) =>{
     eventModel.findAll({
-        ordere: [
+        order: [
             ['id', 'DESC']
         ],
         include: [
@@ -31,6 +31,13 @@ router.get('/homepage', userAuth, (req, res) =>{
     .then((data) =>{
         if(req.session.user){
             const user = req.session.user;
+
+            // Para cada evento, se houver uma imagem, converta para base64
+            data.forEach(event => {
+                if (event.image) {
+                    event.imageBase64 = Buffer.from(event.image).toString('base64');
+                }
+            });
     
             res.render('homepage', {
                 dadosEvents: data,

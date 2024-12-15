@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const recordModel = require('../models/recordModel');
+const eventModel = require('../models/eventModel');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const sequelize = require('sequelize');
@@ -12,9 +13,42 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+router.post('/upload', upload.single('imagem'), (req, res) =>{
+    var {
+        nomeEvento, 
+        tipo, 
+        organizador, 
+        data, 
+        hora_inicio, 
+        hora_fim, 
+        endereco, 
+        descricao
+    } = req.body;
 
-router.post('/upload', (req, res) =>{
-    
+    const imagem = req.file;
+
+    if(req.session.user){
+        eventModel.create({
+            nome: nomeEvento,
+            tipo: tipo,
+            organizador: organizador,
+            data: data,
+            hora_inicio: hora_inicio,
+            hora_fim: hora_fim,
+            endereco: endereco,
+            descricao: descricao,
+            image: imagem.buffer,
+            userId: req.session.user.id
+        })
+        .then(() =>{
+            console.log('Event created sucess')
+            res.redirect('/homepage')
+        })
+        .catch((error) =>{
+            console.log('erro to create event' + error)
+            res.redirect('/homepage')
+        })    
+    }
 })
 
 

@@ -33,6 +33,10 @@ const Events = Conection.define('Events', {
         type: DataTypes.TIME, // Apenas o horário (hora:minuto:segundo)
         allowNull: false,
     },
+    endereco: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     descricao: {
         type: DataTypes.STRING(600),
         allowNull: false,

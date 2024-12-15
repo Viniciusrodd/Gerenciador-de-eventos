@@ -53,58 +53,54 @@
             </div>
 
 
-            <div id="publications-homepage">
-                <div id="event-banner">
-                    <div id="event-data">
-                        <p id="p-event-data">25 dez</p>
-                    </div>
-                    <div id="event-title">
-                        <p id="p-event-title">Evento de Natal</p>
-                    </div>
-                </div>
+            <% dadosEvents.forEach((dados) =>{ %>
+                <div id="publications-homepage">
+                    <div id="event-banner">
+                        <% if (dados.imageBase64) { %>
+                            <img id="img-banner" src="data:image/jpeg;base64,<%= dados.imageBase64 %>" alt="">
+                        <% } %>
 
-                <div id="event-info-container">
-                    <ul>
-                        <hr>
-                        <li>
-                            <i class="material-icons">mail</i>
-                            Privado - Organizado por @Name user
-                        </li>
-                        <hr>
-                        <li>
-                            <i class="material-icons">schedule</i>
-                            Quarta, 25 de dezembro às 19:00 - 2:00
-                        </li>
-                        <hr>
-                        <li>
-                            <i class="material-icons">location_on</i>
-                            Vargem Grande Paulista - SP
-                        </li>
-                        <hr>
-                        <li>
-                            <i class="material-icons">description</i>
-                            Descrição:
-                        </li>
-                    </ul>
-                </div>
+                        <div id="event-data">
+                            <p id="p-event-data">25 dez</p>
+                        </div>
+                        <div id="event-title">
+                            <p id="p-event-title"><%= dados.nome %></p>
+                        </div>
+                    </div>
 
-                <div id="event-description">
-                    <p id="p-event-description">
-                        Venha celebrar o espírito do Natal conosco! 🎅✨<br>
-                        Junte-se à nossa festa especial de Natal, repleta de momentos 
-                        inesquecíveis para toda a família. <br>
-                        Este ano, preparamos uma noite mágica, com decoração natalina 
-                        encantadora, música ao vivo e atividades para todas as idades.
-                        <br>
-                        Destaques do evento: <br>
-                        🎁 Troca de presentes no estilo Amigo Secreto. <br>
-                        🍪 Degustação de delícias natalinas, como biscoitos, panetones e chocolates quentes. <br>
-                        🎶 Apresentação do coral natalino com canções tradicionais. <br>
-                        📸 Espaço para fotos com o Papai Noel. <br>
-                        🎉 Brincadeiras e oficinas criativas para as crianças. <br>
-                    </p>
+                    <div id="event-info-container">
+                        <ul>
+                            <hr>
+                            <li>
+                                <i class="material-icons">mail</i>
+                                <%= dados.tipo %> - Organizado por @<%= dados.organizador %>
+                            </li>
+                            <hr>
+                            <li>
+                                <i class="material-icons">schedule</i>
+                                <%= dados.data %>
+                            </li>
+                            <hr>
+                            <li>
+                                <i class="material-icons">location_on</i>
+                                <%= dados.endereco %>
+                            </li>
+                            <hr>
+                            <li>
+                                <i class="material-icons">description</i>
+                                Descrição:
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="event-description">
+                        <p id="p-event-description">
+                            <%= dados.descricao %>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            <% }) %>
+
         </div>
 
     </div>
