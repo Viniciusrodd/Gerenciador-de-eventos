@@ -80,7 +80,7 @@ router.post('/saveRecords', async (req, res) =>{
         });
 
         console.log('Record sucess create')
-        res.status(200).send('Record sucess create')
+        res.redirect('/login')
     }
     catch(error){
         console.error(`Error in create record: ${error}`);

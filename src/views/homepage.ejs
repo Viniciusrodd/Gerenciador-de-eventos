@@ -23,7 +23,9 @@
                     <div id="profile-image">
 
                     </div>
-                    <p class="profile-name"><%= userData.userName %></p>
+                    <p class="profile-name">
+                        <%= userData.userName %>
+                    </p>
                     
                     <a href="">Editar perfil</a>
                     
@@ -52,18 +54,20 @@
                 </div>
             </div>
 
-
+            <div id="container-publications">
             <% dadosEvents.forEach((dados) =>{ %>
                 <div id="publications-homepage">
                     <div id="event-banner">
                         <% if (dados.imageBase64) { %>
                             <img id="img-banner" src="data:image/jpeg;base64,<%= dados.imageBase64 %>" alt="">
                         <% } %>
+                        
 
-                        <div id="event-data">
-                            <p id="p-event-data">25 dez</p>
-                        </div>
                         <div id="event-title">
+                            <div id="event-data">
+                                <p id="p-event-data">25 dez</p>
+                            </div>
+                        
                             <p id="p-event-title"><%= dados.nome %></p>
                         </div>
                     </div>
@@ -73,7 +77,7 @@
                             <hr>
                             <li>
                                 <i class="material-icons">mail</i>
-                                <%= dados.tipo %> - Organizado por @<%= dados.organizador %>
+                                <%= dados.tipo %> - Organizado por @<%= dados.records.userName %>
                             </li>
                             <hr>
                             <li>
@@ -100,6 +104,7 @@
                     </div>
                 </div>
             <% }) %>
+            </div>
 
         </div>
 
