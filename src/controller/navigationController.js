@@ -15,8 +15,16 @@ router.get('/login', (req, res) =>{
 })
 
 
-router.get('/homepage', (req, res) =>{
-    res.render('homepage');
+router.get('/homepage', userAuth, (req, res) =>{
+    if(req.session.user){
+        const user = req.session.user;
+
+        res.render('homepage', {
+            userData: user
+        });
+    }else{
+        res.redirect('/login')
+    }
 })
 
 router.get('/criarEventos', (req, res) =>{

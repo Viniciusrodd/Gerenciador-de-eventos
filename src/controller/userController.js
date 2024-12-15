@@ -8,18 +8,8 @@ const sequelize = require('sequelize');
 
 
 //config do multer
-/*const storage = multer.memoryStorage(); // Armazena a imagem na memória
-const image = multer({ 
-    storage: storage,
-    fileFilter: (req, file, cb) => {
-        console.log(file.mimetype);
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if (!allowedTypes.includes(file.mimetype)) {
-            return cb(new Error('Tipo de arquivo não permitido. Envie apenas imagens jpeg, png ou gif.'));
-        }
-        cb(null, true);
-    }
- });*/
+const storage = multer.memoryStorage();  // Isso armazena os arquivos na memória
+const upload = multer({ storage: storage });
 
 
 

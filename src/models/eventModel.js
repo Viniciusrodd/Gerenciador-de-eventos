@@ -35,6 +35,10 @@ const Events = Conection.define('Events', {
     descricao: {
         type: DataTypes.STRING(600),
         allowNull: false,
+    },
+    image: {
+        type: DataTypes.BLOB('long'),
+        allowNull: true
     }
 })
 
