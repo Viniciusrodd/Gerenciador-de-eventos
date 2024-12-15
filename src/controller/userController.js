@@ -13,6 +13,12 @@ const upload = multer({ storage: storage });
 
 
 
+router.post('/upload', (req, res) =>{
+    
+})
+
+
+
 router.post('/saveRecords', async (req, res) =>{
     //console.log(req.file);
     try{

@@ -2,6 +2,7 @@
 
 const {Sequelize, DataTypes} = require('sequelize');
 const Conection = require('../database/conection');
+const recordModel = require('./recordModel');
 
 
 const Events = Conection.define('Events', {
@@ -39,6 +40,14 @@ const Events = Conection.define('Events', {
     image: {
         type: DataTypes.BLOB('long'),
         allowNull: true
+    },
+    userId: {  // Aqui está o campo de chave estrangeira
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: recordModel,  // Referencia ao modelo 'record'
+            key: 'id'  // Chave primária da tabela 'records'
+        }
     }
 })
 

@@ -27,8 +27,16 @@ router.get('/homepage', userAuth, (req, res) =>{
     }
 })
 
-router.get('/criarEventos', (req, res) =>{
-    res.render('criar-eventos')
+router.get('/criarEventos', userAuth,(req, res) =>{
+    if(req.session.user){
+        const user = req.session.user;
+
+        res.render('criar-eventos', {
+            userData: user
+        });
+    }else{
+        res.redirect('/login')
+    }
 })
 
 
