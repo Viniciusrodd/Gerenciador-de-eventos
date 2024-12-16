@@ -26,16 +26,20 @@ router.get('/homepage', userAuth, (req, res) =>{
             {
                 model: recordModel,
                 as: 'records', // Alias usado na associação
-                attributes: ['fullName', 'userName', 'email']
+                attributes: ['fullName', 'userName', 'image']
             }
         ]
     })
     .then((data) =>{
         if(req.session.user){
             const user = req.session.user;
-
-            // Para cada evento, se houver uma imagem, converta para base64
+            //se houver uma imagem -> para base64
             data.forEach(event => {
+                if (event.records && event.records.image) {
+                    // Convertendo a imagem da tabela records para base64
+                    event.records.image = `data:image/jpeg;base64,${event.records.image.toString('base64')}`;
+                }
+
                 if (event.image ) {
                     event.imageBase64 = Buffer.from(event.image).toString('base64');
                 }

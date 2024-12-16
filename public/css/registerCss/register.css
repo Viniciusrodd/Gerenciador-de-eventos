@@ -22,9 +22,9 @@ h1{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 40px 0px 2px 0px;
     width: 100%;
-    background-image: url(../../imagens/section-img-5.jpg);
+    background-image: url(../../imagens/section-img-7.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -83,6 +83,43 @@ label{
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0px 20px 0px;
+}
+
+#div-imagem-capa{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+    width: 90%;
+    margin: 20px 0px 40px 0px;
+    border-radius: 30px;
+    border: 2px solid black;
+    background-color: white;
+}
+
+#div-imagem-perfil{
+    height: 130px;
+    width: 130px;
+    margin: 20px;
+    background-image: url(../../imagens/user.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 100px;
+}
+.imagem-perfil{
+    height: 130px;
+    width: 130px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 100px;
+    margin: 0px;
+}
+
+#input-edit-imagem{
+    cursor: pointer;
 }
 
 a{

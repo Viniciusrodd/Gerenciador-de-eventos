@@ -53,10 +53,11 @@ router.post('/upload', upload.single('imagem'), (req, res) =>{
 
 
 
-router.post('/saveRecords', async (req, res) =>{
+router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
     //console.log(req.file);
     try{
         const {fullname, username, email, password} = req.body;
+        var imagem = req.file;
 
         if (!fullname || !username || !email || !password) {
             return res.redirect('/registro');
@@ -76,14 +77,15 @@ router.post('/saveRecords', async (req, res) =>{
             fullName: fullname,
             userName: username,
             email: email,
-            password: hash
+            password: hash,
+            image: imagem.buffer
         });
 
         console.log('Record sucess create')
         res.redirect('/login')
     }
     catch(error){
-        console.error(`Error in create record: ${error}`);
+        console.error(`Error in create record: ${error} image${imagem}`);
         res.status(500).send('Error to process record');
     }
 })
