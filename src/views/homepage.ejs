@@ -20,11 +20,14 @@
         <div id="container-homepage">
             <div id="profile-homepage">
                 <div id="profile-container">
+                    <!--
                     <% dadosEvents.forEach((event) => { %>
-                    <div id="profile-image">                        
-                        <img src="<%= event.records.image %>" id="profile">
-                    </div>
+                        <div id="profile-image">
+                            <img src="<%= event.records.profileimage %>" id="profile">              
+                        </div>
                     <% }); %>
+                    -->
+                    <i class="material-icons">person</i>
                     <p class="profile-name">
                         <%= userData.userName %>
                     </p>
@@ -61,7 +64,7 @@
                 <div id="publications-homepage">
                     <div id="event-banner">
                         <% if (dados.imageBase64) { %>
-                            <img id="img-banner" src="data:image/jpeg;base64,<%= dados.imageBase64 %>" alt="">
+                            <img id="img-banner" src="<%= dados.imageEvent %>" alt="">
                         <% } else { %>
                             <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
                         <% } %>

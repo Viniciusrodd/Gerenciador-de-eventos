@@ -37,19 +37,20 @@ router.get('/homepage', userAuth, (req, res) =>{
             data.forEach(event => {
                 if (event.records && event.records.image) {
                     // Convertendo a imagem da tabela records para base64
-                    event.records.image = `data:image/jpeg;base64,${event.records.image.toString('base64')}`;
+                    event.records.profileimage = Buffer.from(event.records.image).toString('base64');
+                    event.records.profileimage = `data:image/jpeg;base64,${event.records.profileimage}`
                 }
 
                 if (event.image ) {
                     event.imageBase64 = Buffer.from(event.image).toString('base64');
+                    event.imageEvent = `data:image/jpeg;base64,${event.imageBase64}`
                 }
 
                 // Trabalhando com a data
-                
-                    const eventDate = moment(event.data).tz('America/Sao_Paulo', true);
-                    event.day = eventDate.date();  // Extrai o dia
-                    event.month = eventDate.month() + 1;  // Extrai o mês (0-11, por isso adicionamos 1)
-                    event.year = eventDate.year();  // Extrai o ano
+                const eventDate = moment(event.data).tz('America/Sao_Paulo', true);
+                event.day = eventDate.date();  // Extrai o dia
+                event.month = eventDate.month() + 1;  // Extrai o mês (0-11, por isso adicionamos 1)
+                event.year = eventDate.year();  // Extrai o ano
                 
 
 
