@@ -22,9 +22,7 @@
                 <div id="profile-container">
                     <!--
                     <% dadosEvents.forEach((event) => { %>
-                        <div id="profile-image">
-                            <img src="<%= event.records.profileimage %>" id="profile">              
-                        </div>
+                        
                     <% }); %>
                     -->
                     <i class="material-icons">person</i>
@@ -63,8 +61,13 @@
             <% dadosEvents.forEach((dados) =>{ %>
                 <div id="publications-homepage">
                     <div id="event-banner">
+                        
+
                         <% if (dados.imageBase64) { %>
                             <img id="img-banner" src="<%= dados.imageEvent %>" alt="">
+                            <div id="profile-image">
+                                <img src="<%= dados.records.profileimage %>" id="profile">              
+                            </div>
                         <% } else { %>
                             <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
                         <% } %>
@@ -84,7 +87,7 @@
                         <ul>
                             <li>
                                 <i class="material-icons">mail</i>
-                                <%= dados.tipo %> - Organizado por @<%= dados.records.userName %>
+                                <%= dados.tipo %> - Organizado por @<%= dados.records.fullName %>
                             </li>
                             <hr>
                             <li>

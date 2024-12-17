@@ -30,7 +30,7 @@ hr{
     flex-direction: column;
     padding: 0% 0px 0% 0px;
     width: 100%;
-    background-image: url(../../imagens/section-img-7.jpg);
+    background-image: url(../../imagens/section-img-8.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -113,19 +113,6 @@ header{
     height: 15vh;
     width: 70%;
     margin-top: 30px;
-}
-
-#profile-image{
-    height: 100px;
-    width: 100px;
-    border-radius: 100px;
-    margin-bottom: 20px;
-}
-
-#profile{
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
 }
 
 .profile-name{
@@ -228,6 +215,21 @@ a:hover{
     background-repeat: no-repeat;    
     border-radius: 20px 20px 0 0;
     overflow: hidden; /* Garante que nada ultrapasse o limite */
+}
+
+#profile-image{
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    border-radius: 100px;
+    margin: 0px 0px 10% 10px;
+    border: 3px solid black;
+}
+
+#profile{
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
 }
 
 #img-banner{
