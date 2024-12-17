@@ -27,6 +27,7 @@ router.get('/homepage', userAuth, (req, res) =>{
                 model: recordModel,
                 as: 'records', // Alias usado na associação
                 attributes: ['fullName', 'userName', 'image']
+                //where: {id: req.session.user.id}
             }
         ]
     })
