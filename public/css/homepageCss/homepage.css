@@ -342,3 +342,21 @@ li:hover{
 #event-description:hover{
     transform: scale(1.02);
 }
+
+
+#btt-participate{
+    height: 50px;
+    width: 100%;
+    margin-top: 40px;
+    border: none;
+    background-color: var(--cor02);
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+#btt-participate:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.378);
+    outline: none;
+    transform: scale(1.08);
+}

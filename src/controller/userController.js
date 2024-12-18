@@ -13,6 +13,14 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+router.post('/participate', async (req, res) =>{
+    var eventIdVar = req.body.eventId;
+    var userIdVar = req.body.userId;
+
+    
+})
+
+
 router.post('/upload', upload.single('imagem'), (req, res) =>{
     var {
         nomeEvento, 
