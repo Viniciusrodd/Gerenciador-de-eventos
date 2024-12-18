@@ -68,9 +68,6 @@
 
                         <% if (dados.imageBase64) { %>
                             <img id="img-banner" src="<%= dados.imageEvent %>" alt="">
-                            <div id="profile-image">
-                                <img src="<%= dados.records.profileimage %>" id="profile">              
-                            </div>
                         <% } else { %>
                             <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
                         <% } %>
@@ -83,6 +80,10 @@
                             </div>
                         
                             <p id="p-event-title"><%= dados.nome %></p>
+                        </div>
+                        
+                        <div id="profile-image">
+                            <img src="<%= dados.records.profileimage %>" id="profile">              
                         </div>
                     </div>
 

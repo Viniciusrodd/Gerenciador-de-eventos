@@ -204,8 +204,8 @@ a:hover{
 }
 
 #event-banner{
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    justify-content: space-between;
     align-items: flex-end;
     flex-direction: row;
     height: 70vh;
@@ -217,25 +217,26 @@ a:hover{
     overflow: hidden; /* Garante que nada ultrapasse o limite */
 }
 
+#img-banner{
+    height: 100%;
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+}
+
 #profile-image{
     position: absolute;
     height: 120px;
     width: 120px;
     border-radius: 100px;
-    margin: 0px 0px 10% 10px;
+    margin: 0px 20px 10px 0px;
     border: 3px solid black;
+    justify-self: flex-end;
 }
 
 #profile{
     height: 100%;
     width: 100%;
     border-radius: 100px;
-}
-
-#img-banner{
-    height: 100%;
-    width: 100%;
-    border-radius: 20px 20px 0px 0px;
 }
 
 #event-title{
