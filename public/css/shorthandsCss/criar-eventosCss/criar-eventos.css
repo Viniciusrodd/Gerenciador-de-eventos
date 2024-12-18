@@ -26,7 +26,7 @@ html, body{
     flex-direction: column;
     padding: 0% 0px 10% 0px;
     width: 100%;
-    background-image: url(../../imagens/section-img-7.jpg);
+    background-image: url(../../../imagens/section-img-7.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -58,7 +58,7 @@ header{
     height: 90px;
     width: 90px;
     background-color: rgba(255, 255, 255, 0);
-    background-image: url(../../imagens/logo-2.png);
+    background-image: url(../../../imagens/logo-2.png);
     background-size: cover;
     background-position: top;
     border-radius: 100px;

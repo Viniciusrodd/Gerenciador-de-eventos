@@ -86,7 +86,7 @@ router.get('/criarEventos', userAuth,(req, res) =>{
     if(req.session.user){
         const user = req.session.user;
 
-        res.render('criar-eventos', {
+        res.render('../views/shortHands.ejs/criar-eventos', {
             userData: user
         });
     }else{
