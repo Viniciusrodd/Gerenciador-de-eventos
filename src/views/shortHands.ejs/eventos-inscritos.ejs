@@ -7,6 +7,79 @@
     <link rel="stylesheet" href="../../../css/shorthandsCss/eventos-inscritosCss/eventos-inscritos.css">
 </head>
 <body>
-    <h1>welcome to events you've already participate</h1>
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <a href="/homepage">
+                <div id="header-image">
+                
+                </div>
+            </a>
+            <h1 class="titulo">Eventos</h1>
+        </header>
+
+        <div id="container-homepage">
+            <div id="container-publications">
+                <% dadosEvents.forEach((dados) =>{ %>
+                    <div id="publications-homepage">
+                        <div id="event-banner">
+                            
+
+                            <% if (dados.imageBase64) { %>
+                                <img id="img-banner" src="<%= dados.imageEvent %>" alt="">
+                            <% } else { %>
+                                <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
+                            <% } %>
+
+                            <div id="event-title">
+                                <div id="event-data">
+                                    <p class="p-event-data"><%= dados.day %></p>
+                                    <hr>
+                                    <p class="p-event-data"><%= dados.month %></p>
+                                </div>
+                            
+                                <p id="p-event-title"><%= dados.nome %></p>
+                            </div>
+                            
+                            <div id="profile-image">
+                                <img src="<%= dados.records.profileimage %>" id="profile">              
+                            </div>
+                        </div>
+
+                        <div id="event-info-container">
+                            <ul>
+                                <li>
+                                    <i class="material-icons">mail</i>
+                                    <%= dados.tipo %> - Organizado por @<%= dados.records.fullName %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">schedule</i>
+                                    Dia <%= dados.day %>, do mês <%= dados.month %> - 
+                                    das <%= dados.hora_inicio %> às <%= dados.hora_fim %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">location_on</i>
+                                    <%= dados.endereco %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">description</i>
+                                    Descrição:
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="event-description">
+                            <p id="p-event-description">
+                                <%= dados.descricao %>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
