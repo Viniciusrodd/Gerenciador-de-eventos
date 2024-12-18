@@ -22,3 +22,6 @@ Participation.sync()
     .catch((error) =>{
         console.log('Error at sync participation table', error)
     })
+
+
+module.exports = Participation;

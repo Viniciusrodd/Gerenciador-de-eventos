@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
+const participationModel = require('../models/participation');
 
 const multer = require('multer');
 const bcrypt = require('bcrypt');
@@ -13,13 +14,33 @@ const sequelize = require('sequelize');
 const storage = multer.memoryStorage();  // Isso armazena os arquivos na memória
 const upload = multer({ storage: storage });
 
-/*
-router.post('/participate', async (req, res) =>{
-    var eventIdVar = req.body.eventId;
-    var userIdVar = req.body.userId;
 
-    
-})*/
+router.post('/participate', async (req, res) =>{
+    var userIdVar = req.body.userId;
+    var eventIdVar = req.body.eventId;
+
+    try{
+        const [participacao, created] = await participationModel.findOrCreate({
+            where: { 
+                userId: userIdVar, 
+                eventId: eventIdVar 
+            }            
+        });
+
+        if(created){
+            console.log('Participation created sucess')
+            return res.redirect('/homepage')     
+        }else{
+            console.log('Participation already exist')
+            return res.redirect('/homepage')     
+        }
+        
+    }
+    catch(error){
+        console.log('Error at create participation', error)
+        return res.redirect('/homepage')
+    }
+})
 
 
 router.post('/upload', upload.single('imagem'), (req, res) =>{
