@@ -93,7 +93,7 @@ header{
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     width: 20%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.306) -5px 5px, rgba(47, 10, 33, 0.3) -10px 10px,
@@ -168,7 +168,7 @@ a:hover{
         font-size: 20px;
         text-align: left;
         list-style-type: none;
-        margin-bottom: 3px;
+        margin-bottom: 7px;
         cursor: pointer;
         transition: 0.5s;
     }

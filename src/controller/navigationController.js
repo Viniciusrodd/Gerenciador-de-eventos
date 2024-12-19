@@ -125,7 +125,6 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
             ],
         });
 
-
         if (!events || events.length === 0) {
             return res.send('No events found for these IDs.');
         }
@@ -165,7 +164,6 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
                     event.endSeconds = endTime.seconds();
                 }
             });
-
            
             res.render('../views/shortHands.ejs/eventos-inscritos', {
                 dadosEvents: events,
@@ -183,7 +181,11 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
 });
 
 
-
+router.get('/logout', (req, res) =>{
+    req.session.id = undefined
+    console.log('User LogOut sucess')
+    return res.redirect('/login')
+})
 
 
 module.exports = router;
