@@ -20,21 +20,32 @@ router.post('/participate', async (req, res) =>{
     var eventIdVar = req.body.eventId;
 
     try{
-        const [participacao, created] = await participationModel.findOrCreate({
-            where: { 
-                userId: userIdVar, 
-                eventId: eventIdVar 
-            }            
+        var userEvents = await eventModel.findAll({
+            where: {
+                userId: userIdVar
+            }
+        });
+
+        const isOwnEvent = userEvents.some(event => event.id === parseInt(eventIdVar));
+        if(isOwnEvent){
+            console.log('This is your event, so you already participate');
+            return res.redirect('/homepage');
+        }
+
+        const [participation, created] = await participationModel.findOrCreate({
+            where: {
+                userId: userIdVar,
+                eventId: eventIdVar
+            }
         });
 
         if(created){
-            console.log('Participation created sucess')
-            return res.redirect('/homepage')     
+            console.log('Participation created sucess');
         }else{
-            console.log('Participation already exist')
-            return res.redirect('/homepage')     
+            console.log('Participation already exist');
         }
-        
+
+        return res.redirect('/homepage');
     }
     catch(error){
         console.log('Error at create participation', error)
