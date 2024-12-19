@@ -54,7 +54,7 @@ router.post('/participate', async (req, res) =>{
 })
 
 
-router.post('/upload', upload.single('imagem'), (req, res) =>{
+router.post('/createEvent', upload.single('imagem'), (req, res) =>{
     var {
         nomeEvento, 
         tipo, 

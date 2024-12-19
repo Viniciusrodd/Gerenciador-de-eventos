@@ -8,5 +8,14 @@
 </head>
 <body>
     <h1>welcome to edit events page</h1>
+
+    <form action=""></form>
+
+    <ul>
+        <% eventsData.forEach(event => { %>
+            <li><%= event.nome %></li>
+            <li><%= event.tipo %></li>
+        <% }) %>
+    </ul>
 </body>
 </html>

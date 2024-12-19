@@ -187,11 +187,38 @@ router.get('/logout', (req, res) =>{
     return res.redirect('/login')
 })
 
-router.post('/editarEvento', userAuth,(req, res) =>{
-    var {userId, eventId} = req.body
+router.post('/editarEvento', userAuth, async (req, res) =>{
+    var eventId = req.body.eventId
 
-    console.log({userId, eventId})
-    return res.render('../views/shortHands.ejs/editar-eventos')
+    try{
+        var eventsData = await eventModel.findAll({
+            where: {
+                id: eventId
+            }
+        })
+
+        const result = await eventsData.map(event => ({
+            id: event.dataValues.id,
+            nome: event.dataValues.nome,
+            tipo: event.dataValues.tipo,
+            organizador: event.dataValues.organizador,
+            data: event.dataValues.data,
+            hora_inicio: event.dataValues.hora_inicio,
+            hora_fim: event.dataValues.hora_fim,
+            endereco: event.dataValues.endereco,
+            descricao: event.dataValues.descricao,
+            image: event.dataValues.image, // Aqui está a imagem em formato de Buffer
+        }));
+
+
+        return res.render('../views/shortHands.ejs/editar-eventos', {
+            eventsData: result
+        })
+    }
+    catch(error){
+        console.log('Error at editEvent route' + error)
+        return redirect('/homepage')
+    }
 })
 
 
