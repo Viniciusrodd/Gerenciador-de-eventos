@@ -14,6 +14,158 @@ html, body{
     padding: 0px;
 }
 
-h1{
-    color: red;
+
+#div-pai{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0% 0px 0% 0px;
+    width: 100%;
+    background-image: url(../../../imagens/section-img-6.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
+/*HEADER*/
+
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 15vh;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    background-color: transparent;
+}
+
+.titulo{
+    color: white;
+    text-shadow: 3px 3px var(--cor02);
+    font-size: 55px;
+    font-style: italic;
+}
+
+#header-image{
+    height: 90px;
+    width: 90px;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(../../../imagens/logo-2.png);
+    background-size: cover;
+    background-position: top;
+    border-radius: 100px;
+    margin: 0px 15px 0px 15px;
+    transition: ease 0.5s;
+    cursor: pointer;
+}
+#header-image:hover{
+    transform: scale(1.07);
+}
+
+/*DIV-FILHO*/
+
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3% 0px 3% 0px;
+    width: 60%;
+    background-color: transparent;
+}
+
+/*INPUTS*/
+
+hr{
+    background-color: white;
+    border: none;
+    height: 2px;
+    width: 50%;
+}
+
+label{
+    font-size: 26px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+input, select{
+    height: 25px;
+    width: 65%;
+    margin: 0px 0px 70px 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid black;
+    color: white;
+    background-color: transparent;
+    font-size: 19px;
+    text-align: center;
+}
+input, select:focus{
+    outline: none;
+}
+input, select:valid{
+    background-color: transparent;
+}
+
+::placeholder{
+    color: white;
+}
+
+
+#itipo{
+    color: black;
+}
+
+
+fieldset{
+    padding: 30px 100px 30px 100px;
+    border: 3px solid white;
+    margin-bottom: 70px;
+}
+
+legend{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+#p-textarea{
+    color: white;
+    font-size: 17px;
+}
+
+textarea{
+    height: 45vh;
+    width: 25vw;
+    max-height: 60vh;
+    max-width: 25vw;
+    min-width: 25vw;
+}
+
+#iimagem{
+    cursor: pointer;
+}
+
+#btt-evento{
+    height: 50px;
+    width: 15vw;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: ease 0.5s;
+}
+#btt-evento:hover{
+    transform: scale(1.07);
+    background-color: var(--cor01);
+}
+

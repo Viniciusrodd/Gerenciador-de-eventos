@@ -7,40 +7,64 @@
     <link rel="stylesheet" href="../../../css/shorthandsCss/editar-eventosCss/editar-eventos.css">
 </head>
 <body>
-    <h1>welcome to edit events page</h1>
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <a href="/homepage">
+                <div id="header-image">
+                </div>
+            </a>
+            <h1 class="titulo">Eventos</h1>
+        </header>
 
-    <% eventsData.forEach(event => { %>
-        <form action="/uploadEvents" method="post">
-            <label for="nome">Editar nome:</label>
-            <input type="text" name="nome" id="inome" placeholder="<%= event.nome %>">
+        <h1 class="titulo">welcome to edit events page</h1>
 
-            <label for="nome">Editar tipo:</label>
-            <input type="text" name="tipo" id="itipo" placeholder="<%= event.tipo %>">
+        <% eventsData.forEach(event => { %>
+            <form action="/uploadEvents" method="post">
+                <label for="nome">Editar nome:</label>
+                <input type="text" name="nome" id="inome" placeholder="<%= event.nome %>">
 
-            <label for="nome">Editar organizador:</label>
-            <input type="text" name="organizador" id="iorganizador" placeholder="<%= event.organizador %>">
+                
+                <label for="tipo">Editar tipo:</label>
+                <input type="text" name="tipo" id="itipo" placeholder="<%= event.tipo %>">
 
-            <label for="data">Editar data:</label>
-            <input type="date" name="data" id="idata" value="<%= event.data %>">
+                
+                <label for="organizador">Editar organizador:</label>
+                <input type="text" name="organizador" id="iorganizador" placeholder="<%= event.organizador %>">
 
-            <label for="hora_inicio">Editar hora de início:</label>
-            <input type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>">
+                
+                <label for="data">Editar data:</label>
+                <input type="date" name="data" id="idata" value="<%= event.data %>">
 
-            <label for="hora_fim">Editar hora de fim:</label>
-            <input type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>">
+                
+                <label for="hora_inicio">Editar hora de início:</label>
+                <input type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>">
 
-            <label for="endereco">Editar endereço:</label>
-            <input type="text" name="endereco" id="iendereco" placeholder="<%= event.endereco %>">
+                
+                <label for="hora_fim">Editar hora de fim:</label>
+                <input type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>">
 
-            <label for="descricao">Editar descrição:</label>
-            <textarea name="descricao" id="idescricao" rows="4" placeholder="<%= event.descricao %>"></textarea>
+                
+                <label for="endereco">Editar endereço:</label>
+                <input type="text" name="endereco" id="iendereco" placeholder="<%= event.endereco %>">
 
-            <label for="image">Editar imagem:</label>            
-            <img src="data:image/jpeg;base64,<%= event.image.toString('base64') %>" alt="Imagem do evento" style="width: 200px; height: auto;">
-            <input type="file" name="image" id="iimage">
+                
+                <fieldset>
+                    <legend>DESCRIÇÃO</legend>
+                    <p id="p-textarea">*até 600 caracteres</p>
+                    <textarea name="descricao" id="idescricao" required>
+    
+                    </textarea>
+                </fieldset>
 
-            <button type="submit">Salvar alterações</button>
-        </form>
-    <% }) %>
+                
+                <label for="image">Editar imagem:</label>            
+                <img src="data:image/jpeg;base64,<%= event.image.toString('base64') %>" alt="Imagem do evento" style="width: 200px; height: auto;">
+                <input type="file" name="image" id="iimage">
+
+                <button id="btt-evento">Salvar alterações</button>
+            </form>
+        <% }) %>
+    </div>
 </body>
 </html>
