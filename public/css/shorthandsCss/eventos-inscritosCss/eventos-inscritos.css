@@ -30,7 +30,7 @@ hr{
     flex-direction: column;
     padding: 0% 0px 0% 0px;
     width: 100%;
-    background-image: url(../../../imagens/section-img-6.jpg);
+    background-image: url(../../../imagens/section-img-7.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -75,6 +75,20 @@ header{
 
 /*CONTAINER-HOMEPAGE*/
 
+#container-titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+}
+
+#titulo-2{
+    font-size: 50px;
+    color: white;
+    text-align: 50px;
+    text-decoration: underline;
+}
 
 #container-homepage{
     display: flex;
