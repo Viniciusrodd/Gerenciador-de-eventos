@@ -15,8 +15,36 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
-router.post('/uploadEvents', (req, res) =>{
-    
+router.post('/uploadEvents', upload.single('image') ,async (req, res) =>{
+    console.log(req.body)
+    const eventId = req.body.id; // ID enviado pelo input hidden
+    const updates = req.body;
+
+    try {
+        const event = await eventModel.findByPk(eventId);
+
+        if (event) {
+            Object.keys(updates).forEach(key => {
+                if (key !== 'id') {
+                    event[key] = updates[key];
+                }
+            });
+
+            if (req.file) {
+                event.image = req.file.path;
+            }
+
+            await event.save();
+
+            console.log('Event Updated with sucess')
+            res.redirect('/homepage');
+        } else {
+            res.status(404).send({ message: 'Event not found!' });
+        }
+    } catch (error) {
+        console.error('Error at updated event:', error);
+        res.status(500).send({ message: 'Server error.' });
+    }
 })
 
 
