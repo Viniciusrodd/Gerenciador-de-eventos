@@ -9,13 +9,38 @@
 <body>
     <h1>welcome to edit events page</h1>
 
-    <form action=""></form>
+    <% eventsData.forEach(event => { %>
+        <form action="/uploadEvents" method="post">
+            <label for="nome">Editar nome:</label>
+            <input type="text" name="nome" id="inome" placeholder="<%= event.nome %>">
 
-    <ul>
-        <% eventsData.forEach(event => { %>
-            <li><%= event.nome %></li>
-            <li><%= event.tipo %></li>
-        <% }) %>
-    </ul>
+            <label for="nome">Editar tipo:</label>
+            <input type="text" name="tipo" id="itipo" placeholder="<%= event.tipo %>">
+
+            <label for="nome">Editar organizador:</label>
+            <input type="text" name="organizador" id="iorganizador" placeholder="<%= event.organizador %>">
+
+            <label for="data">Editar data:</label>
+            <input type="date" name="data" id="idata" value="<%= event.data %>">
+
+            <label for="hora_inicio">Editar hora de início:</label>
+            <input type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>">
+
+            <label for="hora_fim">Editar hora de fim:</label>
+            <input type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>">
+
+            <label for="endereco">Editar endereço:</label>
+            <input type="text" name="endereco" id="iendereco" placeholder="<%= event.endereco %>">
+
+            <label for="descricao">Editar descrição:</label>
+            <textarea name="descricao" id="idescricao" rows="4" placeholder="<%= event.descricao %>"></textarea>
+
+            <label for="image">Editar imagem:</label>            
+            <img src="data:image/jpeg;base64,<%= event.image.toString('base64') %>" alt="Imagem do evento" style="width: 200px; height: auto;">
+            <input type="file" name="image" id="iimage">
+
+            <button type="submit">Salvar alterações</button>
+        </form>
+    <% }) %>
 </body>
 </html>

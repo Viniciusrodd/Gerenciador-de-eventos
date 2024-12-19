@@ -207,7 +207,7 @@ router.post('/editarEvento', userAuth, async (req, res) =>{
             hora_fim: event.dataValues.hora_fim,
             endereco: event.dataValues.endereco,
             descricao: event.dataValues.descricao,
-            image: event.dataValues.image, // Aqui está a imagem em formato de Buffer
+            image: event.dataValues.image, //imagem em formato de Buffer
         }));
 
 
