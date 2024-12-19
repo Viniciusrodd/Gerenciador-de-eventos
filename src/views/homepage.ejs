@@ -118,11 +118,13 @@
                         </p>
                     </div>
 
-                    <form action="/participate" method="post">
-                        <input type="hidden" name="eventId" value="<%= dados.id %>">
-                        <input type="hidden" name="userId" value="<%= userData.id %>">
-                        <button id="btt-participate">Participar</button>
-                    </form>
+                    <% if (dados.userId != userData.id) { %>
+                        <form action="/participate" method="post">
+                            <input type="hidden" name="eventId" value="<%= dados.id %>">
+                            <input type="hidden" name="userId" value="<%= userData.id %>">
+                            <button id="btt-participate">Participar</button>
+                        </form>    
+                    <% } %>
                 </div>
             <% }) %>
             </div>
