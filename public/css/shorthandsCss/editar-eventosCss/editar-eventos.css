@@ -68,7 +68,7 @@ header{
 /*DIV-FILHO*/
 
 
-form{
+#editEventForm{
     display: flex;
     justify-content: center;
     align-items: center;

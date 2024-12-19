@@ -20,40 +20,42 @@
         <h1 class="titulo">welcome to edit events page</h1>
 
         <% eventsData.forEach(event => { %>
-            <form action="/uploadEvents" method="post">
+            <form id="editEventForm" action="/uploadEvents" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<%= event.id %>">
+                
                 <label for="nome">Editar nome:</label>
-                <input type="text" name="nome" id="inome" placeholder="<%= event.nome %>">
+                <input type="text" name="nome" id="inome" placeholder="<%= event.nome %>" data-original="<%= event.nome %>">
 
                 
                 <label for="tipo">Editar tipo:</label>
-                <input type="text" name="tipo" id="itipo" placeholder="<%= event.tipo %>">
+                <input type="text" name="tipo" id="itipo" placeholder="<%= event.tipo %>" data-original="<%= event.tipo %>">
 
                 
                 <label for="organizador">Editar organizador:</label>
-                <input type="text" name="organizador" id="iorganizador" placeholder="<%= event.organizador %>">
+                <input type="text" name="organizador" id="iorganizador" placeholder="<%= event.organizador %>" data-original="<%= event.organizador %>">
 
                 
                 <label for="data">Editar data:</label>
-                <input type="date" name="data" id="idata" value="<%= event.data %>">
+                <input type="date" name="data" id="idata" value="<%= event.data %>" data-original="<%= event.data %>">
 
                 
                 <label for="hora_inicio">Editar hora de início:</label>
-                <input type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>">
+                <input type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>" data-original="<%= event.hora_inicio %>">
 
                 
                 <label for="hora_fim">Editar hora de fim:</label>
-                <input type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>">
+                <input type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>" data-original="<%= event.hora_fim %>">
 
                 
                 <label for="endereco">Editar endereço:</label>
-                <input type="text" name="endereco" id="iendereco" placeholder="<%= event.endereco %>">
+                <input type="text" name="endereco" id="iendereco" placeholder="<%= event.endereco %>" data-original="<%= event.endereco %>">
 
                 
                 <fieldset>
                     <legend>DESCRIÇÃO</legend>
                     <p id="p-textarea">*até 600 caracteres</p>
-                    <textarea name="descricao" id="idescricao" required>
-    
+                    <textarea name="descricao" id="idescricao" required data-original="<%= event.descricao %>">
+                        <%= event.descricao %>
                     </textarea>
                 </fieldset>
 
@@ -67,4 +69,42 @@
         <% }) %>
     </div>
 </body>
+
+<script>
+    form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Impede o envio padrão
+
+    const formData = new FormData(form); // Dados do formulário
+    const alteredData = {};
+
+    // Detecta mudanças nos campos
+    form.querySelectorAll('input, textarea').forEach(field => {
+        if (field.type !== 'file' && field.value !== field.getAttribute('data-original')) {
+            alteredData[field.name] = field.value;
+        }
+    });
+
+    // Verifica se o campo de imagem contém arquivo
+    const imageField = form.querySelector('#iimage');
+    if (imageField.files.length > 0) {
+        formData.append('image', imageField.files[0]);
+    }
+
+    // Envia os dados com fetch
+    fetch(form.action, {
+        method: 'POST',
+        body: formData, // Inclui arquivos e outros dados
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Alterações salvas com sucesso!');
+            } else {
+                alert('Erro ao salvar alterações.');
+            }
+        }).catch(err => {
+            console.error('Erro na requisição:', err);
+        });
+    });
+</script>
+
 </html>
