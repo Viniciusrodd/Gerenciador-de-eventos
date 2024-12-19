@@ -363,3 +363,20 @@ li:hover{
     outline: none;
     transform: scale(1.08);
 }
+
+#btt-edit{
+    height: 50px;
+    width: 100%;
+    margin-top: 40px;
+    border: none;
+    background-color: lightblue;
+    color: black;
+    font-size: 19px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+#btt-edit:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.378);
+    outline: none;
+    transform: scale(1.08);
+}

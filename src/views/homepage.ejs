@@ -49,10 +49,6 @@
                         <a href="/eventosInscritos">Eventos inscritos</a>
                         <i class="material-icons">event_available</i>
                     </li>
-                    <li> 
-                        <a href="/editEvent">Editar evento</a>
-                        <i class="material-icons">edit_square</i>
-                    </li>
                     <li>
                         <a href="/logout">Sair</a>
                         <i class="material-icons">logout</i>
@@ -124,6 +120,16 @@
                             <input type="hidden" name="userId" value="<%= userData.id %>">
                             <button id="btt-participate">Participar</button>
                         </form>    
+                    <% } %>
+
+                    <% if(dados.userId == userData.id) { %>
+                        <form action="/editarEvento" method="post">
+                            <input type="hidden" name="eventId" value="<%= dados.id %>">
+                            <input type="hidden" name="userId" value="<%= userData.id %>">
+                            <button id="btt-edit">
+                                Editar seu evento
+                            </button>
+                        </form>
                     <% } %>
                 </div>
             <% }) %>
