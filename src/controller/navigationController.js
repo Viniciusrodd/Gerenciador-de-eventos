@@ -187,5 +187,9 @@ router.get('/logout', (req, res) =>{
     return res.redirect('/login')
 })
 
+router.get('/editEvent', (req, res) =>{
+    res.render('../views/shortHands.ejs/editar-eventos')
+})
+
 
 module.exports = router;
