@@ -61,4 +61,32 @@
         <% }) %>
     </div>
 </body>
+
+<script>
+        // Ao clicar no ícone, abre o seletor de arquivo
+        document.getElementById('edit-imagem-perfil').addEventListener('click', () => {
+            document.getElementById('input-file').click();
+        });
+
+        // Quando o arquivo for selecionado, o formulário é enviado automaticamente
+        document.getElementById('input-file').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('div-imagem-perfil');
+                    const divImagemPerfil = document.getElementById('div-imagem-perfil');
+                    divImagemPerfil.innerHTML = '';
+                    divImagemPerfil.appendChild(img);
+
+                    // Envia o formulário automaticamente para o backend
+                    document.getElementById('upload-form').submit();                    
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+</script>
+
 </html>
