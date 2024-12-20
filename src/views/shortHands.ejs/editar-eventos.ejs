@@ -103,15 +103,15 @@
         method: 'PUT',
         body: formData, // Inclui arquivos e outros dados
     })
-        .then(response => {
-            if (response.ok) {
-                alert('Alterações salvas com sucesso!');
-            } else {
-                alert('Erro ao salvar alterações.');
-            }
-        }).catch(err => {
-            console.error('Error at requisition event update:', err);
-        });
+    .then(response => {
+        if (response.ok) {
+            alert('Alterações salvas com sucesso!');
+        } else {
+            alert('Erro ao salvar alterações.');
+        }
+    }).catch(err => {
+        console.error('Error at requisition event update:', err);
+    });
     });
 </script>
 

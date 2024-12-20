@@ -369,8 +369,8 @@ li:hover{
     width: 100%;
     margin-top: 40px;
     border: none;
-    background-color: lightblue;
-    color: black;
+    background-color: cadetblue;
+    color: white;
     font-size: 19px;
     cursor: pointer;
     transition: transform 0.5s ease;

@@ -16,7 +16,6 @@ const upload = multer({ storage: storage });
 
 
 router.post('/uploadEvents', upload.single('image') ,async (req, res) =>{
-    console.log(req.body)
     const eventId = req.body.id; // ID enviado pelo input hidden
     const updates = req.body;
 
@@ -30,8 +29,10 @@ router.post('/uploadEvents', upload.single('image') ,async (req, res) =>{
                 }
             });
 
+            var imagem = req.file
+
             if (req.file) {
-                event.image = req.file.path;
+                event.image = imagem.buffer;
             }
 
             await event.save();
