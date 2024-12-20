@@ -15,6 +15,29 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+router.post('/uploadImage', upload.single('image'), (req, res) =>{
+    var imageUpdated = req.file
+    var userId = req.session.user.id
+
+    if(!imageUpdated){
+        res.status(400).send('No image file send')
+    }
+
+    recordModel.update({
+        image: imageUpdated.buffer
+    }, {
+        where: {id: userId} 
+    })
+    .then(() =>{
+        res.redirect('/editarPerfil')
+    })
+    .catch((error) =>{
+        res.status(400).send('Erro at process image file send' + error)
+    })
+
+})
+
+
 router.post('/uploadEvents', upload.single('image') ,async (req, res) =>{
     const eventId = req.body.id; // ID enviado pelo input hidden
     const updates = req.body;
