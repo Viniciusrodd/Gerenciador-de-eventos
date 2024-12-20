@@ -222,8 +222,34 @@ router.post('/editarEvento', userAuth, async (req, res) =>{
 })
 
 
-router.get('/editarPerfil', (req, res) =>{
-    res.render('../views/shortHands.ejs/editar-perfil')
+router.get('/editarPerfil', userAuth ,async (req, res) =>{
+
+    const idVar = await req.session.user.id
+
+    if(!idVar){
+        return res.status(400).send('User id to edit profile not found')
+    }
+
+    var recordData = await recordModel.findAll({
+        where: {
+            id: idVar     
+        }
+    })
+
+    var result = await recordData.map(events => ({
+        id: events.dataValues.id,
+        fullname: events.dataValues.fullName,
+        userName: events.dataValues.userName,
+        email: events.dataValues.email,
+        password: events.dataValues.password,
+        image: events.dataValues.image
+    }))
+
+    console.log(result)
+
+    res.render('../views/shortHands.ejs/editar-perfil', {
+        recordData: result
+    })
 })
 
 
