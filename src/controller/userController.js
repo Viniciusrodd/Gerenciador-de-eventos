@@ -15,6 +15,31 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+router.post('/deleteAccount', async (req, res) =>{
+    var userId = req.session.user.id;
+
+    try{
+        await recordModel.destroy({
+            where: {
+                id: userId
+            }
+        })
+
+        await eventModel.destroy({
+            where: {
+                id: userId
+            }
+        })
+
+        console.log('Profile deleted with success');
+        return res.redirect('/login');
+    }
+    catch(error){
+        res.status(500).send('Delete profile process failed')
+    }
+})
+
+
 router.post('/updateNames', async (req, res) =>{
     var fullNameVar = req.body.fullName;
     var userNameVar = req.body.userName;
@@ -26,7 +51,7 @@ router.post('/updateNames', async (req, res) =>{
                 id: userId
             }
         });
-        
+
         if (!record) {
             console.log('Erro: fullName already exist')
             return res.redirect('/editarPerfil');
