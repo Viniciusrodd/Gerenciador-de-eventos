@@ -14,3 +14,213 @@ html, body{
     padding: 0px;
 }
 
+/*DIV-PAI*/
+
+
+#div-pai{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0% 0px 10% 0px;
+    width: 100%;
+    background-image: url(../../../imagens/section-img-7.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/*HEADER*/
+
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 15vh;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    background-color: transparent;
+}
+
+.titulo{
+    color: white;
+    text-shadow: 3px 3px var(--cor02);
+    font-size: 55px;
+    font-style: italic;
+}
+
+#header-image{
+    height: 90px;
+    width: 90px;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(../../../imagens/logo-2.png);
+    background-size: cover;
+    background-position: top;
+    border-radius: 100px;
+    margin: 0px 15px 0px 15px;
+    transition: ease 0.5s;
+    cursor: pointer;
+}
+#header-image:hover{
+    transform: scale(1.07);
+}
+
+/*CAPA*/
+
+
+
+#div-imagem-perfil{
+    height: 200px;
+    width: 200px;
+    margin: 0px 0px 2% 0px;
+    background-color: rgba(0, 0, 0, 0.475);
+    border: 3px solid black;
+    border-radius: 100px;
+}
+
+#img-perfil{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+}
+
+#edit-imagem-perfil{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 15%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.475);
+    cursor: pointer;
+}
+#edit-imagem-perfil:hover{
+    background-color: rgba(0, 0, 0, 0.613);
+}
+
+#p-edit-imagem{
+    font-size: 18px;
+    color: white;
+    margin: 0px 0px 0px 10px;
+}
+
+#i-photo {
+    font-size: 25px;
+    color: white;
+}
+
+
+/*SHORTCUTS*/
+
+
+div#shortcuts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4% 0px 4% 0px;
+    width: 60%;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.306) -5px 5px, rgba(47, 10, 33, 0.3) -10px 10px,
+    rgba(60, 19, 45, 0.2) -15px 15px, rgba(82, 25, 61, 0.1) -20px 20px, 
+    rgba(240, 46, 170, 0.05) -25px 25px;
+}
+
+#h1-shortcuts{
+    font-size: 30px;
+    color: rgba(163, 20, 111, 0.981);
+    text-decoration: overline;
+    margin: 0px 0px 10px 0px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    width: 100%;
+}
+
+.label-edit-account{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+input{
+    height: 20px;
+    width: 70%;
+    border: none;
+    font-size: 17px;
+    margin: 0px 0px 10px 0px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(255, 255, 255, 0);
+    border-bottom: 2px solid black;
+}
+
+input:focus {
+    outline: none; 
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.inputs-edit-account{
+    height: 40px;
+    width: 70%;
+    margin: 5px 0px 0px 0px;
+    color: rgba(0, 0, 0, 0.35);
+}
+
+
+.btt-edit-account{
+    height: 35px;
+    width: 80px;
+    letter-spacing: 2px;
+    margin-top: 35px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 16px;
+    background-color: rgba(3, 102, 214, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+.btt-edit-account:hover{
+    transform: scale(1.00);
+}
+
+#accountDelete{
+    margin-top: 8%;
+}
+
+.btt-delete-account{
+    height: 35px;
+    width: 90px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 16px;
+    background-color: rgba(255, 68, 0, 0.615);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+.btt-delete-account:hover{
+    transform: scale(1.00);
+}

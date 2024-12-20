@@ -5,8 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar seu perfil</title>
     <link rel="stylesheet" href="../../../css/shorthandsCss/editar-perfilCss/editar-perfil.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <h1>welcome to edit profile</h1>
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <a href="/homepage">
+                <div id="header-image">
+                </div>
+            </a>
+            <h1 class="titulo">Eventos</h1>
+        </header>
+
+        <% recordData.forEach(data =>{ %>
+        
+        <div id="div-imagem-perfil">
+            <img id="img-perfil" src="data:image/jpeg;base64,<%= data.image.toString('base64') %>" />                   
+        </div>
+        <div id="edit-imagem-perfil">
+            <i class="material-icons" id="i-photo">photo_camera</i>
+            <p id="p-edit-imagem">Edit your photo</p>
+        </div>
+
+        <!-- Formulário de upload de imagem -->
+        <form id="upload-form" action="/uploadImage" method="POST" enctype="multipart/form-data" style="display: none;">
+            <input type="file" id="input-file" name="image">
+        </form>
+        
+
+        <h1 class="titulo"><%= data.fullName %></h1>
+
+
+        <div id="shortcuts">
+            <h1 id="h1-shortcuts">EDITE SUA CONTA</h1>
+            
+            <form action="/updateNames" method="post">
+                <label for="fullname" class="label-edit-account">Nome completo:</label>
+                <input type="text" name="fullname" class="inputs-edit-account" value="<%= data.fullName %>">
+                
+                <label for="username" class="label-edit-account">Nome de usuário:</label>
+                <input type="text" name="userName" class="inputs-edit-account" value="<%= data.userName %>">
+                
+                <button class="btt-edit-account">EDIT</button>
+            </form>
+               
+
+            <form action="/deleteAccount" method="post" id="accountDelete">
+                <h1 id="h1-shortcuts">DELETE ACCOUNT</h1>
+                <input type="hidden" name="id" value="<%= data.id %>">
+                <button class="btt-delete-account">DELETE</button>
+            </form>
+        </div>
+
+        <% }) %>
+    </div>
 </body>
 </html>

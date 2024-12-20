@@ -238,14 +238,12 @@ router.get('/editarPerfil', userAuth ,async (req, res) =>{
 
     var result = await recordData.map(events => ({
         id: events.dataValues.id,
-        fullname: events.dataValues.fullName,
+        fullName: events.dataValues.fullName,
         userName: events.dataValues.userName,
         email: events.dataValues.email,
         password: events.dataValues.password,
         image: events.dataValues.image
     }))
-
-    console.log(result)
 
     res.render('../views/shortHands.ejs/editar-perfil', {
         recordData: result
