@@ -15,6 +15,39 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+router.post('/updateNames', async (req, res) =>{
+    var fullNameVar = req.body.fullName;
+    var userNameVar = req.body.userName;
+    var userId = req.session.user.id;
+
+    try{
+        const record = await recordModel.findOne({
+            where: {
+                id: userId
+            }
+        });
+        
+        if (!record) {
+            console.log('Erro: fullName already exist')
+            return res.redirect('/editarPerfil');
+        }
+
+        await recordModel.update({
+            fullName: fullNameVar,
+            userName: userNameVar 
+        }, {
+            where: {id: userId}
+        })
+
+        console.log('Atualizado com sucesso')
+        res.redirect('/editarPerfil');
+    }
+    catch(error){
+        res.status(400).send('Erro at updated profile names' + error)
+    }
+})
+
+
 router.post('/uploadImage', upload.single('image'), (req, res) =>{
     var imageUpdated = req.file
     var userId = req.session.user.id
@@ -29,7 +62,8 @@ router.post('/uploadImage', upload.single('image'), (req, res) =>{
         where: {id: userId} 
     })
     .then(() =>{
-        res.redirect('/editarPerfil')
+        console.log('Profile image success updated')
+        return res.redirect('/editarPerfil')
     })
     .catch((error) =>{
         res.status(400).send('Erro at process image file send' + error)
