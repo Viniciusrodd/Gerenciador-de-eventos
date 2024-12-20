@@ -23,7 +23,7 @@ router.post('/uploadEvents', upload.single('image') ,async (req, res) =>{
         const event = await eventModel.findByPk(eventId);
 
         if (event) {
-            Object.keys(updates).forEach(key => {
+            Object.keys(updates).forEach(key => { //array de nomes das propriedade de obj updates
                 if (key !== 'id') {
                     event[key] = updates[key];
                 }

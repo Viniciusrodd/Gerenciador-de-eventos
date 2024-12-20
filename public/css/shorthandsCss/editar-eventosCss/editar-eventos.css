@@ -89,9 +89,10 @@ hr{
 
 label{
     font-size: 26px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     font-weight: bold;
-    color: black;
+    color: white;
+    text-shadow: 3px 3px var(--cor02);
 }
 
 input, select{
@@ -102,17 +103,17 @@ input, select{
     border-left: none;
     border-right: none;
     border-bottom: 3px solid black;
-    color: white;
-    background-color: transparent;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.269);
     font-size: 19px;
     text-align: center;
 }
 input, select:focus{
     outline: none;
 }
-input, select:valid{
-    background-color: transparent;
-}
+/*input, select:valid{
+    background-color: rgb(255, 255, 255, 0.54);
+}*/
 
 ::placeholder{
     color: white;
@@ -126,7 +127,7 @@ input, select:valid{
 
 fieldset{
     padding: 30px 100px 30px 100px;
-    border: 3px solid white;
+    border: 3px solid black;
     margin-bottom: 70px;
 }
 
@@ -134,6 +135,7 @@ legend{
     font-size: 30px;
     font-weight: bold;
     color: white;
+    text-shadow: 3px 3px var(--cor02);
 }
 
 #p-textarea{
