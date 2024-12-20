@@ -16,18 +16,18 @@ const upload = multer({ storage: storage });
 
 
 router.post('/deleteAccount', async (req, res) =>{
-    var userId = req.session.user.id;
+    var userIdvar = req.session.user.id;
 
     try{
         await recordModel.destroy({
             where: {
-                id: userId
+                id: userIdvar
             }
         })
 
         await eventModel.destroy({
             where: {
-                id: userId
+                userId: userIdvar
             }
         })
 
