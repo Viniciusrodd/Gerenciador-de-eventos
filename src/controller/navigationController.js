@@ -222,4 +222,9 @@ router.post('/editarEvento', userAuth, async (req, res) =>{
 })
 
 
+router.get('/editarPerfil', (req, res) =>{
+    res.render('../views/shortHands.ejs/editar-perfil')
+})
+
+
 module.exports = router;
