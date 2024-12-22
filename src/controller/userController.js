@@ -4,6 +4,7 @@ const router = express.Router();
 const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
 const participationModel = require('../models/participation');
+const fs = require('fs');
 
 const multer = require('multer');
 const bcrypt = require('bcrypt');
@@ -13,6 +14,25 @@ const sequelize = require('sequelize');
 //config do multer
 const storage = multer.memoryStorage();  // Isso armazena os arquivos na memória
 const upload = multer({ storage: storage });
+
+
+router.post('/deleteEvents', (req, res) =>{
+    var eventId = req.body.id;
+
+    eventModel.destroy({
+        where:{
+            id: eventId
+        }
+    })
+    .then(() =>{
+        console.log('Event deleted with sucess')
+        return res.redirect('/homepage')
+    })
+    .catch((error) =>{
+        console.log('Failed at delete event', error)
+        return res.redirect('/editarEvento')
+    })
+})
 
 
 router.post('/deleteAccount', async (req, res) =>{
@@ -171,41 +191,58 @@ router.post('/participate', async (req, res) =>{
 
 
 router.post('/createEvent', upload.single('imagem'), (req, res) =>{
-    var {
-        nomeEvento, 
-        tipo, 
-        organizador, 
-        data, 
-        hora_inicio, 
-        hora_fim, 
-        endereco, 
+    const {
+        nomeEvento,
+        tipo,
+        organizador,
+        data,
+        hora_inicio,
+        hora_fim,
+        endereco,
         descricao
     } = req.body;
 
-    const imagem = req.file;
-
-    if(req.session.user){
-        eventModel.create({
-            nome: nomeEvento,
-            tipo: tipo,
-            organizador: organizador,
-            data: data,
-            hora_inicio: hora_inicio,
-            hora_fim: hora_fim,
-            endereco: endereco,
-            descricao: descricao,
-            image: imagem.buffer,
-            userId: req.session.user.id
-        })
-        .then(() =>{
-            console.log('Event created sucess')
-            res.redirect('/homepage')
-        })
-        .catch((error) =>{
-            console.log('erro to create event' + error)
-            res.redirect('/homepage')
-        })    
+    if (!req.session.user) {
+        res.status(401).send('Usuário não autenticado.');
+        return;
     }
+
+    let imagemBuffer;
+
+    if (req.file) {
+        // Se o usuário enviou uma imagem, usa o buffer do arquivo enviado
+        imagemBuffer = req.file.buffer;
+    } else {
+        // Caso contrário, lê a imagem padrão e a converte em buffer
+        const defaultImagePath = path.resolve('path/to/default/image/SEM FOTO DE EVENTO.png');
+        try {
+            imagemBuffer = fs.readFileSync(defaultImagePath);
+        } catch (error) {
+            console.error('Erro ao carregar imagem padrão:', error);
+            return res.redirect('/criarEventos');
+        }
+    }
+
+    eventModel.create({
+        nome: nomeEvento,
+        tipo: tipo,
+        organizador: organizador,
+        data: data,
+        hora_inicio: hora_inicio,
+        hora_fim: hora_fim,
+        endereco: endereco,
+        descricao: descricao,
+        image: imagemBuffer,
+        userId: req.session.user.id
+    })
+    .then(() => {
+        console.log('Evento criado com sucesso!');
+        res.redirect('/homepage');
+    })
+    .catch((error) => {
+        console.error('Erro ao criar evento:', error);
+        res.status(500).redirect('/criarEventos');
+    });
 })
 
 

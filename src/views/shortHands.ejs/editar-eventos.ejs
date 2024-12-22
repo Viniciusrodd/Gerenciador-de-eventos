@@ -70,11 +70,18 @@
 
                 <button id="btt-evento">Salvar alterações</button>
             </form>
+
+
+            <form action="/deleteEvents" method="post" id="eventDelete">
+                <h1 class="titulo">Deletar evento:</h1>       
+                <input type="hidden" name="id" value="<%= event.id %>">     
+                <button class="btt-delete-account">DELETE</button>
+            </form>
         <% }) %>
     </div>
 </body>
 
-<script>
+<script defer>
     form.addEventListener('submit', (e) => {
     e.preventDefault(); // Impede o envio padrão
 
@@ -113,6 +120,28 @@
         console.error('Error at requisition event update:', err);
     });
     });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const formDelete = document.getElementById('eventDelete'); // Obtém o formulário de exclusão
+        if (formDelete) {
+            formDelete.addEventListener('submit', function (event) {
+                event.preventDefault(); // Evita o envio automático do formulário
+
+                const userResponse = window.confirm('Tem certeza que deseja excluir esse evento?');
+                if (userResponse) {
+                    // Envia o formulário após a confirmação
+                    this.submit();
+                } else {
+                    alert('Ação cancelada');
+                }
+            });
+        }
+    });
+
+      
+
 </script>
 
 </html>
