@@ -276,7 +276,8 @@ router.post('/authenticateLogin', async (req, res) =>{
                 req.session.user = {
                     id: recordData.id,
                     email: recordData.email,
-                    userName: recordData.userName
+                    userName: recordData.userName,
+                    fullName: recordData.fullName
                 }
                 console.log('Login sucess')
                 return res.redirect('/homepage?sucess=Message for modal')

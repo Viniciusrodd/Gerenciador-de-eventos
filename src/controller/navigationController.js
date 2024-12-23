@@ -71,7 +71,7 @@ router.get('/homepage', userAuth, (req, res) =>{
                     event.endSeconds = endTime.seconds();
                 }
             });
-    
+
             res.render('homepage', {
                 dadosEvents: data,
                 userData: user

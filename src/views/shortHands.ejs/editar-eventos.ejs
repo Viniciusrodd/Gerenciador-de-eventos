@@ -64,8 +64,12 @@
                 </fieldset>
 
                 
-                <label for="image">Editar imagem:</label>            
-                <img src="data:image/jpeg;base64,<%= event.image.toString('base64') %>" alt="Imagem do evento" style="width: 200px; height: auto;">
+                <label for="image">Editar imagem:</label>  
+                <% if(!event.image) { %>
+                    <img src="../../../imagens/SEM FOTO DE EVENTO.png" alt="Imagem do evento" style="width: 200px; height: auto;">
+                <% } else { %>
+                    <img src="data:image/jpeg;base64,<%= event.image.toString('base64') %>" alt="Imagem do evento" style="width: 200px; height: auto;">
+                <% } %>
                 <input type="file" name="image" id="iimage">
 
                 <button id="btt-evento">Salvar alterações</button>
