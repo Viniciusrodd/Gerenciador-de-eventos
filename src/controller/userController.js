@@ -303,7 +303,7 @@ router.post('/authenticateLogin', (req, res) =>{
                     email: dadosLogin.email,
                     userName: dadosLogin.userName
                 }
-                res.redirect('/homepage')
+                res.redirect('/homepage?sucess=Message for modal')
                 console.log('Login sucess')
             }else{
                 res.redirect('/login')

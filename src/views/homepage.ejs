@@ -136,6 +136,52 @@
 
         </div>
 
+
+        <!--modal-->
+
+
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Bem-vindo ao Gerenciador de Eventos!</h2>
+                <p id="p-modal">Estamos felizes em tê-lo aqui. Organize, edite e gerencie seus eventos da forma + simples e eficiente.</p>
+                <button id="close-modal-btn" class="modal-button">Começar</button>
+            </div>
+        </div>
+        
     </div>
 </body>
+
+
+<script>
+    var modal = document.getElementById('welcome-modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    
+
+    document.addEventListener('DOMContentLoaded', () =>{
+        const urlParams = new URLSearchParams(window.location.search);
+        const sucessMsg = urlParams.get('sucess');
+        if(sucessMsg){
+            modal.style.display = 'block'
+            bttModalPress(bttModal, spanbtt);   
+
+            urlParams.delete('sucess');
+            const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+            history.replaceState(null, '', newUrl);
+        }
+    })
+
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+</script>
+
+
 </html>
