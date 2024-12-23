@@ -12,9 +12,9 @@
         <div id="div-filho">
             <h1>Registre-se</h1>
             <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
-            <form method="post" action="/saveRecords" enctype="multipart/form-data">
+            <form method="post" action="/saveRecords" enctype="multipart/form-data" id="register-form">
                 <input type="text" name="fullname" id="inome" placeholder="Nome completo" required>
-                <input type="text" name="username" id="iusername" placeholder="Nome de usuário">
+                <input type="text" name="username" id="iusername" placeholder="Nome de usuário" required>
                 <input type="email" name="email" id="iemail" placeholder="Email" required>
                 <input type="password" name="password" id="isenha" placeholder="Senha" required>
             
@@ -25,7 +25,7 @@
                     </div>
     
                     <!-- Formulário de upload de imagem -->
-                    <input type="file" id="input-edit-imagem" name="imageCreate" >
+                    <input type="file" id="input-edit-imagem" name="imageCreate">
                 </div>
 
                 <p id="p-registro"><a href="/login">Already have an account</a></p>

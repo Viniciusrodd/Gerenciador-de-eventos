@@ -207,80 +207,49 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         return;
     }
 
-    let imagemBuffer;
+    if(req.file){
+        var imagemBuffer = req.file.buffer;
 
-    if (req.file) {
-        // Se o usuário enviou uma imagem, usa o buffer do arquivo enviado
-        imagemBuffer = req.file.buffer;
-    } else {
-        // Caso contrário, lê a imagem padrão e a converte em buffer
-        const defaultImagePath = path.resolve('path/to/default/image/SEM FOTO DE EVENTO.png');
-        try {
-            imagemBuffer = fs.readFileSync(defaultImagePath);
-        } catch (error) {
-            console.error('Erro ao carregar imagem padrão:', error);
-            return res.redirect('/criarEventos');
-        }
-    }
-
-    eventModel.create({
-        nome: nomeEvento,
-        tipo: tipo,
-        organizador: organizador,
-        data: data,
-        hora_inicio: hora_inicio,
-        hora_fim: hora_fim,
-        endereco: endereco,
-        descricao: descricao,
-        image: imagemBuffer,
-        userId: req.session.user.id
-    })
-    .then(() => {
-        console.log('Evento criado com sucesso!');
-        res.redirect('/homepage');
-    })
-    .catch((error) => {
-        console.error('Erro ao criar evento:', error);
-        res.status(500).redirect('/criarEventos');
-    });
-})
-
-
-
-router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
-    //console.log(req.file);
-    try{
-        const {fullname, username, email, password} = req.body;
-        var imagem = req.file;
-
-        if (!fullname || !username || !email || !password) {
-            return res.redirect('/registro');
-        }
-
-        const userExists = await recordModel.findOne({ 
-            where: { email: email } 
+        eventModel.create({
+            nome: nomeEvento,
+            tipo: tipo,
+            organizador: organizador,
+            data: data,
+            hora_inicio: hora_inicio,
+            hora_fim: hora_fim,
+            endereco: endereco,
+            descricao: descricao,
+            image: imagemBuffer,
+            userId: req.session.user.id
+        })
+        .then(() => {
+            console.log('Event created with success!');
+            res.redirect('/homepage');
+        })
+        .catch((error) => {
+            console.error('Error at created event:', error);
+            res.status(500).redirect('/criarEventos');
         });
-        if (userExists) {
-            return res.redirect('/registro');
-        }
-
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(password, salt);
-
-        await recordModel.create({
-            fullName: fullname,
-            userName: username,
-            email: email,
-            password: hash,
-            image: imagem.buffer
+    }else{
+        eventModel.create({
+            nome: nomeEvento,
+            tipo: tipo,
+            organizador: organizador,
+            data: data,
+            hora_inicio: hora_inicio,
+            hora_fim: hora_fim,
+            endereco: endereco,
+            descricao: descricao,
+            userId: req.session.user.id
+        })
+        .then(() => {
+            console.log('Event created with success! (without image)');
+            res.redirect('/homepage');
+        })
+        .catch((error) => {
+            console.error('Erro at create event (without image):', error);
+            res.status(500).redirect('/criarEventos');
         });
-
-        console.log('Record sucess create')
-        res.redirect('/login')
-    }
-    catch(error){
-        console.error(`Error in create record: ${error} image${imagem}`);
-        res.status(500).send('Error to process record');
     }
 })
 
@@ -314,8 +283,58 @@ router.post('/authenticateLogin', (req, res) =>{
             console.log('Wrong login data')
         }
     })
+})
 
 
+router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
+    try{
+        const {fullname, username, email, password} = req.body;
+
+        if (!fullname || !username || !email || !password) {
+            console.log('Fields empty')
+            return res.redirect('/registro');
+        }
+
+        const userExists = await recordModel.findOne({ 
+            where: { email: email } 
+        });
+        if (userExists) {
+            console.log('user email already exist')
+            return res.redirect('/registro');
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+
+        if(req.file){
+            var image = req.file.buffer;
+        
+            await recordModel.create({
+                fullName: fullname,
+                userName: username,
+                email: email,
+                password: hash,
+                image: image
+            });
+    
+            console.log('Record sucess create')
+            res.redirect('/login')
+        }else{
+            await recordModel.create({
+                fullName: fullname,
+                userName: username,
+                email: email,
+                password: hash,
+            });
+
+            console.log('Record sucess create (without image)')
+            res.redirect('/login')
+        }
+    }
+    catch(error){
+        console.error(`Error in create record: ${error} image${imagem}`);
+        res.status(500).send('Error to process record');
+    }
 })
 
 

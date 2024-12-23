@@ -70,21 +70,4 @@
     </div>
 </body>
 
-<script>
-
-    const form = document.getElementById('createForm');
-    form.addEventListener('submit', function(event) {
-        const fileInput = document.getElementById('iimagem');
-
-        if (fileInput.files.length === 0) {
-            // Adiciona a imagem padrão ao formulário
-            const defaultImage = new File([''], 'SEM FOTO DE EVENTO.png', { type: 'image/png' });
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(defaultImage);
-            fileInput.files = dataTransfer.files;
-        }
-    });
-
-</script>
-
 </html>
