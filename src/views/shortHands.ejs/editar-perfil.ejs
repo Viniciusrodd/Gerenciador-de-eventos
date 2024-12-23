@@ -19,10 +19,17 @@
         </header>
 
         <% recordData.forEach(data =>{ %>
-        
-        <div id="div-imagem-perfil">
-            <img id="img-perfil" src="data:image/jpeg;base64,<%= data.image.toString('base64') %>" />                   
-        </div>
+            
+            <% if(!data.image) { %>
+                <div id="div-imagem-perfil">
+                    <img id="img-perfil" src="../../../imagens/user.jpg" />                   
+                </div>    
+            <% } else { %>                    
+                <div id="div-imagem-perfil">
+                    <img id="img-perfil" src="data:image/jpeg;base64,<%= data.image.toString('base64') %>" />                   
+                </div>
+            <% } %>
+
         <div id="edit-imagem-perfil">
             <i class="material-icons" id="i-photo">photo_camera</i>
             <p id="p-edit-imagem">Edit your photo</p>

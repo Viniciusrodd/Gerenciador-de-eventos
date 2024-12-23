@@ -78,9 +78,15 @@
                             <p id="p-event-title"><%= dados.nome %></p>
                         </div>
                         
-                        <div id="profile-image">
-                            <img src="<%= dados.records.profileimage %>" id="profile">              
-                        </div>
+                        <% if(dados.records.profileimage) { %>
+                            <div id="profile-image">
+                                <img src="<%= dados.records.profileimage %>" id="profile">              
+                            </div>
+                        <% } else { %>
+                            <div id="profile-image">
+                                <img src="../../imagens/user.jpg" id="profile">              
+                            </div>
+                        <% } %>
                     </div>
 
                     <div id="event-info-container">
