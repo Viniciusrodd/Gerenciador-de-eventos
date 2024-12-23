@@ -39,9 +39,10 @@
         <div id="emailExist-modal" class="modal">
             <div class="modal-content">
                 <span class="close-button" id="span-btt">&times;</span>
-                <h2 id="h2-modal">Aviso!!!</h2>
+                <h2 id="h2-modal">Aviso</h2>
+                <i class="material-icons">error</i>
                 <p id="p-modal">Email inserido já existente, por favor tente com outro!!!</p>
-                <button id="close-modal-btn" class="modal-button">Começar</button>
+                <button id="close-modal-btn" class="modal-button">Tentar outro</button>
             </div>
         </div>
     </div>
@@ -88,7 +89,11 @@
 
         if(emailExistParms){
             emailModal.style.display = 'block'
-            bttModalPress(bttModal, spanbtt);   
+            bttModalPress(bttModal, spanbtt);  
+            
+            URLparams.delete('emailExist');
+            const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
+            history.replaceState(null, '', newUrl);
         }
     })
 

@@ -208,27 +208,29 @@ button:hover{
 
 #h2-modal{
     font-size: 30px;
+    margin-bottom: 3px;
 }
 
 #p-modal{
     font-size: 19px;
+    margin-top: 3px;
 }
 
 /* Botão de Ação */
 .modal-button {
-    background-color: #3498db;
+    background-color: #db3434;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
-    transition: background-color 0.3s;
+    margin-top: 10px;
+    transition: 0.5s ease;
 }
 
 .modal-button:hover {
-    background-color: #2980b9;
+    background-color: #dd4c4c;
 }
 
 /* Animação de Aparecer */
