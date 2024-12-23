@@ -275,8 +275,8 @@ router.post('/authenticateLogin', (req, res) =>{
                 res.redirect('/homepage?sucess=Message for modal')
                 console.log('Login sucess')
             }else{
-                res.redirect('/login')
                 console.log('Wrong password')
+                return res.redirect('/login?wrongPassword=Senha incorreta')
             }
         }else{
             res.redirect('/login')
@@ -332,8 +332,8 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
         }
     }
     catch(error){
-        console.error(`Error in create record: ${error} image${imagem}`);
-        res.status(500).send('Error to process record');
+        console.error(`Error in create record: ${error}`);
+        res.redirect('/registro');
     }
 })
 

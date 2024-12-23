@@ -32,11 +32,25 @@
                 <h2 id="h2-modal">Registrado</h2>
                 <i class="material-icons">how_to_reg</i>
                 <p id="p-modal">Seu registro foi salvo com sucesso! Continue com o login</p>
-                <button id="close-modal-btn" class="modal-button">Tentar outro</button>
+                <button id="close-modal-btn" class="modal-button">Continuar</button>
+            </div>
+        </div>
+
+        <!--Modal 2-->
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt2">&times;</span>
+                <h2 id="h2-modal2">Senha incorreta</h2>
+                <i class="material-icons">error</i>
+                <p id="p-modal2">Sua senha está incorreta! Por favor tente novamente.</p>
+                <button id="close-modal-btn2" class="modal-button">Tentar novamente</button>
             </div>
         </div>
     </div>
 </body>
+
+
 
 <script>
 
@@ -62,6 +76,37 @@
             bttModalPress(bttModal, spanbtt);  
             
             URLparams.delete('success');
+            const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
+            history.replaceState(null, '', newUrl);
+        }
+    })
+
+
+    //modal 2
+
+
+    var modal2 = document.getElementById('modal2');
+    var bttModal2 = document.getElementById('close-modal-btn2');
+    var spanbtt2 = document.getElementById('span-btt2');
+
+    function bttModalPress2(btt, span){
+        btt.addEventListener('click', () =>{
+            modal2.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal2.style.display = 'none';
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) =>{
+        const URLparams = new URLSearchParams(window.location.search);
+        const Params = URLparams.get('wrongPassword');
+
+        if(Params){
+            modal2.style.display = 'block'
+            bttModalPress2(bttModal2, spanbtt2);  
+            
+            URLparams.delete('wrongPassword');
             const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
             history.replaceState(null, '', newUrl);
         }
