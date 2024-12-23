@@ -14,8 +14,8 @@
             <form method="post" action="/authenticateLogin">
                 <h1>Login</h1>
 
-                <input type="text" name="email" id="iemail" placeholder="Email">
-                <input type="password" name="password" id="ipassword" placeholder="Password">
+                <input type="text" name="email" id="iemail" placeholder="Email" required    >
+                <input type="password" name="password" id="ipassword" placeholder="Password" required   >
 
                 <p><a href="/registro">Don't have an account ?</a></p>
                 
@@ -45,6 +45,19 @@
                 <i class="material-icons">error</i>
                 <p id="p-modal2">Sua senha está incorreta! Por favor tente novamente.</p>
                 <button id="close-modal-btn2" class="modal-button">Tentar novamente</button>
+            </div>
+        </div>
+
+
+        <!--Modal 3-->
+
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt3">&times;</span>
+                <h2 id="h2-modal3">Dados de usuário incorretos</h2>
+                <i class="material-icons">error</i>
+                <p id="p-modal3">Email e senha inexistentes! Por favor tente novamente.</p>
+                <button id="close-modal-btn3" class="modal-button">Tentar novamente</button>
             </div>
         </div>
     </div>
@@ -107,6 +120,37 @@
             bttModalPress2(bttModal2, spanbtt2);  
             
             URLparams.delete('wrongPassword');
+            const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
+            history.replaceState(null, '', newUrl);
+        }
+    })
+
+
+    //modal 3
+
+
+    var modal3 = document.getElementById('modal3');
+    var bttModal3 = document.getElementById('close-modal-btn3');
+    var spanbtt3 = document.getElementById('span-btt3');
+
+    function bttModalPress3(btt, span){
+        btt.addEventListener('click', () =>{
+            modal3.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal3.style.display = 'none';
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) =>{
+        const URLparams = new URLSearchParams(window.location.search);
+        const Params = URLparams.get('userDataWrong');
+
+        if(Params){
+            modal3.style.display = 'block'
+            bttModalPress3(bttModal3, spanbtt3);  
+            
+            URLparams.delete('userDataWrong');
             const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
             history.replaceState(null, '', newUrl);
         }

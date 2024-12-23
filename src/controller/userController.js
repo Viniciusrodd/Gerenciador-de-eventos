@@ -254,35 +254,42 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
 })
 
 
-router.post('/authenticateLogin', (req, res) =>{
+router.post('/authenticateLogin', async (req, res) =>{
     var emailVar = req.body.email
     var passwordVar = req.body.password
+    
+    try{
+        var recordData = await recordModel.findOne({
+            where: {
+                email: emailVar,
+            }
+        })
 
-    recordModel.findOne({
-        where: {
-            email: emailVar,
+        if(!recordData){
+            console.log('Wrong user data')
+            return res.redirect('/login?userDataWrong=Dados não existentes')
         }
-    })
-    .then((dadosLogin) =>{
-        if(dadosLogin != undefined){
-            var correct = bcrypt.compareSync(passwordVar, dadosLogin.password)
+
+        if(recordData){
+            var correct = bcrypt.compareSync(passwordVar, recordData.password)
             if(correct){
                 req.session.user = {
-                    id: dadosLogin.id,
-                    email: dadosLogin.email,
-                    userName: dadosLogin.userName
+                    id: recordData.id,
+                    email: recordData.email,
+                    userName: recordData.userName
                 }
-                res.redirect('/homepage?sucess=Message for modal')
                 console.log('Login sucess')
+                return res.redirect('/homepage?sucess=Message for modal')
             }else{
                 console.log('Wrong password')
                 return res.redirect('/login?wrongPassword=Senha incorreta')
             }
-        }else{
-            res.redirect('/login')
-            console.log('Wrong login data')
         }
-    })
+    }
+    catch(error){
+        console.log('Error at authenticate user', error)
+        return res.redirect('/login')
+    }
 })
 
 
