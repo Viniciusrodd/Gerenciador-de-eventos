@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../../css/loginCss/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div id="div-pai">
@@ -21,6 +22,51 @@
                 <button>Login</button>
             </form>
         </div>
+
+
+        <!--Modal-->
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Registrado</h2>
+                <i class="material-icons">how_to_reg</i>
+                <p id="p-modal">Seu registro foi salvo com sucesso! Continue com o login</p>
+                <button id="close-modal-btn" class="modal-button">Tentar outro</button>
+            </div>
+        </div>
     </div>
 </body>
+
+<script>
+
+    var modal = document.getElementById('modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) =>{
+        const URLparams = new URLSearchParams(window.location.search);
+        const Params = URLparams.get('success');
+
+        if(Params){
+            modal.style.display = 'block'
+            bttModalPress(bttModal, spanbtt);  
+            
+            URLparams.delete('success');
+            const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
+            history.replaceState(null, '', newUrl);
+        }
+    })
+
+</script>
+
 </html>

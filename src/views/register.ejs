@@ -85,9 +85,9 @@
 
     document.addEventListener('DOMContentLoaded', (event) =>{
         const URLparams = new URLSearchParams(window.location.search);
-        const emailExistParms = URLparams.get('emailExist');
+        const emailExistParams = URLparams.get('emailExist');
 
-        if(emailExistParms){
+        if(emailExistParams){
             emailModal.style.display = 'block'
             bttModalPress(bttModal, spanbtt);  
             

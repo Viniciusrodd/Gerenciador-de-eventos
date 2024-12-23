@@ -318,7 +318,7 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
             });
     
             console.log('Record sucess create')
-            res.redirect('/login')
+            res.redirect('/login?success=Usuário registrado com sucesso')
         }else{
             await recordModel.create({
                 fullName: fullname,
@@ -328,7 +328,7 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
             });
 
             console.log('Record sucess create (without image)')
-            res.redirect('/login')
+            res.redirect('/login?success=Usuário registrado com sucesso')        
         }
     }
     catch(error){
