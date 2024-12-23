@@ -32,6 +32,18 @@
                 <button>Cadastrar</button>
             </form>
         </div>
+
+
+        <!--Modal-->
+
+        <div id="emailExist-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Aviso!!!</h2>
+                <p id="p-modal">Email inserido já existente, por favor tente com outro!!!</p>
+                <button id="close-modal-btn" class="modal-button">Começar</button>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -54,6 +66,34 @@
                 reader.readAsDataURL(file);  // Lê o arquivo e o converte em uma URL de dados
             }
     });
+
+
+    
+    var emailModal = document.getElementById('emailExist-modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            emailModal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            emailModal.style.display = 'none';
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) =>{
+        const URLparams = new URLSearchParams(window.location.search);
+        const emailExistParms = URLparams.get('emailExist');
+
+        if(emailExistParms){
+            emailModal.style.display = 'block'
+            bttModalPress(bttModal, spanbtt);   
+        }
+    })
+
+
+
 </script>
 
 </html>

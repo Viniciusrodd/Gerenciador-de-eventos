@@ -181,7 +181,7 @@ router.post('/participate', async (req, res) =>{
             console.log('Participation already exist');
         }
 
-        return res.redirect('/homepage');
+        return res.redirect('/eventosInscritos');
     }
     catch(error){
         console.log('Error at create participation', error)
@@ -300,7 +300,7 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
         });
         if (userExists) {
             console.log('user email already exist')
-            return res.redirect('/registro');
+            return res.redirect(`/registro?emailExist=email ja existe`);
         }
 
         const salt = bcrypt.genSaltSync(10);
