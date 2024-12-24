@@ -103,7 +103,7 @@
                         </div>
 
                         
-                        <form action="/events/disparticipate" method="post">
+                        <form action="/events/disparticipate" method="post" id="formRemovePart">
                             <input type="hidden" name="eventId" value="<%= dados.id %>">
                             <button id="btt-participation">Tirar participação</button>
                         </form>
@@ -113,6 +113,40 @@
                 
             </div>
         </div>
+
+        <!--Modal 2-->
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt2">&times;</span>
+                <h2 id="h2-modal2">Só um momento!</h2>
+                <i class="material-icons">info</i>
+                <p id="p-modal2">Tem certeza sobre remover sua participação desse evento ?</p>
+                <button id="close-modal-btn2" class="modal-button">Tenho certeza</button>
+            </div>
+        </div>
     </div>
 </body>
+
+<script>
+    var formParticipation = document.getElementById('formRemovePart');
+    formParticipation.addEventListener('submit', (event) =>{
+        event.preventDefault();
+
+        var modal2 = document.getElementById('modal2');
+        var bttModal2 = document.getElementById('close-modal-btn2');
+        var spanbtt2 = document.getElementById('span-btt2');
+
+        modal2.style.display = 'block'
+        
+        spanbtt2.addEventListener('click', () =>{
+            modal2.style.display = 'none';
+        })
+        bttModal2.addEventListener('click', () =>{
+            modal2.style.display = 'none';
+            formParticipation.submit();
+        })
+    })
+</script>
+
 </html>

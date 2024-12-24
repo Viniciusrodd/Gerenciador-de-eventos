@@ -28,7 +28,7 @@ hr{
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    padding: 0% 0px 0% 0px;
+    min-height: 100vh;
     width: 100%;
     background-image: url(../../../imagens/section-img-7.jpg);
     background-position: center;
@@ -363,6 +363,58 @@ li:hover{
 .modal-button:hover {
     transform: scale(1.1);
     background-color: rgb(135, 36, 151);
+}
+
+/* Animação de Aparecer */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#modal2{
+    display: none; /* Modal começa invisível */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+}
+
+#h2-modal2{
+    font-size: 30px;
+    margin-bottom: 3px;
+}
+
+#p-modal2{
+    font-size: 19px;
+    margin-top: 3px;
+}
+
+/* Botão de Ação */
+#close-modal-btn2{
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px;
+    width: 160px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: 0.5s ease;
+}
+
+#close-modal-btn2:hover {
+    background-color: #df412f;
 }
 
 /* Animação de Aparecer */
