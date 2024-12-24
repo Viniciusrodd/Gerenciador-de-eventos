@@ -75,7 +75,7 @@
                             <ul>
                                 <li>
                                     <i class="material-icons">mail</i>
-                                    <%= dados.tipo %> - Organizado por @<%= dados.records.fullName %>
+                                    <%= dados.tipo %> - Organizado por @<%= dados.organizador %>
                                 </li>
                                 <hr>
                                 <li>
@@ -101,6 +101,12 @@
                                 <%= dados.descricao %>
                             </p>
                         </div>
+
+                        
+                        <form action="/events/disparticipate" method="post">
+                            <input type="hidden" name="eventId" value="<%= dados.id %>">
+                            <button id="btt-participation">Tirar participação</button>
+                        </form>
                     </div>
                 <% }) %>
                 <% } %>

@@ -127,10 +127,6 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
             ],
         });
 
-        if (!events || events.length === 0) {
-            return res.send('No events found for these IDs.');
-        }
-
         if (events && events.length > 0) {
             // Trabalhando com os eventos
             events.forEach(event => {
@@ -171,7 +167,6 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
                 dadosEvents: events,
                 userData: req.session.user
             });
-            console.log('eventos' + events)
         } else {
             res.redirect('/homepage'); // Caso não haja eventos para exibir
             console.log('nao tem eventos' + events)

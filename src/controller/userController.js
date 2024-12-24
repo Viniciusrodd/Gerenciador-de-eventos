@@ -16,6 +16,25 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+router.post('/events/disparticipate', (req, res) =>{
+    var eventIdVar = req.body.eventId;
+
+    participationModel.destroy({
+        where: {
+            eventId: eventIdVar
+        }
+    })
+    .then(() =>{
+        console.log('Participation event removed');
+        return res.redirect('/eventosInscritos');
+    })
+    .catch((error) =>{
+        console.log('Participation event FAILED at removed', error);
+        return res.redirect('/eventosInscritos');
+    })
+})
+
+
 router.post('/deleteEvents', (req, res) =>{
     var eventId = req.body.id;
 
