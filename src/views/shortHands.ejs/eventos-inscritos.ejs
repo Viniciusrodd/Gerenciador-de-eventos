@@ -25,6 +25,20 @@
 
         <div id="container-homepage">
             <div id="container-publications">
+                <% if (dadosEvents.length === 0) { %>
+                    <!--Modal-->
+
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <h2 id="h2-modal">Você não está participando de nenhum evento</h2>
+                            <i class="material-icons">close</i>
+                            <p id="p-modal">Participe de um evento na página principal</p>
+                            <a href="/homepage">
+                                <button id="close-modal-btn" class="modal-button">Página principal</button>
+                            </a>
+                        </div>
+                    </div>
+                <% } else { %>
                 <% dadosEvents.forEach((dados) =>{ %>
                     <div id="publications-homepage">
                         <div id="event-banner">
@@ -89,6 +103,8 @@
                         </div>
                     </div>
                 <% }) %>
+                <% } %>
+                
             </div>
         </div>
     </div>

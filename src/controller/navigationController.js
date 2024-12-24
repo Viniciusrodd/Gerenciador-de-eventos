@@ -109,7 +109,9 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
         console.log('Event IDs for User:', eventIdsForUser)
 
         if (eventIdsForUser.length === 0) {
-            return res.send('No events found for this user.');
+            return res.render('../views/shortHands.ejs/eventos-inscritos', {
+                dadosEvents: eventIdsForUser
+            });
         }
         
         const events = await eventModel.findAll({

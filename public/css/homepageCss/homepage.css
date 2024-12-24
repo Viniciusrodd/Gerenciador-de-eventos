@@ -334,6 +334,8 @@ li:hover{
     border: 2px solid black;
     border-radius: 10px;
     transition: 0.5s;
+    word-wrap: break-word; /* Quebra automaticamente palavras longas */
+    overflow-wrap: break-word; /* Compatibilidade adicional para quebra de palavras */
 }
 
 #p-event-description{
