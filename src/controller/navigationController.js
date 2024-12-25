@@ -184,6 +184,7 @@ router.get('/logout', (req, res) =>{
     return res.redirect('/login')
 })
 
+
 router.post('/editarEvento', userAuth, async (req, res) =>{
     var eventId = req.body.eventId
 

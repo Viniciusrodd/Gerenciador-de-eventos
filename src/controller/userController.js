@@ -136,38 +136,41 @@ router.post('/uploadImage', upload.single('image'), (req, res) =>{
 })
 
 
-router.post('/uploadEvents', upload.single('image') ,async (req, res) =>{
-    const eventId = req.body.id; // ID enviado pelo input hidden
-    const updates = req.body;
-
+router.post('/uploadEvents', upload.single('image'), async (req, res) => {
     try {
+        const eventId = req.body.id; // ID enviado pelo input hidden
+        const updates = req.body; // Dados enviados no corpo
+
+        console.log('eventID do req.body.id: ', eventId)
+        console.log('updates do req.body: ', updates)
+        // Verifica se o evento existe
         const event = await eventModel.findByPk(eventId);
-
-        if (event) {
-            Object.keys(updates).forEach(key => { //array de nomes das propriedade de obj updates
-                if (key !== 'id') {
-                    event[key] = updates[key];
-                }
-            });
-
-            var imagem = req.file
-
-            if (req.file) {
-                event.image = imagem.buffer;
-            }
-
-            await event.save();
-
-            console.log('Event Updated with sucess')
-            res.redirect('/homepage');
-        } else {
-            res.status(404).send({ message: 'Event not found!' });
+        if (!event) {
+            return res.status(404).send({ message: 'Event not found!' });
         }
+
+        // Atualiza os campos não relacionados a arquivo
+        Object.keys(updates).forEach((key) => {
+            if (key !== 'id' && key !== 'image') {
+                event[key] = updates[key];
+            }
+        });
+
+        // Atualiza a imagem, se enviada
+        if (req.file) {
+            event.image = req.file.buffer; // Verifica se a imagem foi enviada
+        }
+
+        await event.save();
+
+        console.log('Event updated successfully');
+        res.redirect('/homepage');
     } catch (error) {
-        console.error('Error at updated event:', error);
+        console.error('Error updating event:', error);
         res.status(500).send({ message: 'Server error.' });
     }
-})
+});
+
 
 
 router.post('/participate', async (req, res) =>{
