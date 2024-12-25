@@ -50,6 +50,10 @@
                         <i class="material-icons">event_available</i>
                     </li>
                     <li>
+                        <a href="#">Meus eventos</a>
+                        <i class="material-icons">event</i>
+                    </li>
+                    <li>
                         <a href="/logout">Sair</a>
                         <i class="material-icons">logout</i>
                     </li>
@@ -154,6 +158,17 @@
                 <button id="close-modal-btn" class="modal-button">Começar</button>
             </div>
         </div>
+
+
+        <!--Modal 3-->
+
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h2 id="h2-modal3">Espere ai!</h2>
+                <i class="material-icons">sentiment_very_satisfied</i>
+                <p id="p-modal3">Você já está participando deste evento!</p>
+            </div>
+        </div>
         
     </div>
 </body>
@@ -187,6 +202,24 @@
         })
     }
 
+
+    //modal3
+
+    var modal3 = document.getElementById('modal3');
+
+    document.addEventListener('DOMContentLoaded', () =>{
+        const urlParams = new URLSearchParams(window.location.search);
+        const sucessMsg = urlParams.get('participationExist');
+        if(sucessMsg){
+            modal3.style.display = 'block'
+            setTimeout(() =>{
+                modal3.style.display = 'none'
+                urlParams.delete('participationExist');
+                const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+                history.replaceState(null, '', newUrl);
+            }, 4000)
+        }
+    })
 </script>
 
 
