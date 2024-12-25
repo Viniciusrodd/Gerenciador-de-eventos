@@ -72,6 +72,19 @@
                 <i class="material-icons">undo</i>
             </a>
         </h3>
+
+        <!--Modal-->
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Só um momento!</h2>
+                <i class="material-icons">info</i>
+                <p id="p-modal">Tem certeza que deseja excluir seu perfil ?</p>
+                
+                <button id="close-modal-btn" class="modal-button">Tenho certeza</button>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -103,17 +116,26 @@
 
 
 
-        var deleteForm = document.querySelectorAll('#accountDelete');
-        deleteForm.forEach(form => {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Evita que o formulário seja enviado automaticamente
-                
-                const userResponse = window.confirm('Tem certeza que deseja excluir esse perfil ?')
-                if(userResponse){
-                    this.submit();
-                }else{
-                    alert('Ação cancelada')
-                }
+        const deleteForms = document.getElementById('accountDelete');
+        deleteForms.addEventListener('submit', (event) => {
+            event.preventDefault(); // Impede o envio padrão
+
+            const modal = document.getElementById('modal');
+            const bttModal = document.getElementById('close-modal-btn');
+            const spanbtt = document.getElementById('span-btt');
+
+            // Exibe o modal
+            modal.style.display = 'block';
+
+            // Fechar o modal ao clicar no "x"
+            spanbtt.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // Confirmação de exclusão
+            bttModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+                deleteForms.submit(); // Submete o formulário após confirmação
             });
         });
 </script>

@@ -138,27 +138,22 @@ router.post('/uploadImage', upload.single('image'), (req, res) =>{
 
 router.post('/uploadEvents', upload.single('image'), async (req, res) => {
     try {
-        const eventId = req.body.id; // ID enviado pelo input hidden
-        const updates = req.body; // Dados enviados no corpo
+        const eventId = req.body.id;
+        const updates = req.body;
 
-        console.log('eventID do req.body.id: ', eventId)
-        console.log('updates do req.body: ', updates)
-        // Verifica se o evento existe
         const event = await eventModel.findByPk(eventId);
         if (!event) {
             return res.status(404).send({ message: 'Event not found!' });
         }
 
-        // Atualiza os campos não relacionados a arquivo
         Object.keys(updates).forEach((key) => {
             if (key !== 'id' && key !== 'image') {
                 event[key] = updates[key];
             }
         });
 
-        // Atualiza a imagem, se enviada
         if (req.file) {
-            event.image = req.file.buffer; // Verifica se a imagem foi enviada
+            event.image = req.file.buffer;
         }
 
         await event.save();
