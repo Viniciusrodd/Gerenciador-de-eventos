@@ -223,3 +223,19 @@ input::placeholder{
 .btt-delete-account:hover{
     transform: scale(1.00);
 }
+
+#h3-voltar{
+    font-size: 20px;
+    transition: ease 0.5s;
+    color: white;
+    margin-top: 50px;
+    
+    & a{
+        color: white;
+        text-decoration: none;
+    }
+}
+#h3-voltar:hover{
+    text-decoration: underline;
+    transform: scale(1.05);
+}

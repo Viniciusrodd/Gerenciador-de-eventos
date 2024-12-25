@@ -79,15 +79,32 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding: 10px 0px 10px 0px;
     width: 100%;
+    margin-top: 20px;
 }
 
 #titulo-2{
     font-size: 50px;
     color: white;
     text-align: 50px;
+    margin: 0px 0px 3px 0px;
+}
+
+#h3-voltar{
+    font-size: 20px;
+    transition: ease 0.5s;
+    color: white;
+    
+    & a{
+        color: white;
+        text-decoration: none;
+    }
+}
+#h3-voltar:hover{
     text-decoration: underline;
+    transform: scale(1.05);
 }
 
 #container-homepage{

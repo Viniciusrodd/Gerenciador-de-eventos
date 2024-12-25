@@ -85,12 +85,27 @@ form{
     color: white;
     text-shadow: 2px 1px rgba(0, 0, 0, 0.609);
     font-size: 55px;
-    margin: 0px 0px 90px 0px;
-    text-decoration: underline;
+    margin: 0px 0px 3px 0px;
 }
 
+#h3-voltar{
+    font-size: 20px;
+    transition: ease 0.5s;
+    color: white;
+    margin-bottom: 90px;
+    
+    & a{
+        color: white;
+        text-decoration: none;
+    }
+}
+#h3-voltar:hover{
+    text-decoration: underline;
+    transform: scale(1.05);
+}
 
 /*INPUTS*/
+
 select, option {
     background-color: black;     
     color: white;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criação de eventos</title>
     <link rel="stylesheet" href="../../../css/shorthandsCss/criar-eventosCss/criar-eventos.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div id="div-pai">
@@ -20,7 +21,12 @@
 
         <form action="/createEvent" method="POST" enctype="multipart/form-data" id="createForm">
             <h1 id="titulo-evento">Crie seu evento</h1>
-
+            <h3 id="h3-voltar">
+                <a href="/homepage">
+                    Voltar para homepage
+                    <i class="material-icons">undo</i>
+                </a>
+            </h3>
             
             <label for="nomeEvento">NOME DO EVENTO</label>
             <input type="text" name="nomeEvento" id="inomeEvento" required>
