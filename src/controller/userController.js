@@ -198,7 +198,7 @@ router.post('/participate', async (req, res) =>{
             console.log('Participation already exist');
         }
 
-        return res.redirect('/eventosInscritos');
+        return res.redirect('/eventosInscritos?participationCreated=participation');
     }
     catch(error){
         console.log('Error at create participation', error)

@@ -131,6 +131,17 @@
                 <button id="close-modal-btn2" class="modal-button">Tenho certeza</button>
             </div>
         </div>
+
+        <!--Modal 3-->
+
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h2 id="h2-modal3">Sucesso!</h2>
+                <i class="material-icons">handshake</i>
+                <p id="p-modal3">Participação registrada!</p>
+                <p id="p-modal3">Confira em Eventos Inscritos suas participações</p>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -153,6 +164,25 @@
             formParticipation.submit();
         })
     })
+
+    //modal3
+
+    var modal3 = document.getElementById('modal3');
+
+    document.addEventListener('DOMContentLoaded', () =>{
+        const urlParams = new URLSearchParams(window.location.search);
+        const sucessMsg = urlParams.get('participationCreated');
+        if(sucessMsg){
+            modal3.style.display = 'block'
+            setTimeout(() =>{
+                modal3.style.display = 'none'
+                urlParams.delete('participationCreated');
+                const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+                history.replaceState(null, '', newUrl);
+            }, 4000)
+        }
+    })
+
 </script>
 
 </html>

@@ -118,6 +118,9 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
             where: {
                 id: eventIdsForUser, // Filtrar apenas pelos IDs encontrados
             },
+            order: [
+                ['id', 'DESC']
+            ],
             include: [
                 {
                     model: recordModel,
