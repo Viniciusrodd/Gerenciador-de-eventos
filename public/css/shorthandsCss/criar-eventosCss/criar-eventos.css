@@ -91,6 +91,14 @@ form{
 
 
 /*INPUTS*/
+select, option {
+    background-color: black;     
+    color: white;
+}
+
+select:focus {
+    background-color: transparent; /* Fundo do select ao ser clicado */
+}
 
 hr{
     background-color: white;
@@ -119,15 +127,15 @@ input, select{
     font-size: 19px;
     text-align: center;
 }
-input, select:focus{
+input:focus{
+    background-color: transparent;
     outline: none;
 }
-input, select:valid{
+input:valid{
     background-color: transparent;
 }
-
 #itipo{
-    color: black;
+    color: white;
 }
 
 
