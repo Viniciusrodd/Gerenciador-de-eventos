@@ -61,7 +61,8 @@
                 </textarea>
             </fieldset>
 
-            
+
+            <div id="div-imagem"></div>
             <label for="imagem">Imagem de fundo (opcional)</label>
             <input type="file" name="imagem" id="iimagem">
 
@@ -69,5 +70,25 @@
         </form>
     </div>
 </body>
+
+
+<script>
+    document.getElementById('iimagem').addEventListener('change', (event) =>{
+        const file = event.target.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = (e) =>{
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('img');
+                const divImagem = document.getElementById('div-imagem');
+                divImagem.innerHTML = '';
+                divImagem.appendChild(img)
+            };
+            reader.readAsDataURL(file)
+        }
+    })
+</script>
+
 
 </html>
