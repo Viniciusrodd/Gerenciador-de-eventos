@@ -109,7 +109,7 @@
                         </div>
 
                         
-                        <form action="/events/disparticipate" method="post" id="formRemovePart">
+                        <form action="/events/disparticipate" method="post" class="formRemovePart">
                             <input type="hidden" name="eventId" value="<%= dados.id %>">
                             <button id="btt-participation">Tirar participação</button>
                         </form>
@@ -146,24 +146,27 @@
 </body>
 
 <script>
-    var formParticipation = document.getElementById('formRemovePart');
-    formParticipation.addEventListener('submit', (event) =>{
-        event.preventDefault();
-
-        var modal2 = document.getElementById('modal2');
-        var bttModal2 = document.getElementById('close-modal-btn2');
-        var spanbtt2 = document.getElementById('span-btt2');
-
-        modal2.style.display = 'block'
-        
-        spanbtt2.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-        bttModal2.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-            formParticipation.submit();
+    var formParticipation = document.querySelectorAll('.formRemovePart');
+    formParticipation.forEach(form =>{
+        form.addEventListener('submit', (event) =>{
+            event.preventDefault();
+    
+            var modal2 = document.getElementById('modal2');
+            var bttModal2 = document.getElementById('close-modal-btn2');
+            var spanbtt2 = document.getElementById('span-btt2');
+    
+            modal2.style.display = 'block'
+            
+            spanbtt2.addEventListener('click', () =>{
+                modal2.style.display = 'none';
+            })
+            bttModal2.addEventListener('click', () =>{
+                modal2.style.display = 'none';
+                form.submit();
+            })
         })
     })
+
 
     //modal3
 
