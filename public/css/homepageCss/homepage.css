@@ -115,6 +115,7 @@ header{
     margin-top: 30px;
     border: 3px solid black;
     border-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.602) 0px 6px 11px;
 }
 
 .profile-name{
@@ -233,6 +234,7 @@ a:hover{
     border-radius: 100px;
     margin: 0px 20px 10px 0px;
     justify-self: flex-end;
+    box-shadow: rgba(0, 0, 0, 0.602) 0px 6px 11px;
 }
 
 #profile{

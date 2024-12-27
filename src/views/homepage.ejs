@@ -20,21 +20,15 @@
         <div id="container-homepage">
             <div id="profile-homepage">
                 <div id="profile-container">
-                    <!--
-                    <% dadosEvents.forEach((event) => { %>
-                        <div id="profile-image">
-                                <img src="<%= event.records.profileimage %>" id="profile">              
-                            </div>
-                    <% }); %>
-                    -->
-                    
                     <i class="material-icons">person</i>
-                    <p class="profile-name">
-                        <%= userData.userName %>
-                    </p>
-                    
+                    <% dadosProfile.forEach((dadosProfile) => { %>
+                        <% if(dadosProfile.id == userId) { %>
+                            <p class="profile-name">
+                                <%= dadosProfile.userName %>
+                            </p>
+                        <% } %>
+                    <% }) %>
                     <a href="/editarPerfil">Editar perfil</a>
-                    
                 </div>
 
                 <h1 id="h1-eventos">MEUS EVENTOS</h1>
@@ -61,106 +55,112 @@
             </div>
 
             <div id="container-publications">
-            <% dadosEvents.forEach((dados) =>{ %>
-                <div id="publications-homepage">
-                    <div id="event-banner">
-                        
+                <% dadosEvents.forEach((dadosEvents) =>{ %> 
+                    <div id="publications-homepage">
+                        <div id="event-banner">
+                            <% if (dadosEvents.imageBase64) { %>
+                                <img id="img-banner" src="<%= dadosEvents.imageEvent %>" alt="">
+                            <% } else { %>
+                                <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
+                            <% } %>
 
-                        <% if (dados.imageBase64) { %>
-                            <img id="img-banner" src="<%= dados.imageEvent %>" alt="">
-                        <% } else { %>
-                            <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
-                        <% } %>
-
-                        <div id="event-title">
-                            <div id="event-data">
-                                <p class="p-event-data"><%= dados.day %></p>
-                                <hr>
-                                <p class="p-event-data"><%= dados.month %></p>
+                            <div id="event-title">
+                                <div id="event-data">
+                                    <p class="p-event-data"><%= dadosEvents.day %></p>
+                                    <hr>
+                                    <p class="p-event-data"><%= dadosEvents.month %></p>
+                                </div>
+                            
+                                <p id="p-event-title"><%= dadosEvents.nome %></p>
                             </div>
-                        
-                            <p id="p-event-title"><%= dados.nome %></p>
+                            
+                            <% dadosProfile.forEach((dadosProfile) => { %>
+                                <% if (dadosProfile.id === dadosEvents.userId) { %>
+                                    <% if (dadosProfile.profileimage) { %>
+                                        <div id="profile-image">
+                                            <img src="<%= dadosProfile.profileimage %>" id="profile">              
+                                        </div>
+                                    <% } else { %>
+                                        <div id="profile-image">
+                                            <img src="../../imagens/user.jpg" id="profile">              
+                                        </div>
+                                    <% } %>
+                                <% } %>
+                            <% }) %>
                         </div>
-                        
-                        <% if(dados.records.profileimage) { %>
-                            <div id="profile-image">
-                                <img src="<%= dados.records.profileimage %>" id="profile">              
-                            </div>
-                        <% } else { %>
-                            <div id="profile-image">
-                                <img src="../../imagens/user.jpg" id="profile">              
-                            </div>
+
+                        <div id="event-info-container">
+                            <ul>
+                                <li>
+                                    <i class="material-icons">mail</i>
+                                    <%= dadosEvents.tipo %> - Organizado por @<%= dadosEvents.organizador %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">schedule</i>
+                                    Dia <%= dadosEvents.day %>, do mês <%= dadosEvents.month %> - 
+                                    das <%= dadosEvents.hora_inicio %> às <%= dadosEvents.hora_fim %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">location_on</i>
+                                    <%= dadosEvents.endereco %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">description</i>
+                                    Descrição:
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="event-description">
+                            <p id="p-event-description">
+                                <%= dadosEvents.descricao %>
+                            </p>
+                        </div>
+
+                        <% if (dadosEvents.userId != userId) { %>
+                            <form action="/participate" method="post">
+                                <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
+                                <input type="hidden" name="userId" value="<%= userId %>">
+                                <button id="btt-participate">Participar</button>
+                            </form>    
+                        <% } %>
+
+                        <% if(dadosEvents.userId == userId) { %>
+                            <form action="/editarEvento" method="post">
+                                <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
+                                <button id="btt-edit">
+                                    Editar seu evento
+                                </button>
+                            </form>
                         <% } %>
                     </div>
-
-                    <div id="event-info-container">
-                        <ul>
-                            <li>
-                                <i class="material-icons">mail</i>
-                                <%= dados.tipo %> - Organizado por @<%= dados.organizador %>
-                            </li>
-                            <hr>
-                            <li>
-                                <i class="material-icons">schedule</i>
-                                Dia <%= dados.day %>, do mês <%= dados.month %> - 
-                                das <%= dados.hora_inicio %> às <%= dados.hora_fim %>
-                            </li>
-                            <hr>
-                            <li>
-                                <i class="material-icons">location_on</i>
-                                <%= dados.endereco %>
-                            </li>
-                            <hr>
-                            <li>
-                                <i class="material-icons">description</i>
-                                Descrição:
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div id="event-description">
-                        <p id="p-event-description">
-                            <%= dados.descricao %>
-                        </p>
-                    </div>
-
-                    <% if (dados.userId != userData.id) { %>
-                        <form action="/participate" method="post">
-                            <input type="hidden" name="eventId" value="<%= dados.id %>">
-                            <input type="hidden" name="userId" value="<%= userData.id %>">
-                            <button id="btt-participate">Participar</button>
-                        </form>    
-                    <% } %>
-
-                    <% if(dados.userId == userData.id) { %>
-                        <form action="/editarEvento" method="post">
-                            <input type="hidden" name="eventId" value="<%= dados.id %>">
-                            <button id="btt-edit">
-                                Editar seu evento
-                            </button>
-                        </form>
-                    <% } %>
-                </div>
-            <% }) %>
+                <% }) %>
             </div>
-
         </div>
 
 
         <!--modal-->
 
 
-        <div id="welcome-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button" id="span-btt">&times;</span>
-                <h2 id="h2-modal">Bem-vindo <%= userData.fullName %>!</h2>
-                <p id="p-modal">Estamos felizes em tê-lo aqui. Organize, edite e gerencie seus eventos da forma + simples e eficiente.</p>
-                <button id="close-modal-btn" class="modal-button">Começar</button>
-            </div>
-        </div>
+        <% dadosProfile.forEach((dadosProfile) =>{ %> 
+            <% if(dadosProfile.id == userId) { %>
+                <div id="welcome-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button" id="span-btt">&times;</span>
+                        <h2 id="h2-modal">Bem-vindo <%= dadosProfile.userName %>!</h2>
+                        <p id="p-modal">Estamos felizes em tê-lo aqui. Organize, edite e gerencie seus eventos da forma + simples e eficiente.</p>
+                        <button id="close-modal-btn" class="modal-button">Começar</button>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
 
 
         <!--Modal 3-->
+
 
         <div id="modal3" class="modal">
             <div class="modal-content">
