@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+:root{
+    --cor01: #212121;
+    --cor02: rgba(163, 20, 111, 0.981);
+}
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+hr{
+    height: 1px;
+    background-color: black;
+}
+
+
+/*DIV-PAI*/
+
+
+#div-pai{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url(../../../imagens/section-img-7.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/*HEADER*/
+
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 15vh;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    background-color: transparent;
+}
+
+.titulo{
+    color: white;
+    text-shadow: 4px 4px black;
+    font-size: 55px;
+    font-style: italic;
+}
+
+#header-image{
+    height: 90px;
+    width: 90px;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url(../../../imagens/logo-2.png);
+    background-size: cover;
+    background-position: top;
+    border-radius: 100px;
+    margin: 0px 15px 0px 15px;
+    transition: ease 0.5s;
+}
+#header-image:hover{
+    transform: scale(1.07);
+}
+
+/*CONTAINER-HOMEPAGE*/
+
+#container-titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#titulo-2{
+    font-size: 50px;
+    color: white;
+    text-align: 50px;
+    margin: 0px 0px 3px 0px;
+}
+
+#h3-voltar{
+    font-size: 20px;
+    transition: ease 0.5s;
+    color: white;
+    
+    & a{
+        color: white;
+        text-decoration: none;
+    }
+}
+#h3-voltar:hover{
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+
+#container-homepage{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 0% 0px 10% 0px;
+    width: 100%;
+    background-color: transparent;
+    margin-top: 30px;
+}
+
+
+
+/*PUBLICATIONS-CONTAINER*/
+
+#container-publications{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    padding-bottom: 20px;
+}

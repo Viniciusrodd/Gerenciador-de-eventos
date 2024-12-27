@@ -249,4 +249,9 @@ router.get('/editarPerfil', userAuth ,async (req, res) =>{
 })
 
 
+router.get('/meusEventos', (req, res) =>{
+    res.render('../views/shortHands.ejs/meus-eventos')
+})
+
+
 module.exports = router;
