@@ -31,7 +31,71 @@
 
         <div id="container-homepage">
             <div id="container-publications">
-                
+                <% if(myEvents.length === 0) { %>
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <h2 id="h2-modal">Você não tem nenhum evento ainda</h2>
+                            <i class="material-icons">close</i>
+                            <p id="p-modal">Crie seu evento na página principal</p>
+                            <a href="/homepage">
+                                <button id="close-modal-btn" class="modal-button">Página principal</button>
+                            </a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% myEvents.forEach((dados) => { %>
+                        <div id="publications-homepage">
+                            <div id="event-banner">
+                                <% if (dados.imageBase64) { %>
+                                    <img id="img-banner" src="<%= dados.imageEvent %>" alt="">
+                                <% } else { %>
+                                    <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
+                                <% } %>
+
+                                <div id="event-title">
+                                    <div id="event-data">
+                                        <p class="p-event-data"><%= dados.day %></p>
+                                        <hr>
+                                        <p class="p-event-data"><%= dados.month %></p>
+                                    </div>
+                                
+                                    <p id="p-event-title"><%= dados.nome %></p>
+                                </div>
+                            </div>
+
+                            <div id="event-info-container">
+                                <ul>
+                                    <li>
+                                        <i class="material-icons">mail</i>
+                                        <%= dados.tipo %> - Organizado por @<%= dados.organizador %>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">schedule</i>
+                                        Dia <%= dados.day %>, do mês <%= dados.month %> - 
+                                        das <%= dados.hora_inicio %> às <%= dados.hora_fim %>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">location_on</i>
+                                        <%= dados.endereco %>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">description</i>
+                                        Descrição:
+                                    </li>
+                                </ul>
+                            </div>
+    
+                            <div id="event-description">
+                                <p id="p-event-description">
+                                    <%= dados.descricao %>
+                                </p>
+                            </div>  
+                        </div>
+                    <% }) %>
+                <% } %>
             </div>
         </div>
     </div>

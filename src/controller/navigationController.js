@@ -249,8 +249,54 @@ router.get('/editarPerfil', userAuth ,async (req, res) =>{
 })
 
 
-router.get('/meusEventos', (req, res) =>{
-    res.render('../views/shortHands.ejs/meus-eventos')
+router.get('/meusEventos', async (req, res) =>{
+    try{
+        var userIdVar = await req.session.user.id
+
+        const events = await eventModel.findAll({
+            where: {
+                userId: userIdVar 
+            }
+        })
+
+        if(events){
+            events.forEach(event =>{
+                if (event.image) {
+                    event.imageBase64 = Buffer.from(event.image).toString('base64');
+                    event.imageEvent = `data:image/jpeg;base64,${event.imageBase64}`;
+                }
+
+                // Trabalhando com a data
+                const eventDate = moment(event.data).tz('America/Sao_Paulo', true);
+                event.day = eventDate.date();
+                event.month = eventDate.month() + 1;
+                event.year = eventDate.year();
+
+                // Trabalhando com o horário
+                if (event.hora_inicio) {
+                    const startTime = moment(event.hora_inicio, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                    event.startHours = startTime.hours();
+                    event.startMinutes = startTime.minutes();
+                    event.startSeconds = startTime.seconds();
+                }
+
+                if (event.hora_fim) {
+                    const endTime = moment(event.hora_fim, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                    event.endHours = endTime.hours();
+                    event.endMinutes = endTime.minutes();
+                    event.endSeconds = endTime.seconds();
+                }
+            })
+            res.render('../views/shortHands.ejs/meus-eventos', {
+                myEvents: events
+            })
+        }
+    }
+    catch(error){
+        console.log('Error at show your own events', error)
+        return res.redirect('/homepage')
+    }
+
 })
 
 
