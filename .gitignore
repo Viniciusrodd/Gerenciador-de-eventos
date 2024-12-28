@@ -1,5 +1,5 @@
 
 node_modules/
-database/
-models/
+/src/database/
+/src/models/
 server.js
