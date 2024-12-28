@@ -20,19 +20,33 @@
         <div id="container-homepage">
             <div id="profile-homepage">
                 <div id="profile-container">
-                    <i class="material-icons">person</i>
                     <% dadosProfile.forEach((dadosProfile) => { %>
-                        <% if(dadosProfile.id == userId) { %>
-                            <p class="profile-name">
-                                <%= dadosProfile.userName %>
-                            </p>
+                        <% if (dadosProfile.id == userId && dadosProfile.profileimage) { %>
+                            <div class="profile-wrapper">
+                                <img src="<%= dadosProfile.profileimage %>" alt="">
+                            </div>                                
+                        <% } %>
+                        <% if (dadosProfile.id == userId && !dadosProfile.profileimage) { %>
+                            <div class="profile-wrapper">
+                                <img src="../../imagens/user.jpg" alt="">
+                            </div>                                
                         <% } %>
                     <% }) %>
-                    <a href="/editarPerfil">Editar perfil</a>
                 </div>
-
+                <% dadosProfile.forEach((dadosProfile) => { %>
+                    <% if (dadosProfile.id == userId) { %>
+                        <p class="profile-name">
+                            <%= dadosProfile.userName %>
+                        </p>
+                    <% } %>
+                <% }) %>
+                <p id="p-editPerfil">
+                    <a href="/editarPerfil">Editar perfil</a>
+                </p>
+                
+                <hr class="hr-eventos">
                 <h1 id="h1-eventos">MEUS EVENTOS</h1>
-                <hr id="hr-eventos">
+                <hr class="hr-eventos">
 
                 <div id="eventos-container">
                     <li>
@@ -77,11 +91,11 @@
                             <% dadosProfile.forEach((dadosProfile) => { %>
                                 <% if (dadosProfile.id === dadosEvents.userId) { %>
                                     <% if (dadosProfile.profileimage) { %>
-                                        <div id="profile-image">
+                                        <div class="profile-image">
                                             <img src="<%= dadosProfile.profileimage %>" id="profile">              
                                         </div>
                                     <% } else { %>
-                                        <div id="profile-image">
+                                        <div class="profile-image">
                                             <img src="../../imagens/user.jpg" id="profile">              
                                         </div>
                                     <% } %>

@@ -93,7 +93,7 @@ header{
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    padding-bottom: 20px;
+    padding: 30px 0px 20px 0px;
     width: 20%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.306) -5px 5px, rgba(47, 10, 33, 0.3) -10px 10px,
@@ -105,26 +105,56 @@ header{
     top: 10px; 
 }
 
-#profile-container{
+#profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 25vh;
     width: 60%;
-    margin-top: 30px;
-    border: 3px solid black;
+    margin: 0px;
     border-radius: 100%;
     box-shadow: rgba(0, 0, 0, 0.602) 0px 6px 11px;
+    position: relative;
 }
 
-.profile-name{
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-name {
     font-size: 25px;
-    margin: 0px;
     font-weight: bold;
-    color: var(--cor02);
+    color: var(--cor02); /* Texto sobre a imagem */
+    margin: 10px 0px 0px 0px;
 }
 
+#p-editPerfil{
+    font-size: 20px;
+    color: black;
+    transition: 0.5s;
+    text-decoration: none;
+    margin: 5px 0px 10px 0px;
+}
+#p-editPerfil:hover{
+    color: var(--cor01);
+    transform: scale(1.02);
+    text-decoration: underline;
+}
 
 a{
     font-size: 20px;
@@ -141,12 +171,12 @@ a:hover{
 /**/
 
 #h1-eventos{
-    font-size: 25px;
+    font-size: 30px;
     color: var(--cor02);
-    margin-bottom: 0px;
+    margin: 10px 0px;
 }
 
-#hr-eventos{
+.hr-eventos{
     height: 1px;
     width: 80%;
     color: black;
@@ -227,7 +257,7 @@ a:hover{
     border-radius: 20px 20px 0px 0px;
 }
 
-#profile-image{
+.profile-image{
     position: absolute;
     height: 120px;
     width: 120px;
@@ -235,6 +265,12 @@ a:hover{
     margin: 0px 20px 10px 0px;
     justify-self: flex-end;
     box-shadow: rgba(0, 0, 0, 0.602) 0px 6px 11px;
+
+    & img{
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+    }
 }
 
 #profile{
