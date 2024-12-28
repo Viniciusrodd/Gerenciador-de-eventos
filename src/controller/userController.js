@@ -321,12 +321,19 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
             return res.redirect('/registro');
         }
 
-        const userExists = await recordModel.findOne({ 
+        const userEmailExists = await recordModel.findOne({ 
             where: { email: email } 
         });
-        if (userExists) {
+        if (userEmailExists) {
             console.log('user email already exist')
             return res.redirect(`/registro?emailExist=email ja existe`);
+        }
+        const userNameExist = await recordModel.findOne({
+            where: { userName: username }
+        });
+        if(userNameExist){
+            console.log('userName already exist')
+            return res.redirect(`/registro?userName=username ja existe`);
         }
 
         const salt = bcrypt.genSaltSync(10);
