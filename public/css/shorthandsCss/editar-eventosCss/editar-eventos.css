@@ -22,7 +22,8 @@ html, body{
     flex-direction: column;
     padding: 0% 0px 10% 0px;
     width: 100%;
-    background-image: url(../../../imagens/section-img-6.jpg);
+    background-image: url(../../../imagens/section-img-7.jpg);
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -59,7 +60,6 @@ header{
     & a{
         color: white;
         text-decoration: none;
-        text-shadow: 2px 2px var(--cor02);
     }
 }
 #h3-voltar:hover{
@@ -106,28 +106,32 @@ hr{
 }
 
 label{
-    font-size: 26px;
-    margin-bottom: 15px;
+    font-size: 35px;
+    margin-bottom: 35px;
     font-weight: bold;
     color: white;
-    text-shadow: 3px 3px var(--cor02);
+    text-shadow: 2px 2px var(--cor02);
 }
 
 input, select{
-    height: 25px;
+    height: 35px;
     width: 65%;
     margin: 0px 0px 70px 0px;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 3px solid black;
-    color: black;
+    border-bottom: 3px solid white;
+    font-weight: bold;
+    color: white;
     background-color: transparent;
-    font-size: 19px;
+    font-size: 25px;
     text-align: center;
 }
 input, select:focus{
     outline: none;
+}
+.cursorPointer{
+    cursor: pointer;
 }
 /*input, select:valid{
     background-color: rgb(255, 255, 255, 0.54);
@@ -138,20 +142,20 @@ input, select:focus{
 }
 
 #itipo{
-    color: black;
+    color: white;
 }
 
 fieldset{
     padding: 30px 100px 30px 100px;
-    border: 3px solid black;
+    border: 3px solid white;
     margin-bottom: 70px;
 }
 
 legend{
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     color: white;
-    text-shadow: 3px 3px var(--cor02);
+    text-shadow: 2px 2px var(--cor02);
 }
 
 #p-textarea{
@@ -196,7 +200,7 @@ textarea{
 }
 #btt-evento:hover{
     transform: scale(1.07);
-    background-color: var(--cor01);
+    background-color: rgb(18, 18, 18);
 }
 
 

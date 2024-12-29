@@ -25,6 +25,7 @@ h1{
     padding: 40px 0px 2px 0px;
     width: 100%;
     background-image: url(../../imagens/section-img-7.jpg);
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

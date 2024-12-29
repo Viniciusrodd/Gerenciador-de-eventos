@@ -25,6 +25,7 @@ html, body{
     padding: 0% 0px 10% 0px;
     width: 100%;
     background-image: url(../../../imagens/section-img-7.jpg);
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -195,11 +196,11 @@ input::placeholder{
     background-color: rgba(3, 102, 214, 0.3);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
     rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
     cursor: pointer;
 }
 .btt-edit-account:hover{
-    transform: scale(1.00);
+    transform: scale(1.08);
 }
 
 #accountDelete{
@@ -218,11 +219,11 @@ input::placeholder{
     background-color: rgba(255, 68, 0, 0.615);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
     rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
     cursor: pointer;
 }
 .btt-delete-account:hover{
-    transform: scale(1.00);
+    transform: scale(1.08);
 }
 
 #h3-voltar{

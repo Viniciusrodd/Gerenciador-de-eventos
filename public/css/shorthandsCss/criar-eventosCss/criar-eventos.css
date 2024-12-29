@@ -25,6 +25,7 @@ html, body{
     padding: 0% 0px 10% 0px;
     width: 100%;
     background-image: url(../../../imagens/section-img-7.jpg);
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -153,6 +154,9 @@ input:valid{
     color: white;
 }
 
+.cursorPointer{
+    cursor: pointer;
+}
 
 fieldset{
     padding: 30px 100px 30px 100px;

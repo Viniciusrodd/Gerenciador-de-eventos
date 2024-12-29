@@ -36,7 +36,7 @@
 
                 
                 <label for="tipo">Editar tipo:</label>
-                <select name="tipo" id="itipo"> 
+                <select name="tipo" id="itipo" class="cursorPointer"> 
                     <option value="<%= event.tipo %>" selected data-original="<%= event.tipo %>"><%= event.tipo %></option>        
                     <option value="Privado">Privado</option>
                     <option value="Público">Público</option>
@@ -48,15 +48,15 @@
 
                 
                 <label for="data">Editar data:</label>
-                <input type="date" name="data" id="idata" value="<%= event.data %>" data-original="<%= event.data %>">
+                <input class="cursorPointer" type="date" name="data" id="idata" value="<%= event.data %>" data-original="<%= event.data %>">
 
                 
                 <label for="hora_inicio">Editar hora de início:</label>
-                <input type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>" data-original="<%= event.hora_inicio %>">
+                <input class="cursorPointer" type="time" name="hora_inicio" id="ihora_inicio" value="<%= event.hora_inicio %>" data-original="<%= event.hora_inicio %>">
 
                 
                 <label for="hora_fim">Editar hora de fim:</label>
-                <input type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>" data-original="<%= event.hora_fim %>">
+                <input class="cursorPointer" type="time" name="hora_fim" id="ihora_fim" value="<%= event.hora_fim %>" data-original="<%= event.hora_fim %>">
 
                 
                 <label for="endereco">Editar endereço:</label>
