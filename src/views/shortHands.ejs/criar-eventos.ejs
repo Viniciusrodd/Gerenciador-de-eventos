@@ -75,6 +75,19 @@
 
             <button id="btt-evento">Publicar</button>
         </form>
+
+
+        <!--Modal-->
+
+        <div id="emailExist-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Aviso</h2>
+                <i class="material-icons">error</i>
+                <p id="p-modal">A data inserida não pode ser menor que a data atual!!!</p>
+                <button id="close-modal-btn" class="modal-button">Corrigir</button>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -95,6 +108,33 @@
             reader.readAsDataURL(file)
         }
     })
+
+    //modal
+    
+    var modal = document.getElementById('emailExist-modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+    document.getElementById('createForm').addEventListener('submit', function (event) {
+        const inputData = document.getElementById('idata').value;
+        const dataAtual = new Date(); // Data atual
+        const dataInserida = new Date(inputData);
+
+        if (dataInserida < dataAtual) {
+            event.preventDefault(); // Impede o envio do formulário
+            modal.style.display = 'block';
+            bttModalPress(bttModal, spanbtt)
+        }
+    });
 </script>
 
 
