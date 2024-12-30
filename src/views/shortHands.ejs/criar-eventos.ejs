@@ -128,11 +128,12 @@
         const inputData = document.getElementById('idata').value;
         const dataAtual = new Date(); // Data atual
         const dataInserida = new Date(inputData);
-
+        
         if (dataInserida < dataAtual) {
             event.preventDefault(); // Impede o envio do formulário
             modal.style.display = 'block';
             bttModalPress(bttModal, spanbtt)
+            console.log('data atual', dataAtual, 'data inserida', dataInserida)
         }
     });
 </script>

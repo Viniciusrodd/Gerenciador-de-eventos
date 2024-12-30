@@ -128,7 +128,6 @@
     });
 
 
-
     const deleteForms = document.getElementById('eventDeleteForm');
         deleteForms.addEventListener('submit', (event) => {
             event.preventDefault(); // Impede o envio padrão
@@ -151,7 +150,6 @@
                 deleteForms.submit(); // Submete o formulário após confirmação
             });
         });
-
 
     
     form.addEventListener('submit', (e) => {
@@ -187,10 +185,9 @@
         .catch(err => {
             console.error('Error at requisition event update:', err);
         });
+        
     });
-    
-
-    
+        
 </script>
 
 </html>
