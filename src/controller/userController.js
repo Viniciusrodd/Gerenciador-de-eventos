@@ -5,15 +5,51 @@ const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
 const participationModel = require('../models/participation');
 const fs = require('fs');
-
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const sequelize = require('sequelize');
+const { Op } = require('sequelize'); // Operadores do Sequelize
 
 
 //config do multer
 const storage = multer.memoryStorage();  // Isso armazena os arquivos na memória
 const upload = multer({ storage: storage });
+
+
+async function deleteEventsByData(){
+    try{
+        const date = new Date();
+        const currentDate = date.toISOString().split('T')[0]; // 'YYYY-MM-DD'
+        const currentTime = date.toTimeString().split(' ')[0]; // 'HH:mm:ss'
+
+        const eventsRemoved = await eventModel.destroy({
+            where: {
+                [Op.or]: [
+                    {
+                        // Condição: Data é menor que a data atual
+                        data: {
+                            [Op.lt]: currentDate,
+                        },
+                    },
+                    {
+                        // Condição: Data é igual à data atual e hora_fim é menor que a hora atual
+                        [Op.and]: [
+                            { data: currentDate },
+                            { hora_fim: { [Op.lt]: currentTime } },
+                        ],
+                    },
+                ],
+            },
+        });
+        //Op.and e Op.or: Combina condições lógicas
+        //Op.lt (less than): Verifica se o valor é menor.
+        console.log(`${eventsRemoved} evento(s) excluído(s).`);
+    }
+    catch(error){
+        console.error('Error at remove expired events:', error);
+    }
+}
+deleteEventsByData();
 
 
 router.post('/events/disparticipate', (req, res) =>{
