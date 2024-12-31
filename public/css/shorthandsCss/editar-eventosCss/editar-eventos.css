@@ -327,7 +327,7 @@ textarea{
 /*modal 2*/
 
 
-#modal2{
+#modal2, #modal3{
     display: none; /* Modal começa invisível */
     position: fixed;
     z-index: 1000;
@@ -339,18 +339,18 @@ textarea{
     background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
 }
 
-#h2-modal2{
+#h2-modal2, #h2-modal3{
     font-size: 30px;
     margin-bottom: 3px;
 }
 
-#p-modal2{
+#p-modal2, #p-modal3{
     font-size: 19px;
     margin-top: 3px;
 }
 
 /* Botão de Ação */
-#close-modal-btn2{
+#close-modal-btn2, #close-modal-btn3{
     background-color: #e74c3c;
     color: #fff;
     padding: 10px;
@@ -363,7 +363,7 @@ textarea{
     transition: 0.5s ease;
 }
 
-#close-modal-btn2:hover {
+#close-modal-btn2, #close-modal-btn3:hover {
     background-color: #df412f;
 }
 

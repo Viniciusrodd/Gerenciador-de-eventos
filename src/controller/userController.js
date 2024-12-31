@@ -135,13 +135,14 @@ router.post('/uploadImage', upload.single('image'), (req, res) =>{
 })
 
 
-router.post('/uploadEvents', upload.single('image'), async (req, res) => {
+router.put('/uploadEvents/:id', upload.single('image'), async (req, res) => {
     try {
-        const eventId = req.body.id;
+        const eventId = req.params.id;
         const updates = req.body;
 
         const event = await eventModel.findByPk(eventId);
         if (!event) {
+            console.log('evento nao encontrado')
             return res.status(404).send({ message: 'Event not found!' });
         }
 
@@ -158,7 +159,7 @@ router.post('/uploadEvents', upload.single('image'), async (req, res) => {
         await event.save();
 
         console.log('Event updated successfully');
-        res.redirect('/homepage');
+        return res.redirect('/homepage');
     } catch (error) {
         console.error('Error updating event:', error);
         res.status(500).send({ message: 'Server error.' });
