@@ -88,6 +88,20 @@
                 <button id="close-modal-btn" class="modal-button">Corrigir</button>
             </div>
         </div>
+
+
+        <!--Modal 2-->
+
+
+        <div id="modal2" class="modal">
+            <div class="modal-content" id="modal-content">
+                <span class="close-button" id="span-btt2">&times;</span>
+                <h2 id="h2-modal2">Aviso</h2>
+                <i class="material-icons">error</i>
+                <p id="p-modal2">Por favor, tente inserir outro nome de usuário.</p>
+                <button id="close-modal-btn2" class="modal-button">Tentar novamente</button>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -124,17 +138,43 @@
         })
     }
 
+    //modal 2
+
+    var modal2 = document.getElementById('modal2');
+    var bttModal2 = document.getElementById('close-modal-btn2');
+    var spanbtt2 = document.getElementById('span-btt2');
+    var pmodal2 = document.getElementById('p-modal2');
+
+    function bttModalPress2(btt, span){
+        btt.addEventListener('click', () =>{
+            modal2.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal2.style.display = 'none';
+        })
+    }
+
     document.getElementById('createForm').addEventListener('submit', function (event) {
         const inputData = document.getElementById('idata').value;
-        const dataAtual = new Date(); // Data atual
-        const dataInserida = new Date(inputData);
+        const currentData = new Date(); // Data atual
+        const userData = new Date(inputData);
         
-        if (dataInserida < dataAtual) {
+        if (userData < currentData) {
             event.preventDefault(); // Impede o envio do formulário
             modal.style.display = 'block';
             bttModalPress(bttModal, spanbtt)
-            console.log('data atual', dataAtual, 'data inserida', dataInserida)
         }
+        
+        var currentYear = currentData.getFullYear() + 1
+        var userYear = userData.getFullYear()
+
+        if(userYear > currentYear){
+            event.preventDefault();
+            pmodal2.innerText = `O ano inserido não pode ser maior que ${currentYear}`
+            modal2.style.display = 'block';
+            bttModalPress2(bttModal2, spanbtt2)
+        }        
+
     });
 </script>
 
