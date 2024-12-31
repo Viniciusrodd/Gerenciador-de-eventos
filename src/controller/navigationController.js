@@ -14,6 +14,7 @@ async function deleteEventsByData(){
         const date = new Date();
         const currentDate = date.toISOString().split('T')[0]; // 'YYYY-MM-DD'
         const currentTime = date.toTimeString().split(' ')[0]; // 'HH:mm:ss'
+        const nextYear = parseInt(date.toISOString().split('-')[0]) + 1;
 
         const eventsRemoved = await eventModel.destroy({
             where: {
@@ -31,11 +32,18 @@ async function deleteEventsByData(){
                             { hora_fim: { [Op.lt]: currentTime } },
                         ],
                     },
+                    sequelize.where(
+                        sequelize.fn('YEAR', sequelize.col('data')),
+                        {
+                            [Op.gt]: nextYear,
+                        }
+                    ),
                 ],
             },
         });
         //Op.and e Op.or: Combina condições lógicas
         //Op.lt (less than): Verifica se o valor é menor.
+        //.gt (greater than)
         console.log(`${eventsRemoved} evento(s) excluído(s).`);
     }
     catch(error){
@@ -57,6 +65,7 @@ router.get('/login', (req, res) =>{
 router.get('/homepage', userAuth, async (req, res) =>{
     try{
         await deleteEventsByData()
+
         
         var eventData = await eventModel.findAll({
             order: [
