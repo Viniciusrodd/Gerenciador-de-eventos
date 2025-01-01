@@ -107,6 +107,7 @@
 
 
 <script>
+
     document.getElementById('iimagem').addEventListener('change', (event) =>{
         const file = event.target.files[0];
         if(file){
@@ -154,27 +155,57 @@
         })
     }
 
-    document.getElementById('createForm').addEventListener('submit', function (event) {
-        const inputData = document.getElementById('idata').value;
-        const currentData = new Date(); // Data atual
-        const userData = new Date(inputData);
-        
-        if (userData < currentData) {
-            event.preventDefault(); // Impede o envio do formulário
-            modal.style.display = 'block';
-            bttModalPress(bttModal, spanbtt)
-        }
-        
-        var currentYear = currentData.getFullYear() + 1
-        var userYear = userData.getFullYear()
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('createForm').addEventListener('submit', function (event) {
+            let isValid = true;
+            
+            const inputData = document.getElementById('idata').value;
+            const currentData = new Date(); // Data atual
+            const userData = new Date(inputData);
+            
+            if (userData < currentData) {
+                isValid = false
+                modal.style.display = 'block';
+                bttModalPress(bttModal, spanbtt)
+            }
+            
+            var currentYear = currentData.getFullYear() + 1
+            var userYear = userData.getFullYear()
 
-        if(userYear > currentYear){
-            event.preventDefault();
-            pmodal2.innerText = `O ano inserido não pode ser maior que ${currentYear}`
-            modal2.style.display = 'block';
-            bttModalPress2(bttModal2, spanbtt2)
-        }
-    });
+            if(userYear > currentYear){
+                isValid = false
+                pmodal2.innerText = `O ano inserido não pode ser maior que ${currentYear}`
+                modal2.style.display = 'block';
+                bttModalPress2(bttModal2, spanbtt2)
+            }
+
+            var eventName = document.getElementById('inomeEvento');
+            var organizer = document.getElementById('iorganizador');
+            var adress = document.getElementById('iendereco');
+            var descricao = document.getElementById('idescricao');
+
+            if(eventName.value.length > 25){
+                isValid = false
+                window.alert('Nome de evento pode ter no máximo 25 caracteres');
+            }
+            if(organizer.value.length > 50){
+                isValid = false
+                window.alert('Nome de organizador pode ter no máximo 50 caracteres');
+            }
+            if(adress.value.length > 50){
+                isValid = false
+                window.alert('Endereço pode ter no máximo 50 caracteres');
+            }
+            if(descricao.value.length > 600){
+                isValid = false
+                window.alert('Descrição pode ter no máximo 600 caracteres');
+            }  
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    })
 </script>
 
 

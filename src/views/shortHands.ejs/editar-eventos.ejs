@@ -32,7 +32,7 @@
                 <input type="hidden" name="id" value="<%= event.id %>">
 
                 <label for="nome">Editar nome:</label>
-                <input type="text" name="nome" id="inome" data-original="<%= event.nome %>" placeholder="<%= event.nome %>" value="<%= event.nome %>">
+                <input type="text" name="nome" id="inome" data-original="<%= event.nome %>" placeholder="<%= event.nome %>" maxlength="25" value="<%= event.nome %>">
 
                 
                 <label for="tipo">Editar tipo:</label>
@@ -44,7 +44,7 @@
 
                 
                 <label for="organizador">Editar organizador:</label>
-                <input type="text" name="organizador" id="iorganizador" value="<%= event.organizador %>" placeholder="<%= event.organizador %>" data-original="<%= event.organizador %>">
+                <input type="text" name="organizador" id="iorganizador" value="<%= event.organizador %>" placeholder="<%= event.organizador %>" maxlength="50" data-original="<%= event.organizador %>">
 
                 
                 <label for="data">Editar data:</label>
@@ -60,13 +60,13 @@
 
                 
                 <label for="endereco">Editar endereço:</label>
-                <input type="text" name="endereco" id="iendereco" data-original="<%= event.endereco %>" placeholder="<%= event.endereco %>" value="<%= event.endereco %>">
+                <input type="text" name="endereco" id="iendereco" data-original="<%= event.endereco %>" placeholder="<%= event.endereco %>" maxlength="50" value="<%= event.endereco %>">
 
                 
                 <fieldset>
                     <legend>DESCRIÇÃO</legend>
                     <p id="p-textarea">*até 600 caracteres</p>
-                    <textarea name="descricao" id="idescricao" required data-original="<%= event.descricao %>">
+                    <textarea name="descricao" id="idescricao" required data-original="<%= event.descricao %>" maxlength="600">
                     <%= event.descricao %>
                     </textarea>
                 </fieldset>
