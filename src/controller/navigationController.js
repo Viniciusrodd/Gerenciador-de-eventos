@@ -65,8 +65,7 @@ router.get('/login', (req, res) =>{
 router.get('/homepage', userAuth, async (req, res) =>{
     try{
         await deleteEventsByData()
-
-        
+            
         var eventData = await eventModel.findAll({
             order: [
                 ['id', 'DESC']

@@ -135,7 +135,7 @@ router.post('/uploadImage', upload.single('image'), (req, res) =>{
 })
 
 
-router.put('/uploadEvents/:id', upload.single('image'), async (req, res) => {
+router.put('/uploadEvents/:id', upload.array('image'), async (req, res) => {
     try {
         const eventId = req.params.id;
         const updates = req.body;
@@ -147,13 +147,14 @@ router.put('/uploadEvents/:id', upload.single('image'), async (req, res) => {
         }
 
         Object.keys(updates).forEach((key) => {
-            if (key !== 'id' && key !== 'image') {
+            if (key !== 'id') {
                 event[key] = updates[key];
             }
         });
 
-        if (req.file) {
-            event.image = req.file.buffer;
+        if (req.files && req.files.length > 0) {
+            const uploadedFile = req.files[0];
+            event.image = uploadedFile.buffer;        
         }
 
         await event.save();

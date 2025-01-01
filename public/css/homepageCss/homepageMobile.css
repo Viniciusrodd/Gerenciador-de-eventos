@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+:root{
+    --cor01: #212121;
+    --cor02: rgba(163, 20, 111, 0.981);
+}
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+hr{
+    height: 1px;
+    background-color: black;
+}
+
+
+/*DIV-PAI*/
+
+@media screen and (max-width: 767px){
+
+
+    #div-pai{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    /*HEADER*/
+
+
+    header{
+        height: 15vh;
+    }
+
+    .titulo{
+        font-size: 40px;
+    }
+
+    #header-image{
+        height: 85px;
+        width: 85px;
+    }
+
+
+    /*CONTAINER-HOMEPAGE*/
+
+
+    #container-homepage{
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+    /*PROFILE-HOMEPAGE*/
+
+
+    #profile-homepage{
+        width: 60vw;
+        position: unset; /* Para compatibilidade com navegadores WebKit */
+        top: 0px; 
+    }
+
+    #profile-container {
+        height: 20vh;
+        width: 45%;
+        position: none;
+    }
+
+
+    /*PUBLICATIONS-CONTAINER*/
+
+
+    #container-publications{
+        width: 90%;
+        margin-top: 15%;
+    }
+
+    #event-banner{
+        flex-direction: column;
+        height: 50vh;
+        width: 100%;
+        overflow: unset; /* Garante que nada ultrapasse o limite */
+    }
+
+    .profile-image{
+        height: 100px;
+        width: 100px;
+    }
+
+    #event-title{
+        align-items: flex-start;
+        flex-direction: column;
+        height: 25%;
+        padding: 0px 10px 0px 20px;
+    }
+
+    #event-data{
+        height: 60px;
+        width: 60px;
+        margin-right: 0px;
+    }
+
+    .p-event-data{
+        font-size: 20px;
+    }
+
+    #p-event-title{
+        font-size: 35px;
+    }
+
+    #event-info-container{
+        width: 80%;
+        word-wrap: break-word; /* Quebra automaticamente palavras longas */
+        overflow-wrap: break-word; /* Compatibilidade adicional para quebra de palavras */
+    }
+
+    li{
+        font-size: 20px;
+    }
+
+    li:hover{
+        transform: none;
+    }
+
+    #event-description{
+        width: 70%;
+    }
+
+    #event-description:hover{
+        transform: none;
+    }
+
+    #btt-participate:hover{
+        box-shadow: 0 0 0px rgba(0, 0, 0, 0.378);
+        outline: none;
+        transform: none;
+    }
+
+    #btt-edit:hover{
+        box-shadow: 0 0 0px rgba(0, 0, 0, 0.378);
+        outline: none;
+        transform: none;
+    }
+}
