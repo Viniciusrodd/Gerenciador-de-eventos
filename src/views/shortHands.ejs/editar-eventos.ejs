@@ -107,34 +107,6 @@
                 <button id="close-modal-btn" class="modal-button">Tenho certeza</button>
             </div>
         </div>
-
-
-        <!--Modal 2-->
-
-
-        <div id="modal2" class="modal">
-            <div class="modal-content" id="modal-content">
-                <span class="close-button" id="span-btt2">&times;</span>
-                <h2 id="h2-modal2">Aviso</h2>
-                <i class="material-icons">error</i>
-                <p id="p-modal2">A data inserida não pode ser menor que a data atual!!!</p>
-                <button id="close-modal-btn2" class="modal-button">Tentar novamente</button>
-            </div>
-        </div>
-
-
-        <!--Modal 3-->
-
-
-        <div id="modal3" class="modal">
-            <div class="modal-content" id="modal-content">
-                <span class="close-button" id="span-btt3">&times;</span>
-                <h2 id="h2-modal3">Aviso</h2>
-                <i class="material-icons">error</i>
-                <p id="p-modal3"></p>
-                <button id="close-modal-btn3" class="modal-button">Tentar novamente</button>
-            </div>
-        </div>
     </div>
 </body>
 
@@ -156,60 +128,39 @@
     });
 
 
+    //modal
+    
+    var modal = document.getElementById('modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    var pmodal = document.getElementById('p-modal');
+    
+    function bttModalPressDelete(btt, span, form){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+            form.submit();
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+
     const deleteForms = document.getElementById('eventDeleteForm');
         deleteForms.addEventListener('submit', (event) => {
             event.preventDefault(); // Impede o envio padrão
-
-            const modal = document.getElementById('modal');
-            const bttModal = document.getElementById('close-modal-btn');
-            const spanbtt = document.getElementById('span-btt');
-
-            // Exibe o modal
             modal.style.display = 'block';
-
-            // Fechar o modal ao clicar no "x"
-            spanbtt.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-
-            // Confirmação de exclusão
-            bttModal.addEventListener('click', () => {
-                modal.style.display = 'none';
-                deleteForms.submit(); // Submete o formulário após confirmação
-            });
+            bttModalPressDelete(bttModal, spanbtt, deleteForms)
         });
-
-    
-    //modal 2
-
-    var modal2 = document.getElementById('modal2');
-    var bttModal2 = document.getElementById('close-modal-btn2');
-    var spanbtt2 = document.getElementById('span-btt2');
-
-    function bttModalPress2(btt, span){
-        btt.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-        span.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-    }
-
-    //modal 3
-
-    var modal3 = document.getElementById('modal3');
-    var bttModal3 = document.getElementById('close-modal-btn3');
-    var spanbtt3 = document.getElementById('span-btt3');
-    var pmodal3 = document.getElementById('p-modal3');
-
-    function bttModalPress3(btt, span){
-        btt.addEventListener('click', () =>{
-            modal3.style.display = 'none';
-        })
-        span.addEventListener('click', () =>{
-            modal3.style.display = 'none';
-        })
-    }
 
     
     const form = document.getElementById('editEventForm');
@@ -233,8 +184,9 @@
 
         // Verifica se a data inserida é menor que a data atual
         if (userData < currentData) {
-            modal2.style.display = 'block';
-            bttModalPress2(bttModal2, spanbtt2)
+            pmodal.innerText = `A data inserida não pode ser menor que a data atual!!!`
+            modal.style.display = 'block';
+            bttModalPress(bttModal, spanbtt)
             return; // Interrompe a execução do código
         }
 
@@ -243,9 +195,9 @@
         const userYear = userData.getFullYear();
 
         if (userYear > nextYear) {
-            pmodal3.innerText = `O ano inserido não pode ser maior que ${nextYear}`
-            modal3.style.display = 'block';
-            bttModalPress3(bttModal3, spanbtt3)
+            pmodal.innerText = `O ano inserido não pode ser maior que ${nextYear}`
+            modal.style.display = 'block';
+            bttModalPress(bttModal, spanbtt)
             return; // Interrompe a execução do código
         }
 
