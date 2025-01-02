@@ -84,22 +84,8 @@
                 <span class="close-button" id="span-btt">&times;</span>
                 <h2 id="h2-modal">Aviso</h2>
                 <i class="material-icons">error</i>
-                <p id="p-modal">A data inserida não pode ser menor que a data atual!!!</p>
+                <p id="p-modal"></p>
                 <button id="close-modal-btn" class="modal-button">Corrigir</button>
-            </div>
-        </div>
-
-
-        <!--Modal 2-->
-
-
-        <div id="modal2" class="modal">
-            <div class="modal-content" id="modal-content">
-                <span class="close-button" id="span-btt2">&times;</span>
-                <h2 id="h2-modal2">Aviso</h2>
-                <i class="material-icons">error</i>
-                <p id="p-modal2"></p>
-                <button id="close-modal-btn2" class="modal-button">Tentar novamente</button>
             </div>
         </div>
     </div>
@@ -129,6 +115,7 @@
     var modal = document.getElementById('emailExist-modal');
     var bttModal = document.getElementById('close-modal-btn');
     var spanbtt = document.getElementById('span-btt');
+    var pmodal = document.getElementById('p-modal');
     
     function bttModalPress(btt, span){
         btt.addEventListener('click', () =>{
@@ -139,21 +126,6 @@
         })
     }
 
-    //modal 2
-
-    var modal2 = document.getElementById('modal2');
-    var bttModal2 = document.getElementById('close-modal-btn2');
-    var spanbtt2 = document.getElementById('span-btt2');
-    var pmodal2 = document.getElementById('p-modal2');
-
-    function bttModalPress2(btt, span){
-        btt.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-        span.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('createForm').addEventListener('submit', function (event) {
@@ -165,6 +137,7 @@
             
             if (userData < currentData) {
                 isValid = false
+                pmodal.innerText = `A data inserida não pode ser menor que a data atual!!!`
                 modal.style.display = 'block';
                 bttModalPress(bttModal, spanbtt)
             }
@@ -174,9 +147,9 @@
 
             if(userYear > currentYear){
                 isValid = false
-                pmodal2.innerText = `O ano inserido não pode ser maior que ${currentYear}`
-                modal2.style.display = 'block';
-                bttModalPress2(bttModal2, spanbtt2)
+                pmodal.innerText = `O ano inserido não pode ser maior que ${currentYear}`
+                modal.style.display = 'block';
+                bttModalPress(bttModal, spanbtt)
             }
 
             var eventName = document.getElementById('inomeEvento');
@@ -186,19 +159,27 @@
 
             if(eventName.value.length > 25){
                 isValid = false
-                window.alert('Nome de evento pode ter no máximo 25 caracteres');
+                pmodal.innerText = `Nome de evento pode ter no máximo 25 caracteres!!!`
+                modal.style.display = 'block';
+                bttModalPress(bttModal, spanbtt)
             }
             if(organizer.value.length > 50){
                 isValid = false
-                window.alert('Nome de organizador pode ter no máximo 50 caracteres');
+                pmodal.innerText = `Nome de organizador pode ter no máximo 50 caracteres!!!`
+                modal.style.display = 'block';
+                bttModalPress(bttModal, spanbtt)
             }
             if(adress.value.length > 50){
                 isValid = false
-                window.alert('Endereço pode ter no máximo 50 caracteres');
+                pmodal.innerText = `Endereço pode ter no máximo 50 caracteres!!!`
+                modal.style.display = 'block';
+                bttModalPress(bttModal, spanbtt)                
             }
             if(descricao.value.length > 600){
                 isValid = false
-                window.alert('Descrição pode ter no máximo 600 caracteres');
+                pmodal.innerText = `Descrição pode ter no máximo 600 caracteres!!!`
+                modal.style.display = 'block';
+                bttModalPress(bttModal, spanbtt)                
             }  
 
             if (!isValid) {
