@@ -50,10 +50,10 @@
             
             <form action="/updateNames" method="post">
                 <label for="fullname" class="label-edit-account">Nome completo:</label>
-                <input type="text" name="fullName" class="inputs-edit-account" value="<%= data.fullName %>">
+                <input type="text" name="fullName" class="inputs-edit-account" value="<%= data.fullName %>" maxlength="80">
                 
                 <label for="username" class="label-edit-account">Nome de usuário:</label>
-                <input type="text" name="userName" class="inputs-edit-account" value="<%= data.userName %>">
+                <input type="text" name="userName" class="inputs-edit-account" value="<%= data.userName %>" minlength="3" maxlength="30">
                 
                 <button class="btt-edit-account">EDIT</button>
             </form>

@@ -14,10 +14,10 @@
             <h1>Registre-se</h1>
             <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
             <form method="post" action="/saveRecords" enctype="multipart/form-data" id="register-form">
-                <input type="text" name="fullname" id="inome" placeholder="Nome completo" required>
-                <input type="text" name="username" id="iusername" placeholder="Nome de usuário" required>
-                <input type="email" name="email" id="iemail" placeholder="Email" required>
-                <input type="password" name="password" id="isenha" placeholder="Senha" required>
+                <input type="text" name="fullname" id="inome" placeholder="Nome completo" required maxlength="80">
+                <input type="text" name="username" id="iusername" placeholder="Nome de usuário" required minlength="3" maxlength="30">
+                <input type="email" name="email" id="iemail" placeholder="Email" required maxlength="254">
+                <input type="password" name="password" id="isenha" placeholder="Senha" required minlength="8" maxlength="100">
             
                 <div id="div-imagem-capa">
                 
@@ -37,27 +37,13 @@
 
         <!--Modal-->
 
-        <div id="emailExist-modal" class="modal">
+        <div id="modal" class="modal">
             <div class="modal-content">
                 <span class="close-button" id="span-btt">&times;</span>
                 <h2 id="h2-modal">Aviso</h2>
                 <i class="material-icons">error</i>
-                <p id="p-modal">Email inserido já existente, por favor tente com outro!!!</p>
+                <p id="p-modal"></p>
                 <button id="close-modal-btn" class="modal-button">Tentar outro</button>
-            </div>
-        </div>
-
-
-        <!--Modal 2-->
-
-
-        <div id="modal2" class="modal">
-            <div class="modal-content">
-                <span class="close-button" id="span-btt2">&times;</span>
-                <h2 id="h2-modal2">Nome de usuário já existente</h2>
-                <i class="material-icons">error</i>
-                <p id="p-modal2">Por favor, tente inserir outro nome de usuário.</p>
-                <button id="close-modal-btn2" class="modal-button">Tentar novamente</button>
             </div>
         </div>
     </div>
@@ -85,62 +71,45 @@
 
     //modal
     
-    var emailModal = document.getElementById('emailExist-modal');
+    var modal = document.getElementById('modal');
     var bttModal = document.getElementById('close-modal-btn');
     var spanbtt = document.getElementById('span-btt');
+    var pmodal = document.getElementById('p-modal');
     
     function bttModalPress(btt, span){
         btt.addEventListener('click', () =>{
-            emailModal.style.display = 'none';
+            modal.style.display = 'none';
         })
         span.addEventListener('click', () =>{
-            emailModal.style.display = 'none';
+            modal.style.display = 'none';
         })
     }
 
     document.addEventListener('DOMContentLoaded', (event) =>{
         const URLparams = new URLSearchParams(window.location.search);
         const emailExistParams = URLparams.get('emailExist');
+        const Params = URLparams.get('userName');
 
         if(emailExistParams){
-            emailModal.style.display = 'block'
+            pmodal.innerText = 'Email inserido já existente, por favor tente com outro!!!'
+            modal.style.display = 'block'
             bttModalPress(bttModal, spanbtt);  
             
             URLparams.delete('emailExist');
             const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
             history.replaceState(null, '', newUrl);
         }
-    })
-
-    //modal 2
-
-    var modal2 = document.getElementById('modal2');
-    var bttModal2 = document.getElementById('close-modal-btn2');
-    var spanbtt2 = document.getElementById('span-btt2');
-
-    function bttModalPress2(btt, span){
-        btt.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-        span.addEventListener('click', () =>{
-            modal2.style.display = 'none';
-        })
-    }
-
-    document.addEventListener('DOMContentLoaded', (event) =>{
-        const URLparams = new URLSearchParams(window.location.search);
-        const Params = URLparams.get('userName');
 
         if(Params){
-            modal2.style.display = 'block'
-            bttModalPress2(bttModal2, spanbtt2);  
+            pmodal.innerText = 'Nome de usuário já existente, por favor tente com outro!!!'
+            modal.style.display = 'block'
+            bttModalPress(bttModal, spanbtt);  
             
             URLparams.delete('userName');
             const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
             history.replaceState(null, '', newUrl);
         }
     })
-
 
 </script>
 
