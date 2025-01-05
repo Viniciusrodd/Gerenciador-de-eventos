@@ -142,6 +142,9 @@ header{
     font-weight: bold;
     color: var(--cor02); /* Texto sobre a imagem */
     margin: 10px 0px 0px 0px;
+    max-width: 60%;
+    word-wrap: break-word; /* Quebra automaticamente palavras longas */
+    overflow-wrap: break-word; /* Compatibilidade adicional para quebra de palavras */
 }
 
 #p-editPerfil{
@@ -497,61 +500,6 @@ li:hover{
 
 .modal-button:hover {
     background-color: #2980b9;
-}
-
-/* Animação de Aparecer */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-
-/*modal 3*/
-
-#modal3{
-    display: none; /* Modal começa invisível */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
-}
-
-#h2-modal3{
-    font-size: 30px;
-    margin-bottom: 3px;
-}
-
-#p-modal3{
-    font-size: 19px;
-    margin-top: 3px;
-}
-
-/* Botão de Ação */
-#close-modal-btn3{
-    background-color: #3c78e7;
-    color: #fff;
-    padding: 10px;
-    width: 160px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: 0.5s ease;
-}
-
-#close-modal-btn3:hover {
-    background-color: #2e6ee4;
 }
 
 /* Animação de Aparecer */

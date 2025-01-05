@@ -52,6 +52,9 @@ header{
     text-shadow: 3px 3px var(--cor02);
     font-size: 55px;
     font-style: italic;
+    max-width: 60%;
+    word-wrap: break-word; /* Quebra automaticamente palavras longas */
+    overflow-wrap: break-word; /* Compatibilidade adicional para quebra de palavras */
 }
 
 #header-image{

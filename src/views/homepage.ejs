@@ -164,7 +164,7 @@
         <% dadosProfile.forEach((dadosProfile) =>{ %> 
             <% if(dadosProfile.id == userId) { %>
                 <div id="welcome-modal" class="modal">
-                    <div class="modal-content">
+                    <div class="modal-content" id="modal-content">
                         <span class="close-button" id="span-btt">&times;</span>
                         <h2 id="h2-modal">Bem-vindo <%= dadosProfile.userName %>!</h2>
                         <p id="p-modal">Estamos felizes em tê-lo aqui. Organize, edite e gerencie seus eventos da forma + simples e eficiente.</p>
@@ -172,20 +172,7 @@
                     </div>
                 </div>
             <% } %>
-        <% }) %>
-
-
-        <!--Modal 3-->
-
-
-        <div id="modal3" class="modal">
-            <div class="modal-content">
-                <h2 id="h2-modal3">Espere ai!</h2>
-                <i class="material-icons">sentiment_very_satisfied</i>
-                <p id="p-modal3">Você já está participando deste evento!</p>
-            </div>
-        </div>
-        
+        <% }) %>      
     </div>
 </body>
 
@@ -194,20 +181,9 @@
     var modal = document.getElementById('welcome-modal');
     var bttModal = document.getElementById('close-modal-btn');
     var spanbtt = document.getElementById('span-btt');
-    
-
-    document.addEventListener('DOMContentLoaded', () =>{
-        const urlParams = new URLSearchParams(window.location.search);
-        const sucessMsg = urlParams.get('sucess');
-        if(sucessMsg){
-            modal.style.display = 'block'
-            bttModalPress(bttModal, spanbtt);   
-
-            urlParams.delete('sucess');
-            const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
-            history.replaceState(null, '', newUrl);
-        }
-    })
+    var h2modal = document.getElementById('h2-modal');
+    var pmodal = document.getElementById('p-modal');
+    var modalcontent = document.querySelector('.modal-content')
 
     function bttModalPress(btt, span){
         btt.addEventListener('click', () =>{
@@ -218,23 +194,39 @@
         })
     }
 
-
-    //modal3
-
-    var modal3 = document.getElementById('modal3');
-
     document.addEventListener('DOMContentLoaded', () =>{
         const urlParams = new URLSearchParams(window.location.search);
-        const sucessMsg = urlParams.get('participationExist');
+        const sucessMsg = urlParams.get('sucess');
+        const participationAlert = urlParams.get('participationExist');
+        
         if(sucessMsg){
-            modal3.style.display = 'block'
+            modal.style.display = 'block'
+            bttModalPress(bttModal, spanbtt);   
+
+            urlParams.delete('sucess');
+            const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+            history.replaceState(null, '', newUrl);
+        }
+        
+        if(participationAlert){
+            spanbtt.style.display = 'none'
+            h2modal.innerText = 'Espere ai!'
+            var i = document.createElement('i')
+            i.textContent = 'sentiment_very_satisfied'
+            i.classList.add('material-icons')
+            modalcontent.appendChild(i)
+            pmodal.innerText = 'Você já está participando deste evento!'
+            bttModal.style.display = 'none'
+            modal.style.display = 'block'
+            
             setTimeout(() =>{
-                modal3.style.display = 'none'
+                modal.style.display = 'none'
                 urlParams.delete('participationExist');
                 const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
                 history.replaceState(null, '', newUrl);
-            }, 4000)
+            }, 2000)
         }
+        
     })
 </script>
 
