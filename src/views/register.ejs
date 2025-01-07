@@ -14,10 +14,10 @@
             <h1>Registre-se</h1>
             <!--enctype="multipart..." é usado para formular dados que incluem arquivos ou tipos binários.-->
             <form method="post" action="/saveRecords" enctype="multipart/form-data" id="register-form">
-                <input type="text" name="fullname" id="inome" placeholder="Nome completo" required maxlength="80">
-                <input type="text" name="username" id="iusername" placeholder="Nome de usuário" required minlength="3" maxlength="30">
-                <input type="email" name="email" id="iemail" placeholder="Email" required maxlength="254">
-                <input type="password" name="password" id="isenha" placeholder="Senha" required minlength="8" maxlength="100">
+                <input type="text" name="fullname" id="inome" placeholder="Nome completo" required>
+                <input type="text" name="username" id="iusername" placeholder="Nome de usuário" required>
+                <input type="email" name="email" id="iemail" placeholder="Email" required>
+                <input type="password" name="password" id="isenha" placeholder="Senha" required>
             
                 <div id="div-imagem-capa">
                 
@@ -85,31 +85,70 @@
         })
     }
 
-    document.addEventListener('DOMContentLoaded', (event) =>{
+    document.addEventListener('DOMContentLoaded', () =>{
         const URLparams = new URLSearchParams(window.location.search);
         const emailExistParams = URLparams.get('emailExist');
         const Params = URLparams.get('userName');
 
         if(emailExistParams){
             pmodal.innerText = 'Email inserido já existente, por favor tente com outro!!!'
-            modal.style.display = 'block'
-            bttModalPress(bttModal, spanbtt);  
-            
-            URLparams.delete('emailExist');
-            const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
-            history.replaceState(null, '', newUrl);
+            modal.style.display = 'block'            
         }
 
         if(Params){
             pmodal.innerText = 'Nome de usuário já existente, por favor tente com outro!!!'
             modal.style.display = 'block'
-            bttModalPress(bttModal, spanbtt);  
-            
+        }
+
+        if(emailExistParams || Params){
+            bttModalPress(bttModal, spanbtt);
+            URLparams.delete('emailExist');
             URLparams.delete('userName');
-            const newUrl = window.location.pathname + (URLparams.toString() ? '?' +URLparams.toString() : '');
+            const newUrl = window.location.pathname + (URLparams.toString() ? '?' + URLparams.toString() : '');
             history.replaceState(null, '', newUrl);
         }
+   
+
+
+    document.getElementById('register-form').addEventListener('submit', (event) =>{
+        const nomefield = document.getElementById('inome'); //max80
+        const usernamefield = document.getElementById('iusername'); //min3 max30
+        const emailfield = document.getElementById('iemail'); //max254
+        const senhafield = document.getElementById('isenha'); //min8 max100
+
+        let isValid = true;
+            const errorMessages = [];
+
+            if (nomefield.value.length > 80) {
+                isValid = false;
+                errorMessages.push('Nome completo pode ter no máximo 80 caracteres');
+            }
+
+            if (usernamefield.value.length < 3 || usernamefield.value.length > 30) {
+                isValid = false;
+                errorMessages.push('Nome de usuário deve ter entre 3 e 30 caracteres');
+            }
+
+            if (emailfield.value.length > 254) {
+                isValid = false;
+                errorMessages.push('Email pode ter no máximo 254 caracteres');
+            }
+
+            if (senhafield.value.length < 8 || senhafield.value.length > 100) {
+                isValid = false;
+                errorMessages.push('Senha deve ter entre 8 e 100 caracteres');
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+                pmodal.innerText = errorMessages.join('\n'); // Exibe todas as mensagens de erro
+                bttModal.innerText = 'Corrigir'
+                bttModalPress(bttModal, spanbtt);
+                modal.style.display = 'block';
+            }
     })
+})
+
 
 </script>
 
