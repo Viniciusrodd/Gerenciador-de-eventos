@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+:root{
+    --cor01: #212121;
+    --cor02: rgba(163, 20, 111, 0.981);
+}
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+@media screen and (max-width: 767px){
+    /*DIV-PAI*/
+
+    /*HEADER*/
+
+    .titulo{
+        font-size: 45px;
+    }
+
+    #header-image{
+        height: 80px;
+        width: 80px;
+    }
+    #header-image:hover{
+        transform: none;
+    }
+
+    /*CAPA*/
+
+    #div-imagem-perfil{
+        height: 180px;
+        width: 180px;
+    }
+
+    #edit-imagem-perfil{
+        width: 50%;
+    }
+    #edit-imagem-perfil:hover{
+        background-color: rgba(0, 0, 0, 0.475);
+    }
+
+    /*SHORTCUTS*/
+
+    div#shortcuts{
+        width: 90%;
+    }
+
+    .btt-edit-account:hover{
+        transform: none;
+    }
+
+    .btt-delete-account:hover{
+        transform: none;
+    }
+
+    #h3-voltar:hover{
+        text-decoration: none;
+        transform: none;
+    }
+}
