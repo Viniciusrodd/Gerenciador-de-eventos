@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar eventos</title>
     <link rel="stylesheet" href="../../../css/shorthandsCss/editar-eventosCss/editar-eventos.css">
+    <link rel="stylesheet" href="../../../css/shorthandsCss/editar-eventosCss/editar-eventosMobile.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="../../../imagens/favicon.ico" type="image/x-icon">
 </head>
@@ -72,7 +73,7 @@
                 </fieldset>
 
                 
-                <label for="image">Editar imagem:</label>  
+                <label for="image" id="labelimage">Editar imagem:</label>  
                 <% if(!event.image) { %>
                     <div id="div-imagem-evento">
                         <img src="../../../imagens/SEM FOTO DE EVENTO.png" alt="Imagem do evento">

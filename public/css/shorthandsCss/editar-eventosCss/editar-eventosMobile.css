@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+:root{
+    --cor01: #212121;
+    --cor02: rgba(163, 20, 111, 0.981);
+}
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+}
+
+@media screen and (max-width: 767px){
+
+        /*DIV-PAI*/
+
+    /*HEADER*/
+
+    .titulo{
+        font-size: 40px;
+    }
+
+    #header-image:hover{
+        transform: none;
+    }
+
+    /*DIV-FILHO*/
+
+    #editEventForm{
+        width: 90%;
+    }
+
+    #titulo-evento{
+        font-size: 50px;
+    }
+
+    #h3-voltar{
+        font-size: 20px;
+    }
+    #h3-voltar:hover{
+        text-decoration: none;
+        transform: none;
+    }
+
+    /*INPUTS*/
+
+    input, select{
+        width: 85%;
+    }
+
+    fieldset{
+        padding: 20px 40px;
+    }
+
+    textarea{
+        width: 85vw;
+        max-width: 65vw;
+        min-width: 65vw;
+    }
+
+    #div-imagem-evento{
+        width: 80%;
+    }
+
+    #iimage{
+        font-size: 20px;
+    }
+
+    #btt-evento{
+        width: 50vw;
+    }
+    #btt-evento:hover{
+        transform: none;
+        background-color: black;
+    }
+
+    .btt-delete-account:hover{
+        transform: none;
+        background-color: rgba(255, 68, 0, 0.893);
+    }
+}

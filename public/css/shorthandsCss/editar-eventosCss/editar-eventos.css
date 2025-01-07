@@ -229,7 +229,7 @@ textarea{
     font-weight: bolder;
     font-size: 18px;
     color: white;
-    background-color: rgba(255, 68, 0, 0.615);
+    background-color: rgba(255, 68, 0, 0.893);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
     rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     transition: transform 0.5s ease;
@@ -237,7 +237,7 @@ textarea{
 }
 .btt-delete-account:hover{
     transform: scale(1.10);
-    background-color: rgba(212, 57, 0, 0.736);
+    background-color: rgba(255, 87, 25, 0.941);
 }
 
 
