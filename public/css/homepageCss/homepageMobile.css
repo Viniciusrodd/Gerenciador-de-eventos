@@ -152,4 +152,10 @@ hr{
         outline: none;
         transform: none;
     }
+
+    /*modal*/
+
+    .modal-content {
+        width: 80%;
+    }
 }
