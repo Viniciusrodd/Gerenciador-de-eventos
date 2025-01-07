@@ -93,12 +93,14 @@ hr{
     .profile-image{
         height: 100px;
         width: 100px;
+        margin: 10px 10px 0px 0px;
+        align-self: flex-start;
     }
 
     #event-title{
         align-items: flex-start;
         flex-direction: column;
-        height: 25%;
+        height: 20%;
         padding: 0px 10px 0px 20px;
     }
 
@@ -114,6 +116,7 @@ hr{
 
     #p-event-title{
         font-size: 35px;
+        padding: 0px;
     }
 
     #event-info-container{

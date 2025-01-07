@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box; /* Garantir que padding/border não afete dimensões */box-sizing: border-box; /* Garantir que padding/border não afete dimensões */
+}
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+    height: 100%; /* Define que html e body ocupam 100% da altura da viewport */
+}
+
+@media screen and (max-width: 767px){
+
+
+
+}

@@ -127,7 +127,6 @@
         }
     });
 
-
     //modal
     
     var modal = document.getElementById('modal');
@@ -154,7 +153,6 @@
         })
     }
 
-
     const deleteForms = document.getElementById('eventDeleteForm');
         deleteForms.addEventListener('submit', (event) => {
             event.preventDefault(); // Impede o envio padrão
@@ -165,56 +163,48 @@
     
     const form = document.getElementById('editEventForm');
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Impede o envio padrão
+        e.preventDefault();
 
-        const formData = new FormData(form); // Dados do formulário
+        const formData = new FormData(form);
         const alteredData = {};
 
-        // Detecta mudanças nos campos
         form.querySelectorAll('input, textarea').forEach(field => {
             if (field.type !== 'file' && field.value !== field.getAttribute('data-original')) {
                 alteredData[field.name] = field.value;
             }
         });
 
-        // Verificações no campo 'idata'
+        //validações
         const inputData = form.querySelector('#idata').value;
-        const currentData = new Date(); // Data atual
+        const currentData = new Date();
         const userData = new Date(inputData);
+        const nextYear = currentData.getFullYear() + 1;
+        const userYear = userData.getFullYear();
 
-        // Verifica se a data inserida é menor que a data atual
         if (userData < currentData) {
             pmodal.innerText = `A data inserida não pode ser menor que a data atual!!!`
             modal.style.display = 'block';
             bttModalPress(bttModal, spanbtt)
-            return; // Interrompe a execução do código
+            return;
         }
-
-        // Verifica se o ano inserido é maior que o ano atual + 1
-        const nextYear = currentData.getFullYear() + 1;
-        const userYear = userData.getFullYear();
 
         if (userYear > nextYear) {
             pmodal.innerText = `O ano inserido não pode ser maior que ${nextYear}`
             modal.style.display = 'block';
             bttModalPress(bttModal, spanbtt)
-            return; // Interrompe a execução do código
+            return;
         }
-
-        
-        // Verifica se o campo de imagem contém arquivo
+ 
         const imageField = form.querySelector('#iimage');
         if (imageField.files.length > 0) {
             formData.append('image', imageField.files[0]);
         }
-        // Adiciona o ID do evento ao FormData
         const eventId = form.querySelector('input[name="id"]').value; // Recupera o ID do evento
         console.log('Event ID:', eventId);
 
-        // Envia os dados com fetch
         fetch(`/uploadEvents/${eventId}`, {
             method: 'PUT',
-            body: formData, // Inclui arquivos e outros dados
+            body: formData,
         })
         .then(() =>{
             console.log('Sucess updated (frontend)');
