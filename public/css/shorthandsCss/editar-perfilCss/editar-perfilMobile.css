@@ -63,4 +63,8 @@ html, body{
         text-decoration: none;
         transform: none;
     }
+
+    .modal-content {
+        width: 80%;
+    }
 }
