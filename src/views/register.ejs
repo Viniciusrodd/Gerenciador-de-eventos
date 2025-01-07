@@ -109,14 +109,13 @@
         }
    
 
+        document.getElementById('register-form').addEventListener('submit', (event) =>{
+            const nomefield = document.getElementById('inome'); //max80
+            const usernamefield = document.getElementById('iusername'); //min3 max30
+            const emailfield = document.getElementById('iemail'); //max254
+            const senhafield = document.getElementById('isenha'); //min8 max100
 
-    document.getElementById('register-form').addEventListener('submit', (event) =>{
-        const nomefield = document.getElementById('inome'); //max80
-        const usernamefield = document.getElementById('iusername'); //min3 max30
-        const emailfield = document.getElementById('iemail'); //max254
-        const senhafield = document.getElementById('isenha'); //min8 max100
-
-        let isValid = true;
+            let isValid = true;
             const errorMessages = [];
 
             if (nomefield.value.length > 80) {
@@ -146,8 +145,8 @@
                 bttModalPress(bttModal, spanbtt);
                 modal.style.display = 'block';
             }
+        })
     })
-})
 
 
 </script>
