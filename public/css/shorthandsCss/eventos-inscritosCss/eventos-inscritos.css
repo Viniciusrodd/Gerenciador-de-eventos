@@ -54,7 +54,7 @@ header{
 
 .titulo{
     color: white;
-    text-shadow: 4px 4px black;
+    text-shadow: 4px 4px var(--cor02);
     font-size: 55px;
     font-style: italic;
 }
