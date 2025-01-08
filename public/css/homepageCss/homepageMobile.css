@@ -41,7 +41,7 @@ hr{
     }
 
     .titulo{
-        font-size: 40px;
+        font-size: 35px;
     }
 
     #header-image{
@@ -63,7 +63,7 @@ hr{
 
 
     #profile-homepage{
-        width: 60vw;
+        width: 80vw;
         position: unset; /* Para compatibilidade com navegadores WebKit */
         top: 0px; 
     }
@@ -79,8 +79,18 @@ hr{
 
 
     #container-publications{
-        width: 90%;
+        width: 95vw;
         margin-top: 15%;
+    }
+    
+    #publications-homepage{
+        box-shadow: none;
+        border-radius: 0px;
+        box-shadow:  rgba(0, 0, 0, 0.4) 5px 5px, 
+        rgba(47, 10, 33, 0.3) 10px 10px,
+        rgba(60, 19, 45, 0.2) 15px 15px, 
+        rgba(82, 25, 61, 0.1) 20px 20px, 
+        rgba(240, 46, 170, 0.05) 25px 25px;
     }
 
     #event-banner{
@@ -88,8 +98,15 @@ hr{
         height: 50vh;
         width: 100%;
         overflow: unset; /* Garante que nada ultrapasse o limite */
+        border-radius: 0px;
     }
 
+    #img-banner{
+        height: 100%;
+        width: 100%;
+        border-radius: 0px;
+    }
+    
     .profile-image{
         height: 100px;
         width: 100px;
@@ -129,28 +146,8 @@ hr{
         font-size: 20px;
     }
 
-    li:hover{
-        transform: none;
-    }
-
     #event-description{
         width: 70%;
-    }
-
-    #event-description:hover{
-        transform: none;
-    }
-
-    #btt-participate:hover{
-        box-shadow: 0 0 0px rgba(0, 0, 0, 0.378);
-        outline: none;
-        transform: none;
-    }
-
-    #btt-edit:hover{
-        box-shadow: 0 0 0px rgba(0, 0, 0, 0.378);
-        outline: none;
-        transform: none;
     }
 
     /*modal*/

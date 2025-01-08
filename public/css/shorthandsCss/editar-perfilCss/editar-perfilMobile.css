@@ -20,7 +20,7 @@ html, body{
     /*HEADER*/
 
     .titulo{
-        font-size: 45px;
+        font-size: 35px;
     }
 
     #header-image{
@@ -48,6 +48,7 @@ html, body{
     /*SHORTCUTS*/
 
     div#shortcuts{
+        padding: 10% 0px 10% 0px;
         width: 90%;
     }
 
