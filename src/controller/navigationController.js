@@ -337,7 +337,15 @@ router.get('/meusEventos', async (req, res) =>{
         return res.redirect('/homepage')
     }
 
-})
+});
+
+
+//GROUPS
+
+
+router.get('/criarGrupos', (req, res) => {
+    res.render('../views/groups.ejs/criar-grupo')
+});
 
 
 module.exports = router;
