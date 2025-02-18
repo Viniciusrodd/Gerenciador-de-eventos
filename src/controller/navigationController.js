@@ -53,12 +53,12 @@ async function deleteEventsByData(){
 
 
 router.get('/registro', (req, res) =>{
-    res.render('register');
+    res.render('../views/user.ejs/register');
 })
 
 
 router.get('/login', (req, res) =>{
-    res.render('login');
+    res.render('../views/user.ejs/login');
 })
 
 
@@ -127,7 +127,7 @@ router.get('/criarEventos', userAuth,(req, res) =>{
     if(req.session.user){
         const user = req.session.user;
 
-        res.render('../views/shortHands.ejs/criar-eventos', {
+        res.render('../views/events.ejs/criar-eventos', {
             userData: user
         });
     }else{
@@ -149,7 +149,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
         console.log('Event IDs for User:', eventIdsForUser)
 
         if (eventIdsForUser.length === 0) {
-            return res.render('../views/shortHands.ejs/eventos-inscritos', {
+            return res.render('../views/events.ejs/eventos-inscritos', {
                 dadosEvents: eventIdsForUser
             });
         }
@@ -203,7 +203,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
                 }
             });
            
-            res.render('../views/shortHands.ejs/eventos-inscritos', {
+            res.render('../views/events.ejs/eventos-inscritos', {
                 dadosEvents: events,
                 userData: req.session.user
             });
@@ -249,7 +249,7 @@ router.post('/editarEvento', userAuth, async (req, res) =>{
         }));
 
 
-        return res.render('../views/shortHands.ejs/editar-eventos', {
+        return res.render('../views/events.ejs/editar-eventos', {
             eventsData: result
         })
     }
@@ -283,7 +283,7 @@ router.get('/editarPerfil', userAuth ,async (req, res) =>{
         image: events.dataValues.image
     }))
 
-    res.render('../views/shortHands.ejs/editar-perfil', {
+    res.render('../views/user.ejs/editar-perfil', {
         recordData: result
     })
 })
@@ -327,7 +327,7 @@ router.get('/meusEventos', async (req, res) =>{
                     event.endSeconds = endTime.seconds();
                 }
             })
-            res.render('../views/shortHands.ejs/meus-eventos', {
+            res.render('../views/events.ejs/meus-eventos', {
                 myEvents: events
             })
         }
