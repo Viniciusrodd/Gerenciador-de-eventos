@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/eventsCss/criar-eventosCss/criar-eventos.css">
+    <link rel="stylesheet" href="../../../css/eventsCSS/criar-eventosCss/criar-eventosMobile.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="../../../imagens/favicon.ico" type="image/x-icon">
     <title>Criação de grupos</title>
 </head>
 <body>
-    
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <a href="/homepage">
+                <div id="header-image">
+                </div>
+            </a>
+            <h1 class="titulo">Eventos</h1>
+        </header>
+        
+
+        <form action="/createEvent" method="POST" enctype="multipart/form-data" id="createForm">
+            <h1 id="titulo-evento">Crie seu grupo</h1>
+            <h3 id="h3-voltar">
+                <a href="/homepage">
+                    Voltar para homepage
+                    <i class="material-icons">undo</i>
+                </a>
+            </h3>
+            
+            <label for="nameGrup">NOME DO GRUPO</label>
+            <input type="text" name="nameGrup" id="inomeEvento" required>
+            
+            
+            <label for="type">TIPO DE GRUPO</label>
+            <select name="type" id="itipo" class="cursorPointer" required> 
+                <option value="" selected></option>        
+                <option value="Privado">Privado</option>
+                <option value="Público">Público</option>
+            </select>
+            
+            <fieldset>
+                <legend>DESCRIÇÃO DO GRUPO</legend>
+                <p id="p-textarea">*até 600 caracteres</p>
+                <textarea name="description" id="idescricao" required>
+
+                </textarea>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>REGRAS DO GRUPO</legend>
+                <p id="p-textarea">*até 600 caracteres</p>
+                <textarea name="rules" id="idescricao" required>
+
+                </textarea>
+            </fieldset>
+
+            <div id="div-imagem"></div>
+            <label for="imagem">Imagem de grupo (opcional)</label>
+            <input type="file" name="image" id="iimagem" accept="image/*">
+
+            <button id="btt-evento">Criar</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -116,7 +116,7 @@ router.post('/authenticateLogin', async (req, res) =>{
         }
 
         if(recordData){
-            var correct = bcrypt.compareSync(passwordVar, recordData.password);
+            const correct = bcrypt.compareSync(passwordVar, recordData.password);
             if(correct){
                 req.session.user = {
                     id: recordData.id,
