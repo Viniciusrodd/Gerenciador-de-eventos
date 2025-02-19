@@ -24,7 +24,7 @@ h1{
     align-items: center;
     padding: 40px 0px 2px 0px;
     width: 100%;
-    background-image: url(../../imagens/section-img-7.jpg);
+    background-image: url(../../../imagens/section-img-7.jpg);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -103,7 +103,7 @@ label{
     height: 130px;
     width: 130px;
     margin: 20px;
-    background-image: url(../../imagens/user.jpg);
+    background-image: url(../../../imagens/user.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
