@@ -15,35 +15,37 @@ const storage = multer.memoryStorage();  // Isso armazena os arquivos na memóri
 const upload = multer({ storage: storage });
 
 
+//DELETE ACCOUNT
 router.post('/deleteAccount', async (req, res) =>{
-    var userIdvar = req.session.user.id;
+    const userIdvar = req.session.user.id;
 
     try{
         await recordModel.destroy({
             where: {
                 id: userIdvar
             }
-        })
+        });
 
         await eventModel.destroy({
             where: {
                 userId: userIdvar
             }
-        })
+        });
 
         console.log('Profile deleted with success');
         return res.redirect('/login');
     }
     catch(error){
-        res.status(500).send('Delete profile process failed')
-    }
-})
+        res.status(500).send('Delete profile process failed');
+    };
+});
 
 
+//UPDATE NAMES
 router.post('/updateNames', async (req, res) =>{
-    var fullNameVar = req.body.fullName;
-    var userNameVar = req.body.userName;
-    var userId = req.session.user.id;
+    const fullNameVar = req.body.fullName;
+    const userNameVar = req.body.userName;
+    const userId = req.session.user.id;
 
     try{
         const record = await recordModel.findOne({
@@ -53,7 +55,7 @@ router.post('/updateNames', async (req, res) =>{
         });
 
         if (!record) {
-            console.log('Erro: fullName already exist')
+            console.log('Erro: fullName already exist');
             return res.redirect('/editarPerfil');
         }
 
@@ -62,23 +64,24 @@ router.post('/updateNames', async (req, res) =>{
             userName: userNameVar 
         }, {
             where: {id: userId}
-        })
+        });
 
-        console.log('Atualizado com sucesso')
+        console.log('Atualizado com sucesso');
         res.redirect('/editarPerfil');
     }
     catch(error){
         res.status(400).send('Erro at updated profile names' + error)
-    }
-})
+    };
+});
 
 
+//UPLOAD USER IMAGE
 router.post('/uploadImage', upload.single('image'), (req, res) =>{
-    var imageUpdated = req.file
-    var userId = req.session.user.id
+    const imageUpdated = req.file;
+    const userId = req.session.user.id;
 
     if(!imageUpdated){
-        res.status(400).send('No image file send')
+        res.status(400).send('No image file send');
     }
 
     recordModel.update({
@@ -87,62 +90,63 @@ router.post('/uploadImage', upload.single('image'), (req, res) =>{
         where: {id: userId} 
     })
     .then(() =>{
-        console.log('Profile image success updated')
-        return res.redirect('/editarPerfil')
+        console.log('Profile image success updated');
+        return res.redirect('/editarPerfil');
     })
     .catch((error) =>{
-        res.status(400).send('Erro at process image file send' + error)
-    })
+        res.status(400).send('Erro at process image file send' + error);
+    });
+});
 
-})
 
-
+//AUTHENTICATE LOGIN
 router.post('/authenticateLogin', async (req, res) =>{
-    var emailVar = req.body.email
-    var passwordVar = req.body.password
+    const emailVar = req.body.email;
+    const passwordVar = req.body.password;
     
     try{
-        var recordData = await recordModel.findOne({
+        const recordData = await recordModel.findOne({
             where: {
                 email: emailVar,
             }
-        })
+        });
 
         if(!recordData){
-            console.log('Wrong user data')
-            return res.redirect('/login?userDataWrong=Dados não existentes')
+            console.log('Wrong user data');
+            return res.redirect('/login?userDataWrong=Dados não existentes');
         }
 
         if(recordData){
-            var correct = bcrypt.compareSync(passwordVar, recordData.password)
+            var correct = bcrypt.compareSync(passwordVar, recordData.password);
             if(correct){
                 req.session.user = {
                     id: recordData.id,
                     email: recordData.email,
                     userName: recordData.userName,
                     fullName: recordData.fullName
-                }
-                console.log('Login sucess')
-                return res.redirect('/homepage?sucess=Message for modal')
+                };
+                console.log('Login sucess');
+                return res.redirect('/homepage?sucess=Message for modal');
             }else{
-                console.log('Wrong password')
-                return res.redirect('/login?wrongPassword=Senha incorreta')
+                console.log('Wrong password');
+                return res.redirect('/login?wrongPassword=Senha incorreta');
             }
         }
     }
     catch(error){
-        console.log('Error at authenticate user', error)
-        return res.redirect('/login')
-    }
-})
+        console.log('Error at authenticate user', error);
+        return res.redirect('/login');
+    };
+});
 
 
+//SAVE RECORDS
 router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
     try{
         const {fullname, username, email, password} = req.body;
 
         if (!fullname || !username || !email || !password) {
-            console.log('Fields empty')
+            console.log('Fields empty');
             return res.redirect('/registro');
         }
 
@@ -150,14 +154,14 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
             where: { email: email } 
         });
         if (userEmailExists) {
-            console.log('user email already exist')
+            console.log('user email already exist');
             return res.redirect(`/registro?emailExist=email ja existe`);
         }
         const userNameExist = await recordModel.findOne({
             where: { userName: username }
         });
         if(userNameExist){
-            console.log('userName already exist')
+            console.log('userName already exist');
             return res.redirect(`/registro?userName=username ja existe`);
         }
 
@@ -165,7 +169,7 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
         const hash = bcrypt.hashSync(password, salt);
 
         if(req.file){
-            var image = req.file.buffer;
+            const image = req.file.buffer;
         
             await recordModel.create({
                 fullName: fullname,
@@ -175,8 +179,8 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
                 image: image
             });
     
-            console.log('Record sucess create')
-            res.redirect('/login?success=Usuário registrado com sucesso')
+            console.log('Record sucess create');
+            res.redirect('/login?success=Usuário registrado com sucesso');
         }else{
             await recordModel.create({
                 fullName: fullname,
@@ -185,15 +189,15 @@ router.post('/saveRecords', upload.single('imageCreate'),async (req, res) =>{
                 password: hash,
             });
 
-            console.log('Record sucess create (without image)')
-            res.redirect('/login?success=Usuário registrado com sucesso')        
+            console.log('Record sucess create (without image)');
+            res.redirect('/login?success=Usuário registrado com sucesso');        
         }
     }
     catch(error){
         console.error(`Error in create record: ${error}`);
         res.redirect('/registro');
-    }
-})
+    };
+});
 
 
 module.exports = router;
