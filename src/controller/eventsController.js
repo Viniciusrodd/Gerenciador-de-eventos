@@ -30,6 +30,7 @@ router.post('/events/disparticipate', (req, res) =>{
     });
 });
 
+
 //DELETE EVENTS
 router.post('/deleteEvents', (req, res) =>{
     const eventId = req.body.id;
@@ -48,6 +49,7 @@ router.post('/deleteEvents', (req, res) =>{
         return res.redirect('/editarEvento');
     });
 });
+
 
 //UPLOAD EVENTS
 router.put('/uploadEvents/:id', upload.array('image'), async (req, res) => {
@@ -81,6 +83,7 @@ router.put('/uploadEvents/:id', upload.array('image'), async (req, res) => {
         res.status(500).send({ message: 'Server error.' });
     }
 });
+
 
 //EVENT PARTICIPATE
 router.post('/participate', async (req, res) =>{
@@ -121,6 +124,7 @@ router.post('/participate', async (req, res) =>{
         return res.redirect('/homepage');
     };
 });
+
 
 //CREATE EVENT
 router.post('/createEvent', upload.single('imagem'), (req, res) =>{

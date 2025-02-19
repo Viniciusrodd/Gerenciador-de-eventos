@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
-const participationModel = require('../models/participation');
 const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcrypt');

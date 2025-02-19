@@ -9,6 +9,7 @@ const moment = require('moment-timezone');
 const { Op } = require('sequelize'); // Operadores do Sequelize
 
 
+//DELETE EVENTS BY DATA
 async function deleteEventsByData(){
     try{
         const date = new Date();
@@ -49,43 +50,46 @@ async function deleteEventsByData(){
     catch(error){
         console.error('Error at remove expired events:', error);
     }
-}
+};
 
 
+//REGISTER VIEW
 router.get('/registro', (req, res) =>{
     res.render('../views/user.ejs/register');
-})
+});
 
 
+//LOGIN VIEW
 router.get('/login', (req, res) =>{
     res.render('../views/user.ejs/login');
-})
+});
 
 
+//HOMEPAGE VIEW
 router.get('/homepage', userAuth, async (req, res) =>{
     try{
-        await deleteEventsByData()
+        await deleteEventsByData();
             
-        var eventData = await eventModel.findAll({
+        const eventData = await eventModel.findAll({
             order: [
                 ['id', 'DESC']
             ]
         })
-        var profileData = await recordModel.findAll()
-        var userIdSession = req.session.user.id;
+        const profileData = await recordModel.findAll();
+        const userIdSession = req.session.user.id;
 
         profileData.forEach(data =>{
             if (data && data.image) {
                 // Convertendo a imagem da tabela records para base64
                 data.profileimage = Buffer.from(data.image).toString('base64');
-                data.profileimage = `data:image/jpeg;base64,${data.profileimage}`
+                data.profileimage = `data:image/jpeg;base64,${data.profileimage}`;
             }
-        })
+        });
 
         eventData.forEach(event => {
             if (event.image ) {
                 event.imageBase64 = Buffer.from(event.image).toString('base64');
-                event.imageEvent = `data:image/jpeg;base64,${event.imageBase64}`
+                event.imageEvent = `data:image/jpeg;base64,${event.imageBase64}`;
             }
 
             // Trabalhando com a data
@@ -117,12 +121,13 @@ router.get('/homepage', userAuth, async (req, res) =>{
         });    
     }
     catch(error){
-        console.log('Error at homepage', error)
-        return res.redirect('/login')
-    }         
-})
+        console.log('Error at homepage', error);
+        return res.redirect('/login');
+    };         
+});
 
 
+//EVENTS CREATE VIEW
 router.get('/criarEventos', userAuth,(req, res) =>{
     if(req.session.user){
         const user = req.session.user;
@@ -131,12 +136,12 @@ router.get('/criarEventos', userAuth,(req, res) =>{
             userData: user
         });
     }else{
-        res.redirect('/login')
+        res.redirect('/login');
     }
-})
+});
 
 
-
+//REGISTERED EVENTS VIEW
 router.get('/eventosInscritos', userAuth, async (req, res) => {
     try {
         const userId = req.session.user.id;
@@ -146,7 +151,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
         });
 
         const eventIdsForUser = participationData.map(participation => participation.dataValues.eventId);
-        console.log('Event IDs for User:', eventIdsForUser)
+        console.log('Event IDs for User:', eventIdsForUser);
 
         if (eventIdsForUser.length === 0) {
             return res.render('../views/events.ejs/eventos-inscritos', {
@@ -209,15 +214,16 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
             });
         } else {
             res.redirect('/homepage'); // Caso não haja eventos para exibir
-            console.log('nao tem eventos' + events)
+            console.log('nao tem eventos' + events);
         }
     } catch (error) {
         console.log('Error at rendering "eventos-inscritos"', error);
         res.redirect('/homepage');
-    }
+    };
 });
 
 
+//LOGOUT
 router.get('/logout', (req, res) =>{
     req.session.id = undefined
     console.log('User LogOut sucess')
@@ -225,15 +231,16 @@ router.get('/logout', (req, res) =>{
 })
 
 
+//EVENTS EDIT VIEW
 router.post('/editarEvento', userAuth, async (req, res) =>{
-    var eventId = req.body.eventId
+    const eventId = req.body.eventId
 
     try{
-        var eventsData = await eventModel.findAll({
+        const eventsData = await eventModel.findAll({
             where: {
                 id: eventId
             }
-        })
+        });
 
         const result = await eventsData.map(event => ({
             id: event.dataValues.id,
@@ -248,56 +255,57 @@ router.post('/editarEvento', userAuth, async (req, res) =>{
             image: event.dataValues.image, //imagem em formato de Buffer
         }));
 
-
         return res.render('../views/events.ejs/editar-eventos', {
             eventsData: result
-        })
+        });
     }
     catch(error){
-        console.log('Error at editEvent route' + error)
-        return redirect('/homepage')
-    }
-})
+        console.log('Error at editEvent route' + error);
+        return redirect('/homepage');
+    };
+});
 
 
+//PROFILE EDIT VIEW
 router.get('/editarPerfil', userAuth ,async (req, res) =>{
 
-    const idVar = await req.session.user.id
+    const idVar = req.session.user.id;
 
     if(!idVar){
-        return res.status(400).send('User id to edit profile not found')
+        return res.status(400).send('User id to edit profile not found');
     }
 
-    var recordData = await recordModel.findAll({
+    const recordData = await recordModel.findAll({
         where: {
             id: idVar     
         }
-    })
+    });
 
-    var result = await recordData.map(events => ({
+    const result = await recordData.map(events => ({
         id: events.dataValues.id,
         fullName: events.dataValues.fullName,
         userName: events.dataValues.userName,
         email: events.dataValues.email,
         password: events.dataValues.password,
         image: events.dataValues.image
-    }))
+    }));
 
     res.render('../views/user.ejs/editar-perfil', {
         recordData: result
-    })
-})
+    });
+});
 
 
+//MY EVENTS VIEW
 router.get('/meusEventos', async (req, res) =>{
     try{
-        var userIdVar = await req.session.user.id
+        const userIdVar = req.session.user.id;
 
         const events = await eventModel.findAll({
             where: {
                 userId: userIdVar 
             }
-        })
+        });
 
         if(events){
             events.forEach(event =>{
@@ -329,22 +337,19 @@ router.get('/meusEventos', async (req, res) =>{
             })
             res.render('../views/events.ejs/meus-eventos', {
                 myEvents: events
-            })
+            });
         }
     }
     catch(error){
-        console.log('Error at show your own events', error)
-        return res.redirect('/homepage')
-    }
-
+        console.log('Error at show your own events', error);
+        return res.redirect('/homepage');
+    };
 });
 
 
-//GROUPS
-
-
+//GROUPS CREATION VIEW
 router.get('/criarGrupos', (req, res) => {
-    res.render('../views/groups.ejs/criar-grupo')
+    res.render('../views/groups.ejs/criar-grupo');
 });
 
 
