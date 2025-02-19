@@ -353,4 +353,9 @@ router.get('/criarGrupos', (req, res) => {
 });
 
 
+//GROUPS PARTICIPATE
+router.get('/gruposInscritos', (req, res) => {
+    res.render('../views/groups.ejs/grupos-inscritos');
+});
+
 module.exports = router;
