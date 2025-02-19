@@ -21,7 +21,7 @@
         </header>
         
 
-        <form action="/createEvent" method="POST" enctype="multipart/form-data" id="createForm">
+        <form action="/createGroup" method="POST" enctype="multipart/form-data" id="createForm">
             <h1 id="titulo-evento">Crie seu grupo</h1>
             <h3 id="h3-voltar">
                 <a href="/homepage">
@@ -31,7 +31,7 @@
             </h3>
             
             <label for="nameGrup">NOME DO GRUPO</label>
-            <input type="text" name="nameGrup" id="inomeEvento" required>
+            <input type="text" name="nameGroup" id="inomeEvento" required>
             
             
             <label for="type">TIPO DE GRUPO</label>
@@ -66,4 +66,23 @@
         </form>
     </div>
 </body>
+
+<script>
+    document.getElementById('iimagem').addEventListener('change', (event) =>{
+        const file = event.target.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = (e) =>{
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('img');
+                const divImagem = document.getElementById('div-imagem');
+                divImagem.innerHTML = '';
+                divImagem.appendChild(img)
+            };
+            reader.readAsDataURL(file)
+        }
+    })
+</script>
+
 </html>

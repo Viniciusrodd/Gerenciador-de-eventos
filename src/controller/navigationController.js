@@ -349,7 +349,15 @@ router.get('/meusEventos', async (req, res) =>{
 
 //GROUPS CREATION VIEW
 router.get('/criarGrupos', (req, res) => {
-    res.render('../views/groups.ejs/criar-grupo');
+    if(req.session.user){
+        const user = req.session.user;
+        
+        res.render('../views/groups.ejs/criar-grupo', {
+            userData: user
+        });
+    }else{
+        res.redirect('/login');
+    }
 });
 
 
