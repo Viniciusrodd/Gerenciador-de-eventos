@@ -3,6 +3,8 @@ const router = express.Router();
 const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
 const participationModel = require('../models/participation');
+const groupsModel = require('../models/groupsModel');
+const userGroupsModel = require('../models/userGroupsModel');
 const sequelize = require('sequelize');
 const userAuth = require('../middleware/userAuth');
 const moment = require('moment-timezone');
@@ -368,8 +370,43 @@ router.get('/gruposInscritos', (req, res) => {
 
 
 //SEARCH GROUP VIEW
-router.get('/gruposPesquisa', (req, res) =>{
-    res.render('../views/groups.ejs/pesquisar-grupo');
+router.get('/gruposPesquisa', async (req, res) =>{
+    try{
+        const groups = await groupsModel.findAll({
+            include: [
+                {
+                    model: recordModel,
+                    as: 'creator', // Alias usado na associação
+                    attributes: ['fullName', 'userName', 'image'],
+                }
+            ]
+        });
+
+        if(!groups){
+            res.status(404).send({errorFound: 'Group not found'});
+        }
+
+        groups.forEach(group => {
+            console.log(group.creator)
+            if (group.creator && group.creator.image) {
+                // Convertendo a imagem da tabela creator para base64
+                group.creator.profileimage = Buffer.from(group.creator.image).toString('base64');
+                group.creator.profileimage = `data:image/jpeg;base64,${group.creator.profileimage}`;
+            }
+
+            if (group.image){
+                group.imageBase64 = Buffer.from(group.image).toString('base64');
+                group.imageGroup = `data:image/jpeg;base64,${group.imageBase64}`;
+            }
+        })
+        res.render('../views/groups.ejs/pesquisar-grupo', {
+            grupos: groups
+        });
+    }
+    catch(error){
+        console.log('Error at rendering groups', error);
+        return res.status(500).send('Error at rendering groups', error);
+    };
 });
 
 module.exports = router;
