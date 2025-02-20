@@ -99,6 +99,20 @@
                                     </p>
                                 </div>
                             </ul>
+
+                            <% 
+                                // Verifica se o usuário já faz parte do grupo
+                                let isMember = false;
+                                if (dados.members && dados.members.length > 0) {
+                                    isMember = dados.members.some(member => member.id === userid);
+                                }
+                            %>
+
+                            <% if (!isMember) { %>
+                                <button id="btt-participation">Participar do grupo</button>
+                            <% } else { %>
+                                <p id="p-participation">Você já participa desse grupo</p>
+                            <% } %>
                         </div>
                     </div>
                 <% }) %>

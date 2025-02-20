@@ -226,7 +226,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
 
 
 //LOGOUT
-router.get('/logout', (req, res) =>{
+router.get('/logout', userAuth, (req, res) =>{
     req.session.id = undefined
     console.log('User LogOut sucess')
     return res.redirect('/login')
@@ -299,7 +299,7 @@ router.get('/editarPerfil', userAuth ,async (req, res) =>{
 
 
 //MY EVENTS VIEW
-router.get('/meusEventos', async (req, res) =>{
+router.get('/meusEventos', userAuth, async (req, res) =>{
     try{
         const userIdVar = req.session.user.id;
 
@@ -350,7 +350,7 @@ router.get('/meusEventos', async (req, res) =>{
 
 
 //GROUPS CREATION VIEW
-router.get('/criarGrupos', (req, res) => {
+router.get('/criarGrupos', userAuth, (req, res) => {
     if(req.session.user){
         const user = req.session.user;
         
@@ -364,16 +364,16 @@ router.get('/criarGrupos', (req, res) => {
 
 
 //GROUPS PARTICIPATE VIEW
-router.get('/gruposInscritos', (req, res) => {
+router.get('/gruposInscritos', userAuth, (req, res) => {
     res.render('../views/groups.ejs/grupos-inscritos');
 });
 
 
 //SEARCH GROUP VIEW
-router.get('/gruposPesquisa', async (req, res) =>{
+router.get('/gruposPesquisa', userAuth, async (req, res) =>{
     try{
         const searchQuery = req.query.search; //group name of search at frontend
-
+        const userId = req.session.user.id;
 
         let groups;
         if(searchQuery){
@@ -388,6 +388,11 @@ router.get('/gruposPesquisa', async (req, res) =>{
                         model: recordModel,
                         as: 'creator', // Alias usado na associação
                         attributes: ['fullName', 'userName', 'image'],
+                    },
+                    {
+                        model: recordModel,
+                        as: 'members',  // Inclui os membros do grupo
+                        attributes: ['id']
                     }
                 ]
             });
@@ -398,6 +403,11 @@ router.get('/gruposPesquisa', async (req, res) =>{
                         model: recordModel,
                         as: 'creator',
                         attributes: ['fullName', 'userName', 'image'],
+                    },
+                    {
+                        model: recordModel,
+                        as: 'members',  // Inclui os membros do grupo
+                        attributes: ['id']
                     }
                 ]
             });
@@ -419,9 +429,11 @@ router.get('/gruposPesquisa', async (req, res) =>{
                 group.imageGroup = `data:image/jpeg;base64,${group.imageBase64}`;
             }
         })
+
         res.render('../views/groups.ejs/pesquisar-grupo', {
             grupos: groups,
-            searchGroup: searchQuery || ''
+            searchGroup: searchQuery || '',
+            userid: userId,
         });
     }
     catch(error){
