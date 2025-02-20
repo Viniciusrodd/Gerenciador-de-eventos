@@ -361,9 +361,15 @@ router.get('/criarGrupos', (req, res) => {
 });
 
 
-//GROUPS PARTICIPATE
+//GROUPS PARTICIPATE VIEW
 router.get('/gruposInscritos', (req, res) => {
     res.render('../views/groups.ejs/grupos-inscritos');
+});
+
+
+//SEARCH GROUP VIEW
+router.get('/gruposPesquisa', (req, res) =>{
+    res.render('../views/groups.ejs/pesquisar-grupo');
 });
 
 module.exports = router;

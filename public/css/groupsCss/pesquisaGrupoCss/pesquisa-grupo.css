@@ -1,0 +1,29 @@
+
+
+@charset "UTF-8";
+
+
+#grupos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 70vw;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#isearch{
+    height: 50px;
+    width: 70vw;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+#isearch:focus{
+    outline: none;
+    box-shadow: 0 0 5px 2px #E95D5C;
+}
