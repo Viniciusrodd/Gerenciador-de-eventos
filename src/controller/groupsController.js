@@ -12,56 +12,52 @@ const upload = multer({ storage: storage });
 
 
 //CREATE GROUP
-router.post('/createGroup', upload.single('image'), (req, res) =>{
-    const {
-        nameGroup,
-        type,
-        description,
-        rules
-    } = req.body;
+router.post('/createGroup', upload.single('image'), async (req, res) =>{
+    const { nameGroup, type, description, rules } = req.body;
 
     if (!req.session.user) {
         res.status(401).send('Usuário não autenticado.');
         return;
     }
 
-    if(req.file){
-        const imagemBuffer = req.file.buffer;
+    try{
+        let newGroup;
 
-        groupModel.create({
-            name: nameGroup,
-            description: description,
-            creatorId: req.session.user.id,
-            isPublic: type,
-            memberCount: +1,   
-            rules: rules,
-            image: imagemBuffer
-        })
-        .then(() =>{
-            console.log('Group created with sucess!');
-            res.redirect('/homepage');
-        })
-        .catch((error) => {
-            console.error('Error at created group: ', error);
-            res.status(500).redirect('/criarGrupos');
-        })
-    }else{
-        groupModel.create({
-            name: nameGroup,
-            description: description,
-            creatorId: req.session.user.id,
-            isPublic: type,
-            memberCount: +1,   
-            rules: rules
-        })
-        .then(() =>{
-            console.log('Group created with sucess! (without image)');
-            res.redirect('/homepage');
-        })
-        .catch((error) => {
-            console.error('Error at created group (without image): ', error);
-            res.status(500).redirect('/criarGrupos');
+        if(req.file){
+            const imagemBuffer = req.file.buffer;
+    
+            newGroup = await groupModel.create({
+                name: nameGroup,
+                description: description,
+                creatorId: req.session.user.id,
+                isPublic: type,
+                memberCount: +1,   
+                rules: rules,
+                image: imagemBuffer
+            });
+        }else{
+            newGroup = await groupModel.create({
+                name: nameGroup,
+                description: description,
+                creatorId: req.session.user.id,
+                isPublic: type,
+                memberCount: +1,   
+                rules: rules
+            });
+        }
+
+        console.log('Group created successfully!');
+
+        await userGroupsModel.create({
+            userId: req.session.user.id,
+            groupId: newGroup.id
         });
+
+        res.redirect('/gruposPesquisa');
+    }
+    catch(error){
+        console.log('Internal server error at create a group', error);
+        res.status(500).redirect('/criarGrupos');
     }
 });
 
