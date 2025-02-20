@@ -23,12 +23,22 @@
         </header>
 
         <div id="container-titulo">
-            <h1 id="titulo-2">Pesquisar grupo:</h1>        
+            <h1 id="titulo-2">Pesquisar grupo:</h1>    
+            <h3 id="h3-voltar">
+                <a href="/homepage">
+                    Voltar para homepage
+                    <i class="material-icons">undo</i>
+                </a>
+            </h3>    
         </div>
 
         <div id="container-homepage">
             <div id="container-publications">
-                <input type="text" name="search" id="isearch" placeholder="Nome do grupo...">
+                <form action="/gruposPesquisa" method="GET" id="formSearch">
+                    <input type="text" name="search" id="isearch" placeholder="Nome do grupo..." value="<%= searchGroup %>">
+                    <button id="btt-participation" class="btt-participation-perso">Pesquisar</button>
+                </form>
+
 
                 <% grupos.forEach((dados) => { %>
                     <div id="publications-homepage">
@@ -72,7 +82,7 @@
                                     <i class="material-icons">description</i>
                                     Descrição:
                                 </li>
-                                <div id="event-description">
+                                <div id="event-description" class="event-description-perso">
                                     <p id="p-event-description">
                                         <%= dados.description %>
                                     </p>
@@ -83,7 +93,7 @@
                                     <i class="material-icons">description</i>
                                     Regras:
                                 </li>
-                                <div id="event-description">
+                                <div id="event-description" class="event-description-perso">
                                     <p id="p-event-description">
                                         <%= dados.rules %>                                        
                                     </p>
@@ -96,4 +106,14 @@
         </div>
     </div>
 </body>
+
+<script>
+    const nomeGrupo = document.getElementById('isearch');
+    const bttSearch = document.getElementById('btt-participation');
+
+    bttSearch.addEventListener('click', () => {
+        console.log('valor: ', nomeGrupo);
+    });
+</script>
+
 </html>

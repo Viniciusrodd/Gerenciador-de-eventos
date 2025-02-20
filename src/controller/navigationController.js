@@ -372,22 +372,42 @@ router.get('/gruposInscritos', (req, res) => {
 //SEARCH GROUP VIEW
 router.get('/gruposPesquisa', async (req, res) =>{
     try{
-        const groups = await groupsModel.findAll({
-            include: [
-                {
-                    model: recordModel,
-                    as: 'creator', // Alias usado na associação
-                    attributes: ['fullName', 'userName', 'image'],
-                }
-            ]
-        });
+        const searchQuery = req.query.search; //group name of search at frontend
 
-        if(!groups){
-            res.status(404).send({errorFound: 'Group not found'});
+
+        let groups;
+        if(searchQuery){
+            groups = await groupsModel.findAll({
+                where: {
+                    name: {
+                        [Op.like]: `%${searchQuery}%` //groups filter with this nameSearch
+                    }
+                },
+                include: [
+                    {
+                        model: recordModel,
+                        as: 'creator', // Alias usado na associação
+                        attributes: ['fullName', 'userName', 'image'],
+                    }
+                ]
+            });
+        }else{
+            groups = await groupsModel.findAll({
+                include: [
+                    {
+                        model: recordModel,
+                        as: 'creator',
+                        attributes: ['fullName', 'userName', 'image'],
+                    }
+                ]
+            });
+        }
+
+        if(!groups || groups.length === 0){
+            res.redirect('/gruposPesquisa');
         }
 
         groups.forEach(group => {
-            console.log(group.creator)
             if (group.creator && group.creator.image) {
                 // Convertendo a imagem da tabela creator para base64
                 group.creator.profileimage = Buffer.from(group.creator.image).toString('base64');
@@ -400,7 +420,8 @@ router.get('/gruposPesquisa', async (req, res) =>{
             }
         })
         res.render('../views/groups.ejs/pesquisar-grupo', {
-            grupos: groups
+            grupos: groups,
+            searchGroup: searchQuery || ''
         });
     }
     catch(error){

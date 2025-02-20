@@ -283,6 +283,10 @@ li:hover{
     overflow-wrap: break-word; /* Compatibilidade adicional para quebra de palavras */
 }
 
+.event-description-perso{
+    width: 90% !important;
+}
+
 #p-event-description{
     font-size: 20px;
     text-align: left;
@@ -305,10 +309,25 @@ li:hover{
 }
 #btt-participation:hover{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.378);
+    background-color: rgba(246, 35, 35, 0.937);
     outline: none;
-    transform: scale(1.08);
+    transform: scale(1.02);
 }
 
+.btt-participation-perso{
+    width: 20% !important;
+    border-radius: 10px;
+    margin-top: 25px !important;
+    margin-bottom: 20px;
+}
+
+/*PESQUISAR-GRUPO*/
+#formSearch{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /*modal*/
 
