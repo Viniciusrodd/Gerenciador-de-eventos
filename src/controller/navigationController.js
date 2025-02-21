@@ -363,10 +363,6 @@ router.get('/criarGrupos', userAuth, (req, res) => {
 });
 
 
-//GROUPS PARTICIPATE VIEW
-router.get('/gruposInscritos', userAuth, (req, res) => {
-    res.render('../views/groups.ejs/grupos-inscritos');
-});
 
 
 //SEARCH GROUP VIEW
@@ -374,7 +370,7 @@ router.get('/gruposPesquisa', userAuth, async (req, res) =>{
     try{
         const searchQuery = req.query.search; //group name of search at frontend
         const userId = req.session.user.id;
-
+        
         let groups;
         if(searchQuery){
             groups = await groupsModel.findAll({
@@ -418,24 +414,24 @@ router.get('/gruposPesquisa', userAuth, async (req, res) =>{
                 ]
             });
         }
-
+        
         if(!groups || groups.length === 0){
             res.redirect('/gruposPesquisa');
         }
-
+        
         groups.forEach(group => {
             if (group.creator && group.creator.image) {
                 // Convertendo a imagem da tabela creator para base64
                 group.creator.profileimage = Buffer.from(group.creator.image).toString('base64');
                 group.creator.profileimage = `data:image/jpeg;base64,${group.creator.profileimage}`;
             }
-
+            
             if (group.image){
                 group.imageBase64 = Buffer.from(group.image).toString('base64');
                 group.imageGroup = `data:image/jpeg;base64,${group.imageBase64}`;
             }
         })
-
+        
         res.render('../views/groups.ejs/pesquisar-grupo', {
             grupos: groups,
             searchGroup: searchQuery || '',
@@ -447,5 +443,38 @@ router.get('/gruposPesquisa', userAuth, async (req, res) =>{
         return res.status(500).send('Error at rendering groups', error);
     };
 });
+
+
+//GROUPS PARTICIPATE VIEW
+router.get('/gruposInscritos', userAuth, async (req, res) => {
+    const userIdSession = req.session.user.id;
+
+    try{
+        const groupsParticipation = await userGroupsModel.findAll({
+            where:{ userId: userIdSession }
+        });
+
+        if(!groupsParticipation){
+            res.status(404).send('Not Groups participations found');
+        }
+
+        //New array with only id's of groups
+        const groupsIds = groupsParticipation.map(element => element.dataValues.groupId);
+
+        const groups = groupsModel.findAll({
+            where: {
+                id: { [Op.in]: groupsIds }
+            }
+        })
+
+        res.render('../views/groups.ejs/grupos-inscritos', {
+            groups
+        });
+    }
+    catch(error){
+        res.status(500).send('Error at rendering groups participations');
+    };
+});
+
 
 module.exports = router;

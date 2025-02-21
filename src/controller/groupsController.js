@@ -74,12 +74,12 @@ router.post('/groupParticipation', async (req, res) =>{
     try{
         const userExist = await recordModel.findByPk(userid);
         if(!userExist){
-            return res.status(404).send('User not found')
+            return res.status(404).send('User not found');
         }
 
         const groupExist = await groupModel.findByPk(groupid);
         if(!groupExist){
-            return res.status(404).send('Group not found')
+            return res.status(404).send('Group not found');
         }
 
         await userGroupsModel.create({
@@ -90,13 +90,13 @@ router.post('/groupParticipation', async (req, res) =>{
             res.redirect('/gruposInscritos');
         })
         .catch((error) =>{
-            res.status(500).send('Error at create Group participation', error)
+            res.status(500).send('Error at create Group participation', error);
         })
     }
     catch(error){
         console.log('Internal server error at Group participation', error);
         return res.status(500).send('Internal server error at Group participation', error);
-    }
+    };
 }); 
 
 
