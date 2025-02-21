@@ -4,6 +4,7 @@ const router = express.Router();
 const sequelize = require('sequelize');
 const groupModel = require('../models/groupsModel');
 const userGroupsModel = require('../models/userGroupsModel');
+const recordModel = require('../models/recordModel');
 const fs = require('fs');
 
 const multer = require('multer');
@@ -61,6 +62,42 @@ router.post('/createGroup', upload.single('image'), async (req, res) =>{
     }
 });
 
+
+//GROUP PARTICIPATION
+router.post('/groupParticipation', async (req, res) =>{
+    const { userid, groupid } = req.body;
+
+    if(!userid || !groupid){
+        return res.status(400).send('Bad request');
+    }
+
+    try{
+        const userExist = await recordModel.findByPk(userid);
+        if(!userExist){
+            return res.status(404).send('User not found')
+        }
+
+        const groupExist = await groupModel.findByPk(groupid);
+        if(!groupExist){
+            return res.status(404).send('Group not found')
+        }
+
+        await userGroupsModel.create({
+            userId: userid,
+            groupId: groupid
+        })
+        .then(() =>{
+            res.redirect('/gruposInscritos');
+        })
+        .catch((error) =>{
+            res.status(500).send('Error at create Group participation', error)
+        })
+    }
+    catch(error){
+        console.log('Internal server error at Group participation', error);
+        return res.status(500).send('Internal server error at Group participation', error);
+    }
+}); 
 
 
 module.exports = router;

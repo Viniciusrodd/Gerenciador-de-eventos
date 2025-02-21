@@ -378,6 +378,9 @@ router.get('/gruposPesquisa', userAuth, async (req, res) =>{
         let groups;
         if(searchQuery){
             groups = await groupsModel.findAll({
+                order: [
+                    ['id', 'DESC']
+                ],
                 where: {
                     name: {
                         [Op.like]: `%${searchQuery}%` //groups filter with this nameSearch
@@ -398,6 +401,9 @@ router.get('/gruposPesquisa', userAuth, async (req, res) =>{
             });
         }else{
             groups = await groupsModel.findAll({
+                order: [
+                    ['id', 'DESC']
+                ],
                 include: [
                     {
                         model: recordModel,

@@ -109,7 +109,11 @@
                             %>
 
                             <% if (!isMember) { %>
-                                <button id="btt-participation">Participar do grupo</button>
+                                <form action="/groupParticipation" method="post">
+                                    <input type="hidden" name="userid" value="<%= userid %>">
+                                    <input type="hidden" name="groupid" value="<%= dados.id %>">
+                                    <button id="btt-participation">Participar do grupo</button>
+                                </form>
                             <% } else { %>
                                 <p id="p-participation">Você já participa desse grupo</p>
                             <% } %>
