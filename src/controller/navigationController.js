@@ -461,9 +461,34 @@ router.get('/gruposInscritos', userAuth, async (req, res) => {
         //New array with only id's of groups
         const groupsIds = groupsParticipation.map(element => element.dataValues.groupId);
 
-        const groups = groupsModel.findAll({
+        let groups = await groupsModel.findAll({
             where: {
                 id: { [Op.in]: groupsIds }
+            },
+            include: [
+                {
+                    model: recordModel,
+                    as: 'creator',
+                    attributes: ['fullName', 'userName', 'image'],
+                },
+                {
+                    model: recordModel,
+                    as: 'members',  // Inclui os membros do grupo
+                    attributes: ['id']
+                }
+            ]
+        })
+
+        groups.forEach(group => {
+            if (group.creator && group.creator.image) {
+                // Convertendo a imagem da tabela creator para base64
+                group.creator.profileimage = Buffer.from(group.creator.image).toString('base64');
+                group.creator.profileimage = `data:image/jpeg;base64,${group.creator.profileimage}`;
+            }
+            
+            if (group.image){
+                group.imageBase64 = Buffer.from(group.image).toString('base64');
+                group.imageGroup = `data:image/jpeg;base64,${group.imageBase64}`;
             }
         })
 
@@ -472,7 +497,8 @@ router.get('/gruposInscritos', userAuth, async (req, res) => {
         });
     }
     catch(error){
-        res.status(500).send('Error at rendering groups participations');
+        console.log('Error at rendering groups participations', error)
+        return res.status(500).send('Error at rendering groups participations', error);
     };
 });
 
