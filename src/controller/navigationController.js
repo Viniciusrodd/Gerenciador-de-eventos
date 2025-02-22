@@ -503,4 +503,37 @@ router.get('/gruposInscritos', userAuth, async (req, res) => {
 });
 
 
+//MY GROUPS VIEW
+router.get('/meusGrupos', userAuth, async (req, res) => {
+    const userIdVar = req.session.user.id;
+
+    try{
+        const groups = await groupsModel.findAll({
+            where: {
+                creatorId: userIdVar
+            }
+        });
+
+        if(!groups){
+            return res.status(404).send('Personal groups not found');
+        }
+
+        groups.forEach(group => {
+            if (group.image){
+                group.imageBase64 = Buffer.from(group.image).toString('base64');
+                group.imageGroup = `data:image/jpeg;base64,${group.imageBase64}`;
+            }
+        })
+
+        res.render('../views/groups.ejs/meus-grupos', {
+            grupos: groups
+        })
+    }
+    catch(error){
+        console.log('Internal server error at rendering My groups view', error);
+        return res.status(500).send('Internal server error at rendering My groups view', error);
+    };
+});
+
+
 module.exports = router;
