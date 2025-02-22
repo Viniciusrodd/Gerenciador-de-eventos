@@ -192,14 +192,14 @@ a:hover{
 #eventos-container{
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     height: 23vh;
     width: 70%;
 
     & li{
         font-size: 20px;
-        text-align: left;
+        text-align: center;
         list-style-type: none;
         margin-bottom: 7px;
         cursor: pointer;
@@ -427,7 +427,11 @@ li:hover{
 
 
 /*GROUPS*/
-
+#group-name{
+    font-size: 30px;
+    text-shadow: 0px 2px 2px var(--cor02);
+    margin: 0px 0px 5px 0px;
+}
 
 /*modal*/
 

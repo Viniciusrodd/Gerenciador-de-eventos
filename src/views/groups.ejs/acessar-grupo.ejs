@@ -13,25 +13,27 @@
     <div id="div-pai">
         <header>
             <h1 class="titulo">Gerência</h1>
-            <div id="header-image">
-    
-            </div>
+            <a href="/homepage">
+                <div id="header-image">
+                
+                </div>
+            </a>
             <h1 class="titulo">Eventos</h1>
         </header>
 
         <div id="container-homepage">
             <div id="profile-homepage">
                 <h1 id="h1-eventos">MEUS EVENTOS DO GRUPO</h1>
+                <hr class="hr-eventos">
+
+                <i class="material-icons">groups</i>
+                <h1 id="group-name">< <%= groupData.name %> ></h1>
 
                 <div id="eventos-container">
                     <hr class="hr-eventos">
                     <li>
-                        <a href="/criarEventos/<%= groupIdVar %>">Criar evento</a>
+                        <a href="/criarEventos/<%= groupIdVar %>">Criar evento de grupo</a>
                         <i class="material-icons">add_circle</i>
-                    </li>
-                    <li>
-                        <a href="/meusEventos">Meus eventos</a>
-                        <i class="material-icons">edit</i>
                     </li>
                     <hr class="hr-eventos">
 
@@ -46,9 +48,8 @@
                 <% if(events.length === 0) { %>
                     <div id="welcome-modal" class="modal">
                     <div class="modal-content" id="modal-content">
-                        <span class="close-button" id="span-btt">&times;</span>
-                        <h2 id="h2-modal">Espere</h2>
-                        <p id="p-modal">Você ainda não tem eventos nesse grupo</p>
+                        <i class="material-icons">waving_hand</i>
+                        <h2 id="h2-modal">Ainda não há eventos nesse grupo</h2>
                         <a href="/criarEventos/<%= groupIdVar %>">
                             <button id="close-modal-btn" class="modal-button">Criar um evento</button>
                         </a>
@@ -120,17 +121,17 @@
                                 </p>
                             </div>
 
-                            <% if (events.userId != userId) { %>
+                            <% if (dadosEvents.userId != userId) { %>
                                 <form action="/participate" method="post">
-                                    <input type="hidden" name="eventId" value="<%= events.id %>">
+                                    <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
                                     <input type="hidden" name="userId" value="<%= userId %>">
                                     <button id="btt-participate">Participar</button>
                                 </form>    
                             <% } %>
 
-                            <% if(events.userId == userId) { %>
+                            <% if(dadosEvents.userId == userId) { %>
                                 <form action="/editarEvento" method="post">
-                                    <input type="hidden" name="eventId" value="<%= events.id %>">
+                                    <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
                                     <button id="btt-edit">
                                         Editar seu evento
                                     </button>

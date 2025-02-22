@@ -167,6 +167,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
         }
         
         const events = await eventModel.findAll({
+            order: [['id', 'DESC']],
             where: {
                 id: eventIdsForUser, // Filtrar apenas pelos IDs encontrados
             },
@@ -309,8 +310,17 @@ router.get('/meusEventos', userAuth, async (req, res) =>{
         const userIdVar = req.session.user.id;
 
         const events = await eventModel.findAll({
+            order: [['id', 'DESC']],
             where: {
-                userId: userIdVar 
+                userId: userIdVar
+                /*
+                [Op.and]: [
+                    {userId: userIdVar}, 
+                    { [Op.or]: [
+                        { groupId: 0 },{ groupId: { [Op.is]: null } } // correct use of "null" ins sequelize
+                    ] }
+                ]
+                */
             }
         });
 
@@ -589,11 +599,19 @@ router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
             }
         });
 
+        const groupData = await groupsModel.findOne({
+            attributes: ['name'],
+            where: {
+                id: groupIdVar
+            }
+        })
+
         res.render('../views/groups.ejs/acessar-grupo', {
             groupIdVar,
             events,
             profileData,
-            userId
+            userId,
+            groupData
         });
     }
     catch(error){
