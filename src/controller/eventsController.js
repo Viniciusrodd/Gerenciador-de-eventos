@@ -136,7 +136,8 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         hora_inicio,
         hora_fim,
         endereco,
-        descricao
+        descricao,
+        groupId
     } = req.body;
 
     if (!req.session.user) {
@@ -157,7 +158,8 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
             endereco: endereco,
             descricao: descricao,
             image: imagemBuffer,
-            userId: req.session.user.id
+            userId: req.session.user.id,
+            groupId: groupId
         })
         .then(() => {
             console.log('Event created with success!');
@@ -177,7 +179,8 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
             hora_fim: hora_fim,
             endereco: endereco,
             descricao: descricao,
-            userId: req.session.user.id
+            userId: req.session.user.id,
+            groupId: groupId
         })
         .then(() => {
             console.log('Event created with success! (without image)');

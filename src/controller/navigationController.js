@@ -130,16 +130,15 @@ router.get('/homepage', userAuth, async (req, res) =>{
 
 
 //EVENTS CREATE VIEW
-router.get('/criarEventos', userAuth,(req, res) =>{
-    if(req.session.user){
-        const user = req.session.user;
+router.get('/criarEventos/:groupId', userAuth,(req, res) =>{        
+    const user = req.session.user;
+    const groupIdVar = req.params.groupId; 
 
-        res.render('../views/events.ejs/criar-eventos', {
-            userData: user
-        });
-    }else{
-        res.redirect('/login');
-    }
+    res.render('../views/events.ejs/criar-eventos', {
+        userData: user,
+        groupId: groupIdVar 
+    });
+
 });
 
 
@@ -536,11 +535,13 @@ router.get('/meusGrupos', userAuth, async (req, res) => {
 });
 
 
-router.get('/acessarGrupo', userAuth, async (req, res) => {
-    //const groupIdVar = req.params.groupId;
+router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
+    const groupIdVar = req.params.groupId;
 
     try{
-        res.render('../views/groups.ejs/acessar-grupo');
+        res.render('../views/groups.ejs/acessar-grupo', {
+            groupIdVar
+        });
     }
     catch(error){
         console.log('Internal server erro at rendering Group Acess view', error);

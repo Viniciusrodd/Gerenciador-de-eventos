@@ -29,7 +29,7 @@
                     <i class="material-icons">undo</i>
                 </a>
             </h3>
-            
+
             <label for="nomeEvento">NOME DO EVENTO</label>
             <input type="text" name="nomeEvento" id="inomeEvento" required>
             
@@ -73,6 +73,8 @@
             <div id="div-imagem"></div>
             <label for="imagem">Imagem de fundo (opcional)</label>
             <input type="file" name="imagem" id="iimagem" accept="image/*">
+
+            <input type="hidden" name="groupId" value="<%= groupId %>">
 
             <button id="btt-evento">Publicar</button>
         </form>
