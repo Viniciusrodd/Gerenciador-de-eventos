@@ -536,4 +536,17 @@ router.get('/meusGrupos', userAuth, async (req, res) => {
 });
 
 
+router.get('/acessarGrupo', userAuth, async (req, res) => {
+    //const groupIdVar = req.params.groupId;
+
+    try{
+        res.render('../views/groups.ejs/acessar-grupo');
+    }
+    catch(error){
+        console.log('Internal server erro at rendering Group Acess view', error);
+        return res.status(500).send('Internal server erro at rendering Group Acess view', error);
+    };
+});
+
+
 module.exports = router;
