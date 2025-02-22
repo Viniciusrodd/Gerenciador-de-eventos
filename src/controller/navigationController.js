@@ -75,7 +75,13 @@ router.get('/homepage', userAuth, async (req, res) =>{
         const eventData = await eventModel.findAll({
             order: [
                 ['id', 'DESC']
-            ]
+            ],            
+            where:{
+                [Op.or]: [
+                    { groupId: 0 },
+                    { groupId: null }
+                ]
+            }
         })
         const profileData = await recordModel.findAll();
         const userIdSession = req.session.user.id;
@@ -539,8 +545,55 @@ router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
     const groupIdVar = req.params.groupId;
 
     try{
+        const events = await eventModel.findAll({
+            order: [['id', 'DESC']],
+            where: {
+                groupId: {
+                    [Op.gt]: 0
+                }            
+            }
+        });
+        events.forEach(event => {
+            if (event.image ) {
+                event.imageBase64 = Buffer.from(event.image).toString('base64');
+                event.imageEvent = `data:image/jpeg;base64,${event.imageBase64}`;
+            }
+
+            // Trabalhando com a data
+            const eventDate = moment(event.data).tz('America/Sao_Paulo', true);
+            event.day = eventDate.date();  // Extrai o dia
+            event.month = eventDate.month() + 1;  // Extrai o mês (0-11, por isso adicionamos 1)
+            event.year = eventDate.year();  // Extrai o ano
+        
+            // Trabalhando com o horário
+            if (event.hora_inicio) { // Valida se o campo de horário de início existe
+                const startTime = moment(event.hora_inicio, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                event.startHours = startTime.hours();
+                event.startMinutes = startTime.minutes();
+                event.startSeconds = startTime.seconds();
+            }
+
+            if (event.hora_fim) { // Valida se o campo de horário de fim existe
+                const endTime = moment(event.hora_fim, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                event.endHours = endTime.hours();
+                event.endMinutes = endTime.minutes();
+                event.endSeconds = endTime.seconds();
+            }
+        })
+
+        const profileData = await recordModel.findAll();
+        profileData.forEach(data =>{
+            if (data && data.image) {
+                // Convertendo a imagem da tabela records para base64
+                data.profileimage = Buffer.from(data.image).toString('base64');
+                data.profileimage = `data:image/jpeg;base64,${data.profileimage}`;
+            }
+        });
+
         res.render('../views/groups.ejs/acessar-grupo', {
-            groupIdVar
+            groupIdVar,
+            events,
+            profileData
         });
     }
     catch(error){
