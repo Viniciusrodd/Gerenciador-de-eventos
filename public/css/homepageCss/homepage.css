@@ -175,6 +175,7 @@ a:hover{
     font-size: 30px;
     color: var(--cor02);
     margin: 10px 0px;
+    text-align: center;
 }
 
 .hr-eventos{

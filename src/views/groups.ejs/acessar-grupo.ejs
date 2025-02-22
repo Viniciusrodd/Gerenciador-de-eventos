@@ -21,11 +21,10 @@
 
         <div id="container-homepage">
             <div id="profile-homepage">
-                <h1 id="h1-eventos">MEUS EVENTOS</h1>
-                <h1 id="h1-eventos">DESSE GRUPO</h1>
-                <hr class="hr-eventos">
+                <h1 id="h1-eventos">MEUS EVENTOS DO GRUPO</h1>
 
                 <div id="eventos-container">
+                    <hr class="hr-eventos">
                     <li>
                         <a href="/criarEventos/<%= groupIdVar %>">Criar evento</a>
                         <i class="material-icons">add_circle</i>
@@ -34,13 +33,138 @@
                         <a href="/meusEventos">Meus eventos</a>
                         <i class="material-icons">edit</i>
                     </li>
+                    <hr class="hr-eventos">
+
+                    <li>
+                        <a href="/gruposInscritos">Voltar para Grupos inscritos</a>
+                        <i class="material-icons">undo</i>
+                    </li>
                 </div>
             </div>
 
             <div id="container-publications">
-                
+                <% if(events.length === 0) { %>
+                    <div id="welcome-modal" class="modal">
+                    <div class="modal-content" id="modal-content">
+                        <span class="close-button" id="span-btt">&times;</span>
+                        <h2 id="h2-modal">Espere</h2>
+                        <p id="p-modal">Você ainda não tem eventos nesse grupo</p>
+                        <a href="/criarEventos/<%= groupIdVar %>">
+                            <button id="close-modal-btn" class="modal-button">Criar um evento</button>
+                        </a>
+                    </div>
+                </div>
+                <% } else { %>
+                    <% events.forEach((dadosEvents) =>{ %>
+                        <div id="publications-homepage">
+                            <div id="event-banner">
+                                <% if (dadosEvents.imageBase64) { %>
+                                    <img id="img-banner" src="<%= dadosEvents.imageEvent %>" alt="">
+                                <% } else { %>
+                                    <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
+                                <% } %>
+
+                                <div id="event-title">
+                                    <div id="event-data">
+                                        <p class="p-event-data"><%= dadosEvents.day %></p>
+                                        <hr>
+                                        <p class="p-event-data"><%= dadosEvents.month %></p>
+                                    </div>
+                                
+                                    <p id="p-event-title"><%= dadosEvents.nome %></p>
+                                </div>
+                                
+                                <% profileData.forEach((dadosProfile) => { %>
+                                    <% if (dadosProfile.id === dadosEvents.userId) { %>
+                                        <% if (dadosProfile.profileimage) { %>
+                                            <div class="profile-image">
+                                                <img src="<%= dadosProfile.profileimage %>" id="profile">              
+                                            </div>
+                                        <% } else { %>
+                                            <div class="profile-image">
+                                                <img src="../../imagens/user.jpg" id="profile">              
+                                            </div>
+                                        <% } %>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+
+                            <div id="event-info-container">
+                                <ul>
+                                    <li>
+                                        <i class="material-icons">mail</i>
+                                        <%= dadosEvents.tipo %> - Organizado por @<%= dadosEvents.organizador %>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">schedule</i>
+                                        <%= dadosEvents.day %>/<%= dadosEvents.month %>/<%= dadosEvents.year %> 
+                                        das <%= dadosEvents.hora_inicio %> às <%= dadosEvents.hora_fim %>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">location_on</i>
+                                        <%= dadosEvents.endereco %>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">description</i>
+                                        Descrição:
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="event-description">
+                                <p id="p-event-description">
+                                    <%= dadosEvents.descricao %>
+                                </p>
+                            </div>
+
+                            <% if (events.userId != userId) { %>
+                                <form action="/participate" method="post">
+                                    <input type="hidden" name="eventId" value="<%= events.id %>">
+                                    <input type="hidden" name="userId" value="<%= userId %>">
+                                    <button id="btt-participate">Participar</button>
+                                </form>    
+                            <% } %>
+
+                            <% if(events.userId == userId) { %>
+                                <form action="/editarEvento" method="post">
+                                    <input type="hidden" name="eventId" value="<%= events.id %>">
+                                    <button id="btt-edit">
+                                        Editar seu evento
+                                    </button>
+                                </form>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                <% } %>
             </div>
         </div>
     </div>
 </body>
+
+<script>
+    var modal = document.getElementById('welcome-modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    var h2modal = document.getElementById('h2-modal');
+    var pmodal = document.getElementById('p-modal');
+    var modalcontent = document.querySelector('.modal-content')
+
+    modal.style.display = 'block'
+
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+    bttModalPress(bttModal, spanbtt);
+
+</script>
+
 </html>

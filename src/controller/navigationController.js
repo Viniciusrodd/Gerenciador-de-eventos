@@ -543,14 +543,13 @@ router.get('/meusGrupos', userAuth, async (req, res) => {
 
 router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
     const groupIdVar = req.params.groupId;
+    const userId = req.session.user.id;
 
     try{
         const events = await eventModel.findAll({
             order: [['id', 'DESC']],
             where: {
-                groupId: {
-                    [Op.gt]: 0
-                }            
+                groupId: groupIdVar             
             }
         });
         events.forEach(event => {
@@ -593,7 +592,8 @@ router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
         res.render('../views/groups.ejs/acessar-grupo', {
             groupIdVar,
             events,
-            profileData
+            profileData,
+            userId
         });
     }
     catch(error){
