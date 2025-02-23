@@ -240,8 +240,8 @@ router.get('/logout', userAuth, (req, res) =>{
 
 
 //EVENTS EDIT VIEW
-router.post('/editarEvento', userAuth, async (req, res) =>{
-    const eventId = req.body.eventId
+router.get('/editarEvento', userAuth, async (req, res) =>{
+    const eventId = req.query.eventId;
 
     try{
         const eventsData = await eventModel.findAll({
@@ -276,7 +276,6 @@ router.post('/editarEvento', userAuth, async (req, res) =>{
 
 //PROFILE EDIT VIEW
 router.get('/editarPerfil', userAuth ,async (req, res) =>{
-
     const idVar = req.session.user.id;
 
     if(!idVar){
@@ -617,6 +616,38 @@ router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
     catch(error){
         console.log('Internal server erro at rendering Group Acess view', error);
         return res.status(500).send('Internal server erro at rendering Group Acess view', error);
+    };
+});
+
+
+router.get('/editarGrupo', userAuth, async (req, res) => {
+    const groupId = req.query.groupId;
+
+    try{
+        const groupData = await groupsModel.findAll({
+            where: {
+                id: groupId
+            }
+        });
+
+        const result = await groupData.map(data => ({
+            id: data.dataValues.id,
+            name: data.dataValues.name,
+            description: data.dataValues.description,
+            creatorId: data.dataValues.creatorId,
+            isPublic: data.dataValues.isPublic,
+            memberCount: data.dataValues.memberCount,
+            rules: data.dataValues.rules,
+            image: data.dataValues.image
+        }));
+
+        return res.render('../views/groups.ejs/editar-grupo', {
+            group: result
+        })
+    }
+    catch(error){
+        console.log('Internal server error at rendering group edit view', error);
+        return res.status(500).send('Internal server error at rendering group edit view', error);
     };
 });
 

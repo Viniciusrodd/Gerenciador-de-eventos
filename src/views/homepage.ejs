@@ -165,7 +165,7 @@
                         <% } %>
 
                         <% if(dadosEvents.userId == userId) { %>
-                            <form action="/editarEvento" method="post">
+                            <form action="/editarEvento" method="get">
                                 <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
                                 <button id="btt-edit">
                                     Editar seu evento
