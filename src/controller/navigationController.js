@@ -642,7 +642,7 @@ router.get('/editarGrupo', userAuth, async (req, res) => {
         }));
 
         return res.render('../views/groups.ejs/editar-grupo', {
-            group: result
+            groups: result
         })
     }
     catch(error){

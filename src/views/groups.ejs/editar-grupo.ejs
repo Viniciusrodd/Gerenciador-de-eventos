@@ -4,8 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edição de grupos</title>
+    <link rel="stylesheet" href="../../../css/eventsCSS/editar-eventosCss/editar-eventos.css">
+    <link rel="stylesheet" href="../../../css/eventsCSS/editar-eventosCss/editar-eventosMobile.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="../../../imagens/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>dads</h1>
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <a href="/homepage">
+                <div id="header-image">
+                </div>
+            </a>
+            <h1 class="titulo">Eventos</h1>
+        </header>
+
+        <h1 class="titulo">Edite seu Grupo</h1>
+        <h3 id="h3-voltar">
+            <a href="/meusGrupos">
+                Voltar para meus grupos
+                <i class="material-icons">undo</i>
+            </a>
+        </h3>
+
+        <% groups.forEach(group => { %>
+            <form id="editEventForm" action="/uploadGroups" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<%= group.id %>">
+
+                <label for="nameGrup">NOME DO GRUPO</label>
+                <input type="text" name="nameGroup" id="inomeEvento" data-original="<%= group.name %>" placeholder="<%= group.name %>" required>
+                
+                
+                <label for="type">TIPO DE GRUPO</label>
+                <select name="type" id="itipo" class="cursorPointer" required> 
+                    <option value="<%= group.isPublic %>" selected data-original="<%= group.isPublic %>"><%= group.isPublic %></option>        
+                    <option value="Privado">Privado</option>
+                    <option value="Público">Público</option>
+                </select>
+                
+                <fieldset>
+                    <legend>DESCRIÇÃO DO GRUPO</legend>
+                    <p id="p-textarea">*até 600 caracteres</p>
+                    <textarea name="description" id="idescricao" required data-original="<%= group.description %>">
+                        <%= group.description %>
+                    </textarea>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend>REGRAS DO GRUPO</legend>
+                    <p id="p-textarea">*até 600 caracteres</p>
+                    <textarea name="rules" id="idescricao" required data-original="<%= group.rules %>">
+                       <%= group.rules %>
+                    </textarea>
+                </fieldset>
+
+                <label for="image" id="labelimage">Editar imagem:</label>  
+                <% if(!group.image) { %>
+                    <div id="div-imagem-evento">
+                        <img src="../../../imagens/SEM FOTO DE EVENTO.png" alt="Imagem do evento">
+                    </div>
+                <% } else { %>
+                    <div id="div-imagem-evento">
+                        <img src="data:image/jpeg;base64,<%= group.image.toString('base64') %>" alt="Imagem do evento">
+                    </div>
+                <% } %>
+                <input type="file" name="image" id="iimage" accept="image/*">
+
+                <button id="btt-evento">Salvar alterações</button>
+            </form>
+
+            <form action="/deleteGroups" method="post" id="eventDeleteForm">
+                <h1 class="titulo">Deletar grupo</h1>       
+                <input type="hidden" name="id" value="<%= group.id %>">     
+                <button class="btt-delete-account">DELETE</button>
+            </form>
+        <% }) %>
+
+
+        <!--Modal-->
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Só um momento!</h2>
+                <i class="material-icons">info</i>
+                <p id="p-modal">Tem certeza que deseja excluir o grupo ?</p>
+                
+                <button id="close-modal-btn" class="modal-button">Tenho certeza</button>
+            </div>
+        </div>
+    </div>
 </body>
+
+<script>
+     document.getElementById('iimage').addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('div-imagem-evento');
+                const divImagem = document.getElementById('div-imagem-evento');
+                divImagem.innerHTML = '';
+                divImagem.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    var modal = document.getElementById('modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    var pmodal = document.getElementById('p-modal');
+    
+    function bttModalPressDelete(btt, span, form){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+            form.submit();
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+    const deleteForms = document.getElementById('eventDeleteForm');
+        deleteForms.addEventListener('submit', (event) => {
+            event.preventDefault(); // Impede o envio padrão
+            modal.style.display = 'block';
+            bttModalPressDelete(bttModal, spanbtt, deleteForms)
+        });
+
+    const form = document.getElementById('editEventForm');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const alteredData = {};
+
+        form.querySelectorAll('input, textarea').forEach(field => {
+            if (field.type !== 'file' && field.value !== field.getAttribute('data-original')) {
+                alteredData[field.name] = field.value;
+            }
+        });
+
+        const imageField = form.querySelector('#iimage');
+        if (imageField.files.length > 0) {
+            formData.append('image', imageField.files[0]);
+        }
+        
+        const groupId = form.querySelector('input[name="id"]').value; // Recupera o ID do grupo
+
+        fetch(`/uploadGroups/${groupId}`, {
+            method: 'PUT',
+            body: formData,
+        })
+        .then(() =>{
+            window.location.href = '/meusGrupos';
+        })
+        .catch(err => {
+            console.error('Error at requisition event update:', err);
+        });
+
+    });
+</script>
+
 </html>
