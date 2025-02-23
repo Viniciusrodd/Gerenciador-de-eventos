@@ -94,11 +94,19 @@
                             </ul>
                         </div>
 
-                        <a href="/acessarGrupo/<%= dados.id %>">
-                            <button id="btt-participation" class="btt-participation-perso">
-                                Acessar grupo
-                            </button>
-                        </a>
+                        <div>
+                            <a href="/acessarGrupo/<%= dados.id %>">
+                                <button id="btt-participation" class="btt-participation-perso">
+                                    Acessar grupo
+                                </button>
+                            </a>
+                            <form action="/groups/disparticipate" method="post">
+                                <input type="hidden" value="<%= dados.id %>" name="groupid">
+                                <button id="btt-participation" class="btt-participation-perso">
+                                    Tirar participação
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 <% }) %>
             </div>

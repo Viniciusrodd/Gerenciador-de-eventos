@@ -6,8 +6,11 @@ const groupModel = require('../models/groupsModel');
 const userGroupsModel = require('../models/userGroupsModel');
 const recordModel = require('../models/recordModel');
 const fs = require('fs');
+const { Op } = require('sequelize');
 
 const multer = require('multer');
+const userAuth = require('../middleware/userAuth');
+const { group } = require('console');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -98,6 +101,29 @@ router.post('/groupParticipation', async (req, res) =>{
         return res.status(500).send('Internal server error at Group participation', error);
     };
 }); 
+
+
+router.post('/groups/disparticipate', userAuth, (req, res) => {
+    const groupIdVar = req.body.groupid;
+    const userIdVar = req.session.user.id;
+
+    userGroupsModel.destroy({
+        where: {
+            [Op.and]: [
+                { groupId: groupIdVar },
+                { userId: userIdVar }
+            ]
+        }
+    })
+    .then(() => {
+        console.log('Participation group removed');
+        return res.redirect('/gruposInscritos');
+    })
+    .catch((error) => {
+        console.log('Internal error at Remove participation of a group', error);
+        return res.status(500).send('Internal error at Remove participation of a group', error);
+    });
+});
 
 
 module.exports = router;

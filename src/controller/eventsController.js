@@ -6,13 +6,14 @@ const sequelize = require('sequelize');
 const fs = require('fs');
 
 const multer = require('multer');
+const userAuth = require('../middleware/userAuth');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
 
 //EVENTS DISPARTICIPATE
-router.post('/events/disparticipate', (req, res) =>{
+router.post('/events/disparticipate', userAuth, (req, res) =>{
     const eventIdVar = req.body.eventId;
 
     participationModel.destroy({
