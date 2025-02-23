@@ -550,6 +550,7 @@ router.get('/meusGrupos', userAuth, async (req, res) => {
 });
 
 
+//GROUP ACESS VIEW
 router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
     const groupIdVar = req.params.groupId;
     const userId = req.session.user.id;
@@ -620,6 +621,7 @@ router.get('/acessarGrupo/:groupId', userAuth, async (req, res) => {
 });
 
 
+//GROUP EDIT VIEW
 router.get('/editarGrupo', userAuth, async (req, res) => {
     const groupId = req.query.groupId;
 

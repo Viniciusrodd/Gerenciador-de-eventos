@@ -60,8 +60,8 @@ router.put('/uploadEvents/:id', upload.array('image'), async (req, res) => {
 
         const event = await eventModel.findByPk(eventId);
         if (!event) {
-            console.log('evento nao encontrado');
-            return res.status(404).send({ message: 'Event not found!' });
+            console.log('Event not found');
+            return res.status(404).send('Event not found!');
         }
 
         Object.keys(updates).forEach((key) => {

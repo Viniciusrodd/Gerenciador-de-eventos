@@ -10,7 +10,6 @@ const { Op } = require('sequelize');
 
 const multer = require('multer');
 const userAuth = require('../middleware/userAuth');
-const { group } = require('console');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -127,6 +126,41 @@ router.post('/groups/disparticipate', userAuth, (req, res) => {
         console.log('Internal error at Remove participation of a group', error);
         return res.status(500).send('Internal error at Remove participation of a group', error);
     });
+});
+
+
+//UPLOAD GRUPS
+router.put('/uploadGroups/:id', upload.array('image'), async (req, res) => {
+    const groupId = req.params.id;
+    const updates = req.body;
+
+    try{
+        const groups = await groupModel.findByPk(groupId);
+        if(!groups){
+            console.log('Group not found');
+            return res.status(404).send('Group not found!');
+        }
+
+        Object.keys(updates).forEach((key) => {
+            if(key !== 'id'){
+                groups[key] = updates[key];
+            }
+        });
+
+        if (req.files && req.files.length > 0) {
+            const uploadedFile = req.files[0];
+            groups.image = uploadedFile.buffer;        
+        }
+
+        await groups.save();
+
+        console.log('Group updated successfully');
+        return res.redirect('/meusGrupos');
+    }
+    catch(error){
+        console.log('Internal server error at upload groups', error);
+        return res.status(500).send('Internal server error at upload groups', error);
+    };
 });
 
 

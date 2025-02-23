@@ -33,11 +33,11 @@
                 <input type="hidden" name="id" value="<%= group.id %>">
 
                 <label for="nameGrup">NOME DO GRUPO</label>
-                <input type="text" name="nameGroup" id="inomeEvento" data-original="<%= group.name %>" placeholder="<%= group.name %>" required>
+                <input type="text" name="name" id="inomeEvento" data-original="<%= group.name %>" placeholder="<%= group.name %>" required value="<%= group.name %>" maxlength="25">
                 
                 
                 <label for="type">TIPO DE GRUPO</label>
-                <select name="type" id="itipo" class="cursorPointer" required> 
+                <select name="isPublic" id="itipo" class="cursorPointer" required> 
                     <option value="<%= group.isPublic %>" selected data-original="<%= group.isPublic %>"><%= group.isPublic %></option>        
                     <option value="Privado">Privado</option>
                     <option value="Público">Público</option>
@@ -145,6 +145,7 @@
             modal.style.display = 'block';
             bttModalPressDelete(bttModal, spanbtt, deleteForms)
         });
+
 
     const form = document.getElementById('editEventForm');
     form.addEventListener('submit', (e) => {
