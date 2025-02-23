@@ -64,6 +64,18 @@
 
             <button id="btt-evento">Criar</button>
         </form>
+
+        <!--Modal-->
+
+        <div id="emailExist-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt">&times;</span>
+                <h2 id="h2-modal">Aviso</h2>
+                <i class="material-icons">error</i>
+                <p id="p-modal"></p>
+                <button id="close-modal-btn" class="modal-button">Corrigir</button>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -83,6 +95,49 @@
             reader.readAsDataURL(file)
         }
     })
+
+
+    var modal = document.getElementById('emailExist-modal');
+    var bttModal = document.getElementById('close-modal-btn');
+    var spanbtt = document.getElementById('span-btt');
+    var pmodal = document.getElementById('p-modal');
+    
+    function bttModalPress(btt, span){
+        btt.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+        span.addEventListener('click', () =>{
+            modal.style.display = 'none';
+        })
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('createForm').addEventListener('submit', function (event) {
+            let isValid = true;
+            const errorMessages = [];
+
+            const groupName = document.getElementById('inomeEvento');
+            const description_rules = document.getElementById('idescricao');
+
+            if(groupName.value.length > 25){
+                isValid = false;
+                errorMessages.push(`Nome de grupo pode ter no máximo 25 caracteres!!!`);
+            }
+
+            if(description_rules.value.length > 600){
+                isValid = false;
+                errorMessages.push(`Descrição e Regras podem ter no máximo 600 caracteres!!!`);
+            }  
+
+            if (!isValid) {
+                event.preventDefault();
+                pmodal.innerText = errorMessages.join('\n');
+                bttModalPress(bttModal, spanbtt);
+                modal.style.display = 'block';
+            }
+        });
+    });
 </script>
 
 </html>

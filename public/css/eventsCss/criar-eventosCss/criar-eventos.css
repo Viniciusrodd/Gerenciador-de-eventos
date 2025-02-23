@@ -48,7 +48,7 @@ header{
 
 .titulo{
     color: white;
-    text-shadow: 3px 3px var(--cor02);
+    text-shadow: 4px 4px black;
     font-size: 55px;
     font-style: italic;
 }
@@ -83,7 +83,7 @@ form{
 
 #titulo-evento{
     color: white;
-    text-shadow: 2px 2px var(--cor02);
+    text-shadow: 3px 3px black;
     font-style: italic;
     font-size: 55px;
     margin: 0px 0px 3px 0px;
