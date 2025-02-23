@@ -164,4 +164,36 @@ router.put('/uploadGroups/:id', upload.array('image'), async (req, res) => {
 });
 
 
+//DELETE GROUPS
+router.post('/deleteGroups', async (req, res) => {
+    const groupId = req.body.deleteid;
+
+    try{
+        const userGroupData = await userGroupsModel.destroy({
+            where: { groupId: groupId }
+        });
+
+        const groupData = await groupModel.destroy({
+            where: { id: groupId }
+        });
+
+        if(!userGroupData){
+            console.log('Error at delete User Group Data');
+            return res.status(500).send('Error at delete User Group Data');
+        }
+        if(!groupData){
+            console.log('Error at delete Group Data');
+            return res.status(500).send('Error at delete Group Data');
+        }
+
+        console.log('Group deleted with sucess');
+        return res.redirect('/meusGrupos');    
+    }
+    catch(error){
+        console.log('Internal server error at delete group', error);
+        return res.status(500).send('Internal server error at delete group', error);
+    }
+});
+
+
 module.exports = router;
