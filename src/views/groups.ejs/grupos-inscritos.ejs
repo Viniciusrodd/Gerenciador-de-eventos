@@ -33,82 +33,94 @@
 
         <div id="container-homepage">
             <div id="container-publications">
-                <% groups.forEach((dados) => { %>
-                    <div id="publications-homepage">
-                        <div id="event-banner">
-                            <% if (dados.imageBase64) { %>
-                                <img id="img-banner" src="<%= dados.imageGroup %>" alt="">
-                            <% } else { %>
-                                <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
-                            <% } %>
-
-                            <div id="event-title">
-                                <p id="p-event-title"><%= dados.name %></p>
-                            </div>
-
-                            <% if(dados.creator.profileimage) { %>
-                                <div id="profile-image">
-                                    <img src="<%= dados.creator.profileimage %>" id="profile">              
-                                </div>
-                            <% } else { %>
-                                <div id="profile-image">
-                                    <img src="../../../imagens/user.jpg" id="profile">              
-                                </div>
-                            <% } %>
-                        </div>
-
-                        <div id="event-info-container">
-                            <ul>
-                                <li>
-                                    <i class="material-icons">mail</i>
-                                    <%= dados.isPublic %> - Criado por @<%= dados.creator.userName %>
-                                </li>
-
-                                <hr>
-                                <li>
-                                    <i class="material-icons">person</i>
-                                    Quantidade de membros: <%= dados.memberCount %>
-                                </li>
-
-                                <hr>
-                                <li>
-                                    <i class="material-icons">description</i>
-                                    Descrição:
-                                </li>
-                                <div id="event-description" class="event-description-perso">
-                                    <p id="p-event-description">
-                                        <%= dados.description %>
-                                    </p>
-                                </div>
-                                <br>
-                                <hr>
-                                <li>
-                                    <i class="material-icons">description</i>
-                                    Regras:
-                                </li>
-                                <div id="event-description" class="event-description-perso">
-                                    <p id="p-event-description">
-                                        <%= dados.rules %>                                        
-                                    </p>
-                                </div>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <a href="/acessarGrupo/<%= dados.id %>">
-                                <button id="btt-participation" class="btt-participation-perso">
-                                    Acessar grupo
-                                </button>
+                <% if(groups.length === 0) { %>
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <h2 id="h2-modal">Você não está inscrito em nenhum grupo ainda</h2>
+                            <i class="material-icons">close</i> <br>
+                            <a href="/gruposPesquisa">
+                                <button id="close-modal-btn" class="modal-button">Se inscrever</button>
                             </a>
-                            <form action="/groups/disparticipate" method="post">
-                                <input type="hidden" value="<%= dados.id %>" name="groupid">
-                                <button id="btt-participation" class="btt-participation-perso">
-                                    Tirar participação
-                                </button>
-                            </form>
                         </div>
                     </div>
-                <% }) %>
+                <% } else { %>
+                    <% groups.forEach((dados) => { %>
+                        <div id="publications-homepage">
+                            <div id="event-banner">
+                                <% if (dados.imageBase64) { %>
+                                    <img id="img-banner" src="<%= dados.imageGroup %>" alt="">
+                                <% } else { %>
+                                    <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
+                                <% } %>
+
+                                <div id="event-title">
+                                    <p id="p-event-title"><%= dados.name %></p>
+                                </div>
+
+                                <% if(dados.creator.profileimage) { %>
+                                    <div id="profile-image">
+                                        <img src="<%= dados.creator.profileimage %>" id="profile">              
+                                    </div>
+                                <% } else { %>
+                                    <div id="profile-image">
+                                        <img src="../../../imagens/user.jpg" id="profile">              
+                                    </div>
+                                <% } %>
+                            </div>
+
+                            <div id="event-info-container">
+                                <ul>
+                                    <li>
+                                        <i class="material-icons">mail</i>
+                                        <%= dados.isPublic %> - Criado por @<%= dados.creator.userName %>
+                                    </li>
+
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">person</i>
+                                        Quantidade de membros: <%= dados.memberCount %>
+                                    </li>
+
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">description</i>
+                                        Descrição:
+                                    </li>
+                                    <div id="event-description" class="event-description-perso">
+                                        <p id="p-event-description">
+                                            <%= dados.description %>
+                                        </p>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <li>
+                                        <i class="material-icons">description</i>
+                                        Regras:
+                                    </li>
+                                    <div id="event-description" class="event-description-perso">
+                                        <p id="p-event-description">
+                                            <%= dados.rules %>                                        
+                                        </p>
+                                    </div>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <a href="/acessarGrupo/<%= dados.id %>">
+                                    <button id="btt-participation" class="btt-participation-perso">
+                                        Acessar grupo
+                                    </button>
+                                </a>
+                                <form action="/groups/disparticipate" method="post">
+                                    <input type="hidden" value="<%= dados.id %>" name="groupid">
+                                    <button id="btt-participation" class="btt-participation-perso">
+                                        Tirar participação
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } %>
             </div>
         </div>
     </div>
