@@ -95,6 +95,13 @@
                                     <%= dados.descricao %>
                                 </p>
                             </div>  
+
+                            <form action="/editarEvento" method="post">
+                                <input type="hidden" name="eventId" value="<%= dados.id %>">
+                                <button id="btt-edit">
+                                    Editar seu evento
+                                </button>
+                            </form>
                         </div>
                     <% }) %>
                 <% } %>

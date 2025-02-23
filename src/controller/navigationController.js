@@ -222,7 +222,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
             });
         } else {
             res.redirect('/homepage'); // Caso não haja eventos para exibir
-            console.log('nao tem eventos' + events);
+            //console.log('nao tem eventos' + events);
         }
     } catch (error) {
         console.log('Error at rendering "eventos-inscritos"', error);

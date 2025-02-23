@@ -146,14 +146,14 @@
 </body>
 
 <script>
-    var formParticipation = document.querySelectorAll('.formRemovePart');
+    const formParticipation = document.querySelectorAll('.formRemovePart');
     formParticipation.forEach(form =>{
         form.addEventListener('submit', (event) =>{
             event.preventDefault();
     
-            var modal2 = document.getElementById('modal2');
-            var bttModal2 = document.getElementById('close-modal-btn2');
-            var spanbtt2 = document.getElementById('span-btt2');
+            const modal2 = document.getElementById('modal2');
+            const bttModal2 = document.getElementById('close-modal-btn2');
+            const spanbtt2 = document.getElementById('span-btt2');
     
             modal2.style.display = 'block'
             
@@ -170,7 +170,7 @@
 
     //modal3
 
-    var modal3 = document.getElementById('modal3');
+    const modal3 = document.getElementById('modal3');
 
     document.addEventListener('DOMContentLoaded', () =>{
         const urlParams = new URLSearchParams(window.location.search);

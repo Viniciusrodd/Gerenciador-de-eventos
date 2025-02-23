@@ -111,7 +111,7 @@
                                         Acessar grupo
                                     </button>
                                 </a>
-                                <form action="/groups/disparticipate" method="post">
+                                <form action="/groups/disparticipate" method="post" class="formRemovePart">
                                     <input type="hidden" value="<%= dados.id %>" name="groupid">
                                     <button id="btt-participation" class="btt-participation-perso">
                                         Tirar participação
@@ -123,6 +123,71 @@
                 <% } %>
             </div>
         </div>
+
+        <!--Modal 2-->
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="span-btt2">&times;</span>
+                <h2 id="h2-modal2">Só um momento!</h2>
+                <i class="material-icons">info</i>
+                <p id="p-modal2">Tem certeza sobre remover sua participação desse grupo ?</p>
+                <button id="close-modal-btn2" class="modal-button">Tenho certeza</button>
+            </div>
+        </div>
+
+        <!--Modal 3-->
+
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h2 id="h2-modal3">Sucesso!</h2>
+                <i class="material-icons">handshake</i>
+                <p id="p-modal3">Participação registrada!</p>
+                <p id="p-modal3">Confira em Grupos Inscritos suas participações</p>
+            </div>
+        </div>
     </div>
 </body>
+
+<script>
+    const formParticipation = document.querySelectorAll('.formRemovePart');
+    formParticipation.forEach(form =>{
+        form.addEventListener('submit', (event) =>{
+            event.preventDefault();
+    
+            const modal2 = document.getElementById('modal2');
+            const bttModal2 = document.getElementById('close-modal-btn2');
+            const spanbtt2 = document.getElementById('span-btt2');
+    
+            modal2.style.display = 'block'
+            
+            spanbtt2.addEventListener('click', () =>{
+                modal2.style.display = 'none';
+            })
+            bttModal2.addEventListener('click', () =>{
+                modal2.style.display = 'none';
+                form.submit();
+            })
+        })
+    })
+
+    //modal3
+
+    const modal3 = document.getElementById('modal3');
+
+    document.addEventListener('DOMContentLoaded', () =>{
+        const urlParams = new URLSearchParams(window.location.search);
+        const sucessMsg = urlParams.get('participationCreated');
+        if(sucessMsg){
+            modal3.style.display = 'block'
+            setTimeout(() =>{
+                modal3.style.display = 'none'
+                urlParams.delete('participationCreated');
+                const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+                history.replaceState(null, '', newUrl);
+            }, 3000)
+        }
+    })
+</script>
+
 </html>

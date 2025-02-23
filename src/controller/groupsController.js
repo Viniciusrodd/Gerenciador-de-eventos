@@ -85,16 +85,20 @@ router.post('/groupParticipation', async (req, res) =>{
             return res.status(404).send('Group not found');
         }
 
-        await userGroupsModel.create({
-            userId: userid,
-            groupId: groupid
-        })
-        .then(() =>{
-            res.redirect('/gruposInscritos');
-        })
-        .catch((error) =>{
-            res.status(500).send('Error at create Group participation', error);
-        })
+        const [participation, created] = await userGroupsModel.findOrCreate({
+            where: {
+                userId: userid,
+                groupId: groupid                            
+            }
+        });
+
+        if(created){
+            console.log('Group participation created');
+            return res.redirect('/gruposInscritos?participationCreated=participation');
+        }else{
+            console.log('Participation already exist');
+            return res.redirect('/gruposInscritos?participationExist=participation');
+        }
     }
     catch(error){
         console.log('Internal server error at Group participation', error);
