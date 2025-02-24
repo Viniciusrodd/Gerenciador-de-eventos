@@ -52,6 +52,27 @@ header{
     background-color: transparent;
 }
 
+.hr-header{
+    height: 2px;
+    width: 50%;
+    background-color: white;
+    border: none;
+}
+
+#container-titulo-homepage{
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+}
+
+#titulo-homepage{
+    color: white;
+    text-shadow: 3px 3px black;
+    font-style: italic;
+    font-size: 55px;
+    margin: 0px 0px 3px 0px;
+    text-align: center;
+}
+
 .titulo{
     color: white;
     text-shadow: 4px 4px black;
@@ -183,8 +204,8 @@ a:hover{
     width: 80%;
     color: black;
     background-color: black;
+    border: none;
 }
-
 
 /*EVENTOS-CONTAINER*/
 

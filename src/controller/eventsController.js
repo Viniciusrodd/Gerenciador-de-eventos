@@ -50,8 +50,8 @@ router.post('/deleteEvents', async (req, res) =>{
         });
 
         if(!participationData){
-            console.log('Error at delete Participation Event Data');
-            return res.status(500).send('Error at delete Participation Event Data');
+            console.log("Events Participations doesn't exist");
+            return res.redirect('/homepage');
         }
 
         if(!eventData){
