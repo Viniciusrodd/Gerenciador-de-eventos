@@ -165,18 +165,15 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
         });
 
         const eventIdsForUser = participationData.map(participation => participation.dataValues.eventId);
-        console.log('Event IDs for User:', eventIdsForUser);
-
-        if (eventIdsForUser.length === 0) {
-            return res.render('../views/events.ejs/eventos-inscritos', {
-                dadosEvents: eventIdsForUser
-            });
-        }
+        //console.log('Event IDs for User:', eventIdsForUser);
         
         const events = await eventModel.findAll({
             order: [['id', 'DESC']],
             where: {
-                id: eventIdsForUser, // Filtrar apenas pelos IDs encontrados
+                [Op.or]: [
+                    {id: eventIdsForUser},
+                    {userId: userId}
+                ]
             },
             include: [
                 {
@@ -228,7 +225,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
                 userData: req.session.user
             });
         } else {
-            res.redirect('/homepage'); // Caso não haja eventos para exibir
+            return res.redirect('/eventosInscritos'); // Caso não haja eventos para exibir
             //console.log('nao tem eventos' + events);
         }
     } catch (error) {
