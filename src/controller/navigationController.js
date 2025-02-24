@@ -164,6 +164,12 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
             where: { userId: userId } 
         });
 
+        if(participationData.length == 0){
+            return res.render('../views/events.ejs/eventos-inscritos', {
+                dadosEvents: participationData
+            })
+        }
+
         const eventIdsForUser = participationData.map(participation => participation.dataValues.eventId);
         //console.log('Event IDs for User:', eventIdsForUser);
         

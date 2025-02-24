@@ -89,6 +89,11 @@
                                 </ul>
                             </div>    
 
+                            <a href="/acessarGrupo/<%= dados.id %>">
+                                <button id="btt-participation" class="btt-participation-perso">
+                                    Acessar seu grupo
+                                </button>
+                            </a>
                             <form action="/editarGrupo" method="get">
                                 <input type="hidden" name="groupId" value="<%= dados.id %>">
                                 <button id="btt-edit">

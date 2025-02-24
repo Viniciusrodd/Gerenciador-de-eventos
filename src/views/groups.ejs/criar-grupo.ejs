@@ -31,7 +31,7 @@
             </h3>
             
             <label for="nameGrup">NOME DO GRUPO</label>
-            <input type="text" name="nameGroup" id="inomeEvento" required>
+            <input type="text" name="nameGroup" id="inomeEvento" required maxlength="25">
             
             
             <input type="hidden" name="type" id="itipo" class="cursorPointer" required value="Privado"> 
@@ -39,7 +39,7 @@
             <fieldset>
                 <legend>DESCRIÇÃO DO GRUPO</legend>
                 <p id="p-textarea">*até 600 caracteres</p>
-                <textarea name="description" id="idescricao" required>
+                <textarea name="description" id="idescricao" required maxlength="600">
 
                 </textarea>
             </fieldset>
@@ -48,7 +48,7 @@
             <fieldset>
                 <legend>REGRAS DO GRUPO</legend>
                 <p id="p-textarea">*até 600 caracteres</p>
-                <textarea name="rules" id="idescricao" required>
+                <textarea name="rules" id="idescricao" required maxlength="600">
 
                 </textarea>
             </fieldset>

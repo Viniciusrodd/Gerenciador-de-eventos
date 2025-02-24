@@ -41,7 +41,7 @@
                 <fieldset>
                     <legend>DESCRIÇÃO DO GRUPO</legend>
                     <p id="p-textarea">*até 600 caracteres</p>
-                    <textarea name="description" id="idescricao" required data-original="<%= group.description %>">
+                    <textarea name="description" id="idescricao" required data-original="<%= group.description %>" maxlength="600">
                         <%= group.description %>
                     </textarea>
                 </fieldset>
@@ -50,7 +50,7 @@
                 <fieldset>
                     <legend>REGRAS DO GRUPO</legend>
                     <p id="p-textarea">*até 600 caracteres</p>
-                    <textarea name="rules" id="idescricao" required data-original="<%= group.rules %>">
+                    <textarea name="rules" id="idescricao" required data-original="<%= group.rules %>" maxlength="600">
                        <%= group.rules %>
                     </textarea>
                 </fieldset>

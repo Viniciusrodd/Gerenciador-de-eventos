@@ -31,7 +31,7 @@
             </h3>
 
             <label for="nomeEvento">NOME DO EVENTO</label>
-            <input type="text" name="nomeEvento" id="inomeEvento" required>
+            <input type="text" name="nomeEvento" id="inomeEvento" required maxlength="25">
             
             
             <% if(groupId == 0) { %>
@@ -41,7 +41,7 @@
             <% } %>
             
             <label for="organizador">ORGANIZADOR DO EVENTO</label>
-            <input type="text" name="organizador" id="iorganizador" required>
+            <input type="text" name="organizador" id="iorganizador" required maxlength="50">
             
             
             <label for="data">DATA DO EVENTO</label>
@@ -57,12 +57,12 @@
 
             
             <label for="endereco">ENDEREÇO DO EVENTO</label>
-            <input type="text" name="endereco" id="iendereco" required>
+            <input type="text" name="endereco" id="iendereco" required maxlength="50">
             
             <fieldset>
                 <legend>DESCRIÇÃO</legend>
                 <p id="p-textarea">*até 600 caracteres</p>
-                <textarea name="descricao" id="idescricao" required>
+                <textarea name="descricao" id="idescricao" required maxlength="600">
 
                 </textarea>
             </fieldset>
