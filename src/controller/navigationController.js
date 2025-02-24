@@ -145,7 +145,7 @@ router.get('/homepage', userAuth, async (req, res) =>{
 //EVENTS CREATE VIEW
 router.get('/criarEventos/:groupId', userAuth,(req, res) =>{        
     const user = req.session.user;
-    const groupIdVar = req.params.groupId; 
+    const groupIdVar = parseInt(req.params.groupId, 10); // Converte para inteiro em base decimal
 
     res.render('../views/events.ejs/criar-eventos', {
         userData: user,
@@ -170,10 +170,7 @@ router.get('/eventosInscritos', userAuth, async (req, res) => {
         const events = await eventModel.findAll({
             order: [['id', 'DESC']],
             where: {
-                [Op.or]: [
-                    {id: eventIdsForUser},
-                    {userId: userId}
-                ]
+                id: eventIdsForUser
             },
             include: [
                 {

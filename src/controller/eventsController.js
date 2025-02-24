@@ -33,22 +33,39 @@ router.post('/events/disparticipate', userAuth, (req, res) =>{
 
 
 //DELETE EVENTS
-router.post('/deleteEvents', (req, res) =>{
+router.post('/deleteEvents', async (req, res) =>{
     const eventId = req.body.id;
 
-    eventModel.destroy({
-        where:{
-            id: eventId
+    try{
+        const participationData = await participationModel.destroy({
+            where: {
+                eventId: eventId
+            }
+        });
+
+        const eventData = await eventModel.destroy({
+            where:{
+                id: eventId
+            }
+        });
+
+        if(!participationData){
+            console.log('Error at delete Participation Event Data');
+            return res.status(500).send('Error at delete Participation Event Data');
         }
-    })
-    .then(() =>{
+
+        if(!eventData){
+            console.log('Error at delete Event Data');
+            return res.status(500).send('Error at delete Event Data');
+        }
+
         console.log('Event deleted with sucess');
         return res.redirect('/homepage');
-    })
-    .catch((error) =>{
+    }
+    catch(error){
         console.log('Failed at delete event', error);
-        return res.redirect('/editarEvento');
-    });
+        return res.status(500).send('Failed at delete event', error);
+    }
 });
 
 
@@ -141,12 +158,13 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         groupId
     } = req.body;
 
+
     if (!req.session.user) {
         res.status(401).send('Usuário não autenticado.');
         return;
     }
 
-    if(req.file){
+    if(req.file && groupId != 0){
         const imagemBuffer = req.file.buffer;
 
         eventModel.create({
@@ -164,13 +182,15 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         })
         .then(() => {
             console.log('Event created with success!');
-            res.redirect('/homepage');
+            res.redirect('/meusEventos');
         })
         .catch((error) => {
             console.error('Error at created event:', error);
             res.status(500).redirect('/criarEventos');
         });
-    }else{
+    }
+    
+    if(!req.file && groupId != 0){
         eventModel.create({
             nome: nomeEvento,
             tipo: tipo,
@@ -185,10 +205,55 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         })
         .then(() => {
             console.log('Event created with success! (without image)');
-            res.redirect('/homepage');
+            res.redirect('/meusEventos');
         })
         .catch((error) => {
             console.error('Erro at create event (without image):', error);
+            res.status(500).redirect('/criarEventos');
+        });
+    }
+
+    if(req.file && groupId == 0){
+        eventModel.create({
+            nome: nomeEvento,
+            tipo: tipo,
+            organizador: organizador,
+            data: data,
+            hora_inicio: hora_inicio,
+            hora_fim: hora_fim,
+            endereco: endereco,
+            descricao: descricao,
+            image: imagemBuffer,
+            userId: req.session.user.id,
+        })
+        .then(() => {
+            console.log('Event created with success! (without group)');
+            res.redirect('/meusEventos');
+        })
+        .catch((error) => {
+            console.error('Erro at create event (without group):', error);
+            res.status(500).redirect('/criarEventos');
+        });
+    }
+
+    if(!req.file && groupId == 0){
+        eventModel.create({
+            nome: nomeEvento,
+            tipo: tipo,
+            organizador: organizador,
+            data: data,
+            hora_inicio: hora_inicio,
+            hora_fim: hora_fim,
+            endereco: endereco,
+            descricao: descricao,
+            userId: req.session.user.id,
+        })
+        .then(() => {
+            console.log('Event created with success! (without image) and (without group)');
+            res.redirect('/meusEventos');
+        })
+        .catch((error) => {
+            console.error('Error at created event: (without image) and (without group)', error);
             res.status(500).redirect('/criarEventos');
         });
     }
