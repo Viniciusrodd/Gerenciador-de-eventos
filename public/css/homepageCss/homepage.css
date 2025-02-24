@@ -425,6 +425,10 @@ li:hover{
     transform: scale(1.04);
 }
 
+#p-participation{
+    font-size: 20px;
+    font-weight: bold;
+}
 
 /*GROUPS*/
 #group-name{

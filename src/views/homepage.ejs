@@ -156,21 +156,22 @@
                             </p>
                         </div>
 
-                        <% if (dadosEvents.userId != userId) { %>
-                            <form action="/participate" method="post">
-                                <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
-                                <input type="hidden" name="userId" value="<%= userId %>">
-                                <button id="btt-participate">Participar</button>
-                            </form>    
-                        <% } %>
-
-                        <% if(dadosEvents.userId == userId) { %>
+                        <% if(eventsParticipate.some((data) => data.eventId == dadosEvents.id) || dadosEvents.userId == userId) { %>
+                            <p id="p-participation">Você já participa desse grupo</p>
+                            <!--
                             <form action="/editarEvento" method="get">
                                 <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
                                 <button id="btt-edit">
                                     Editar seu evento
                                 </button>
                             </form>
+                            -->
+                        <% } else { %>
+                            <form action="/participate" method="post">
+                                <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
+                                <input type="hidden" name="userId" value="<%= userId %>">
+                                <button id="btt-participate">Participar</button>
+                            </form>    
                         <% } %>
                     </div>
                 <% }) %>

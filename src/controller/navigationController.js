@@ -122,10 +122,17 @@ router.get('/homepage', userAuth, async (req, res) =>{
             }
         });
 
+        const eventsParticipate = await participationModel.findAll({
+            where: {
+                userId: userIdSession
+            }
+        })
+        
         res.render('homepage', {
             dadosEvents: eventData,
             dadosProfile: profileData,
-            userId: userIdSession
+            userId: userIdSession,
+            eventsParticipate
         });    
     }
     catch(error){
