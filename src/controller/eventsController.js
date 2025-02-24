@@ -70,7 +70,7 @@ router.post('/deleteEvents', async (req, res) =>{
 
 
 //UPLOAD EVENTS
-router.put('/uploadEvents/:id', upload.array('image'), async (req, res) => {
+router.put('/uploadEvents/:id', userAuth, upload.array('image'), async (req, res) => {
     try {
         const eventId = req.params.id;
         const updates = req.body;
@@ -95,7 +95,7 @@ router.put('/uploadEvents/:id', upload.array('image'), async (req, res) => {
         await event.save();
 
         console.log('Event updated successfully');
-        return res.redirect('/homepage');
+        return res.redirect('/meusEventos');
     } catch (error) {
         console.error('Error updating event:', error);
         res.status(500).send({ message: 'Server error.' });

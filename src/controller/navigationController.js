@@ -524,6 +524,7 @@ router.get('/meusGrupos', userAuth, async (req, res) => {
 
     try{
         const groups = await groupsModel.findAll({
+            order: [['id', 'DESC']],
             where: {
                 creatorId: userIdVar
             }

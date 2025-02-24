@@ -36,12 +36,7 @@
                 <input type="text" name="name" id="inomeEvento" data-original="<%= group.name %>" placeholder="<%= group.name %>" required value="<%= group.name %>" maxlength="25">
                 
                 
-                <label for="type">TIPO DE GRUPO</label>
-                <select name="isPublic" id="itipo" class="cursorPointer" required> 
-                    <option value="<%= group.isPublic %>" selected data-original="<%= group.isPublic %>"><%= group.isPublic %></option>        
-                    <option value="Privado">Privado</option>
-                    <option value="Público">Público</option>
-                </select>
+                <input type="hidden" name="type" id="itipo" class="cursorPointer" required value="<%= group.isPublic %>" data-original="<%= group.isPublic %>"> 
                 
                 <fieldset>
                     <legend>DESCRIÇÃO DO GRUPO</legend>

@@ -34,13 +34,11 @@
             <input type="text" name="nomeEvento" id="inomeEvento" required>
             
             
-            <label for="tipo">TIPO DE EVENTO</label>
-            <select name="tipo" id="itipo" class="cursorPointer" required> 
-                <option value="" selected></option>        
-                <option value="Privado">Privado</option>
-                <option value="Público">Público</option>
-            </select>
-
+            <% if(groupId == 0) { %>
+                <input type="hidden" name="tipo" value="Público">
+            <% } else { %>
+                <input type="hidden" name="tipo" value="Privado">                
+            <% } %>
             
             <label for="organizador">ORGANIZADOR DO EVENTO</label>
             <input type="text" name="organizador" id="iorganizador" required>

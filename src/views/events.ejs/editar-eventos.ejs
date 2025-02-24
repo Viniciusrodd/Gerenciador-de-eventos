@@ -34,15 +34,10 @@
 
                 <label for="nome">Editar nome:</label>
                 <input type="text" name="nome" id="inome" data-original="<%= event.nome %>" placeholder="<%= event.nome %>" maxlength="25" value="<%= event.nome %>">
-
                 
-                <label for="tipo">Editar tipo:</label>
-                <select name="tipo" id="itipo" class="cursorPointer"> 
-                    <option value="<%= event.tipo %>" selected data-original="<%= event.tipo %>"><%= event.tipo %></option>        
-                    <option value="Privado">Privado</option>
-                    <option value="Público">Público</option>
-                </select>
-
+       
+                <input type="hidden" name="tipo" value="<%= event.tipo %>" data-original="<%= event.tipo %>">
+                
                 
                 <label for="organizador">Editar organizador:</label>
                 <input type="text" name="organizador" id="iorganizador" value="<%= event.organizador %>" placeholder="<%= event.organizador %>" maxlength="50" data-original="<%= event.organizador %>">
@@ -209,7 +204,7 @@
         })
         .then(() =>{
             console.log('Sucess updated (frontend)');
-            window.location.href = '/homepage';
+            window.location.href = '/meusEventos';
         })
         .catch(err => {
             console.error('Error at requisition event update:', err);

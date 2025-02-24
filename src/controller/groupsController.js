@@ -56,11 +56,11 @@ router.post('/createGroup', upload.single('image'), async (req, res) =>{
             groupId: newGroup.id
         });
 
-        res.redirect('/gruposPesquisa');
+        return res.redirect('/meusGrupos');
     }
     catch(error){
         console.log('Internal server error at create a group', error);
-        res.status(500).redirect('/criarGrupos');
+        return res.status(500).redirect('/criarGrupos');
     }
 });
 
