@@ -31,7 +31,7 @@
             </h3>
 
             <label for="nomeEvento">NOME DO EVENTO</label>
-            <input type="text" name="nomeEvento" id="inomeEvento" required maxlength="25">
+            <input type="text" name="nomeEvento" id="inomeEvento" required maxlength="30">
             
             
             <% if(groupId == 0) { %>
@@ -153,9 +153,9 @@
                 errorMessages.push(`O ano inserido não pode ser maior que ${currentYear}`);
             }
 
-            if(eventName.value.length > 25){
+            if(eventName.value.length > 30){
                 isValid = false;
-                errorMessages.push(`Nome de evento pode ter no máximo 25 caracteres!!!`);
+                errorMessages.push(`Nome de evento pode ter no máximo 30 caracteres!!!`);
             }
             if(organizer.value.length > 50){
                 isValid = false;

@@ -92,6 +92,10 @@ router.post('/groupParticipation', async (req, res) =>{
         });
 
         if(created){
+            await groupModel.increment('memberCount', {
+                where: { id: groupid }
+            });
+
             console.log('Group participation created');
             return res.redirect('/gruposInscritos?participationCreated=participation');
         }else{
@@ -106,26 +110,33 @@ router.post('/groupParticipation', async (req, res) =>{
 }); 
 
 
-router.post('/groups/disparticipate', userAuth, (req, res) => {
+router.post('/groups/disparticipate', userAuth, async (req, res) => {
     const groupIdVar = req.body.groupid;
     const userIdVar = req.session.user.id;
 
-    userGroupsModel.destroy({
-        where: {
-            [Op.and]: [
-                { groupId: groupIdVar },
-                { userId: userIdVar }
-            ]
+    try{
+        const groupDestroy = await userGroupsModel.destroy({
+            where: {
+                [Op.and]: [
+                    { groupId: groupIdVar },
+                    { userId: userIdVar }
+                ]
+            }
+        })
+
+        if(groupDestroy){
+            await groupModel.decrement('memberCount', {
+                where: { id: groupIdVar }
+            })
+        
+            console.log('Participation group removed');
+            return res.redirect('/gruposInscritos');
         }
-    })
-    .then(() => {
-        console.log('Participation group removed');
-        return res.redirect('/gruposInscritos');
-    })
-    .catch((error) => {
+    }
+    catch(error){
         console.log('Internal error at Remove participation of a group', error);
         return res.status(500).send('Internal error at Remove participation of a group', error);
-    });
+    }
 });
 
 

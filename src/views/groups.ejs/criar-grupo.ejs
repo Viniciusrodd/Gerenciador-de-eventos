@@ -31,7 +31,7 @@
             </h3>
             
             <label for="nameGrup">NOME DO GRUPO</label>
-            <input type="text" name="nameGroup" id="inomeEvento" required maxlength="25">
+            <input type="text" name="nameGroup" id="inomeEvento" required maxlength="40">
             
             
             <input type="hidden" name="type" id="itipo" class="cursorPointer" required value="Privado"> 
@@ -115,9 +115,9 @@
             const groupName = document.getElementById('inomeEvento');
             const description_rules = document.getElementById('idescricao');
 
-            if(groupName.value.length > 25){
+            if(groupName.value.length > 40){
                 isValid = false;
-                errorMessages.push(`Nome de grupo pode ter no máximo 25 caracteres!!!`);
+                errorMessages.push(`Nome de grupo pode ter no máximo 40 caracteres!!!`);
             }
 
             if(description_rules.value.length > 600){

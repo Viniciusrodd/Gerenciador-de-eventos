@@ -164,8 +164,8 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         return;
     }
 
+    const imagemBuffer = req.file.buffer;
     if(req.file && groupId != 0){
-        const imagemBuffer = req.file.buffer;
 
         eventModel.create({
             nome: nomeEvento,

@@ -10,8 +10,8 @@ const config = {
 
 
 // Exibe a configuração no console (apenas para debug)
-console.log('Configurações do Sequelize:');
-console.log(config);
+// console.log('Configurações do Sequelize:');
+// console.log(config);
 
 // Exporta a configuração para o Sequelize CLI
 module.exports = config;
