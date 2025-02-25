@@ -281,12 +281,12 @@ a:hover{
 
 .profile-image{
     position: absolute;
-    height: 120px;
-    width: 120px;
+    height: 140px;
+    width: 140px;
     border-radius: 100px;
     margin: 0px 20px 10px 0px;
     justify-self: flex-end;
-    box-shadow: rgba(0, 0, 0, 0.602) 0px 6px 11px;
+    border: 4px solid black;
 
     & img{
         height: 100%;
@@ -456,6 +456,7 @@ li:hover{
     font-size: 30px;
     text-shadow: 0px 2px 2px var(--cor02);
     margin: 0px 0px 5px 0px;
+    text-align: center;
 }
 
 /*modal*/
