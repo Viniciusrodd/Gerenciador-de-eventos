@@ -1,0 +1,17 @@
+
+const path = require('path');
+
+const config = {
+    'config': path.resolve('./src/database/config', 'config.js'),
+    'models-path': path.resolve('./src/database/models'),
+    'seeders-path': path.resolve('./src/database/seeders'),
+    'migrations-path': path.resolve('./src/database/migrations')
+}
+
+
+// Exibe a configuração no console (apenas para debug)
+console.log('Configurações do Sequelize:');
+console.log(config);
+
+// Exporta a configuração para o Sequelize CLI
+module.exports = config;
