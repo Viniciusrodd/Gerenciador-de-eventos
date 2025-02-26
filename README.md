@@ -1,43 +1,138 @@
 
-# Gerenciador de Eventos
+# 🎉 Gerenciador de Eventos
 
-Esse é o projeto do **Gerenciador de Eventos**, criado como parte de uma atividade extensionista da faculdade. A ideia é criar uma plataforma simples e prática para organizar e participar de eventos, ajudando a conectar a galera da faculdade e da comunidade de forma bem fácil.
+Esse é o projeto do **Gerenciador de Eventos**, criado como parte de uma atividade extensionista da faculdade. A ideia é criar uma plataforma simples e prática para organizar e participar de eventos.
+
+---
 
 ## 🌟 Qual é o propósito desse projeto?
 
-O Gerenciador de Eventos foi feito para facilitar a criação e a participação em eventos. Ele tem um foco bem social e acadêmico, ajudando na organização de eventos e promovendo a interação entre os participantes, seja para trocar ideias, aprender algo novo ou só se divertir.
+O **Gerenciador de Eventos** foi feito para facilitar a criação e a participação em eventos. Ele tem um foco social, ajudando na organização de eventos e promovendo a interação entre os participantes. Além disso, o projeto pode ser alinhado com os **Objetivos de Desenvolvimento Sustentável (ODS)**, como:
 
-### 🏫 O que são atividades extensionistas?
+- **📚 ODS 4** - Educação de Qualidade
+- **⚖️ ODS 16** - Paz, Justiça e Instituições Eficazes
 
-Atividades extensionistas são aquelas iniciativas da faculdade que ajudam a integrar o pessoal da universidade com a comunidade externa. Com isso, o projeto ajuda a divulgar e organizar eventos de forma mais organizada e acessível, trazendo mais pessoas para os eventos da faculdade.
+---
+
+## 🏫 O que são atividades extensionistas?
+
+Atividades extensionistas são iniciativas da faculdade que ajudam a integrar o pessoal da universidade com a comunidade externa. Esse projeto auxilia na **divulgação e organização de eventos**, tornando tudo mais acessível e eficiente.
+
+---
 
 ## 🛠️ Funcionalidades principais
 
-Aqui estão as principais coisas que o sistema faz:
+### 🙋‍♂️ Gerenciar seu perfil
+- **Cadastro e login:** Sistema de login para manter as contas organizadas e seguras.
+- **Editar perfil:** Possibilidade de atualizar informações pessoais e foto de perfil.
+- **Logout:** Sair da conta com segurança.
 
 ### 📅 Criar e gerenciar eventos
-- **Criar eventos**: Quem está autenticado pode criar eventos, definir data, horário, local, descrição e muito mais.
-- **Ver eventos**: Todos os eventos estão organizados de maneira bem visual, com imagens e datas certinhas.
-- **Editar eventos**: Quem organizou o evento pode ir lá e editar as informações quando necessário.
+- **Criar eventos:** Usuários autenticados podem criar eventos com data, horário, local e descrição.
+- **Ver eventos:** Todos os eventos são exibidos de forma visual e organizada.
+- **Editar eventos:** Organizadores podem editar informações dos eventos criados.
 
 ### 🎟️ Participação nos eventos
-- **Se inscrever em eventos**: Quem quiser participar de um evento pode se inscrever com facilidade.
-- **Ver seus eventos inscritos**: Aqui você pode ver todos os eventos que já se inscreveu e acompanhar o que está rolando.
-- **Meus eventos**: Se você é o organizador, pode ver todos os eventos que criou.
+- **Se inscrever em eventos:** Inscrição fácil para participação.
+- **Ver eventos inscritos:** Acompanhamento dos eventos em que o usuário está cadastrado.
+- **Meus eventos:** Organizadores podem visualizar seus eventos criados.
 
-### 🙋‍♂️ Gerenciar seu perfil
-- **Cadastro e login**: Sistema de login para manter as coisas organizadas e seguras.
-- **Editar perfil**: Dá pra mudar as informações pessoais e até colocar uma foto nova.
-- **Logout**: Sair da conta com segurança.
+### 👥 Funcionalidade de Grupos
+- **Criar grupos:** Usuários podem criar grupos para eventos específicos.
+- **Participar de grupos:** Entrada fácil em grupos de interesse.
+- **Eventos privados:** Grupos podem ter eventos exclusivos para membros.
+- **Pesquisar grupos:** Busca por grupos por nome ou categoria.
+- **Editar grupos:** Criadores podem modificar informações do grupo.
 
-## 🖥️ O que foi usado para criar esse projeto?
+---
 
-- **Node.js**: O backend que faz todo o sistema funcionar.
-- **Express**: Framework para facilitar as rotas e a estrutura do backend.
-- **Sequelize**: ORM para mexer com o banco de dados de forma simples.
-- **Moment.js**: Para lidar com datas e horários de forma fácil.
-- **EJS**: Para gerar as páginas dinâmicas que os usuários veem no navegador.
-- **Session**: Para manter o usuário logado durante a navegação.
-- **Multer**: Middleware para o upload de arquivos (como imagens dos eventos e dos perfis).
-- **Bcrypt**: Para fazer a criptografia das senhas de forma segura.
-- **FS (File System)**: Para trabalhar com arquivos no servidor.
+## 🖥️ Tecnologias utilizadas
+
+- **Node.js** - Backend eficiente para a aplicação.
+- **Express** - Framework para rotas e estrutura do backend.
+- **MySQL** - Banco de dados relacional.
+- **Sequelize** - ORM para interação com o banco de dados.
+- **Moment.js** - Manipulação de datas e horários.
+- **EJS** - Template engine para páginas dinâmicas.
+- **Session** - Gerenciamento de sessão do usuário.
+- **Multer** - Upload de arquivos (imagens de eventos e perfis).
+- **Bcrypt** - Criptografia de senhas.
+- **FS (File System)** - Manipulação de arquivos no servidor.
+
+---
+
+## 🚀 Como rodar o projeto localmente
+
+### 🛠️ 1. Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado:
+
+- **Node.js** (versão LTS recomendada)
+- **MySQL**
+- **Git** (opcional, mas recomendado para clonar o repositório)
+
+### 📥 2. Clonar o repositório
+
+```bash
+# Clonando o repositório
+git clone https://github.com/Viniciusrodd/Gerenciador-de-eventos.git
+
+# Acesse a pasta do projeto
+cd gerenciador-de-eventos
+```
+
+### 📦 3. Instalar as dependências
+
+```bash
+npm install
+```
+
+Isso instalará todas as bibliotecas necessárias, como Express, Sequelize, EJS, entre outras.
+
+### 🛢️ 4. Configurar o banco de dados
+
+Abra o MySQL e crie um banco de dados para o projeto:
+
+```sql
+CREATE DATABASE gerenciador_eventos;
+```
+
+Configure o arquivo **.env** na raiz do projeto:
+
+```env
+DB_NAME=gerenciador_eventos
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_HOST=localhost
+DB_DIALECT=mysql
+SESSION_SECRET=sua_chave_secreta_aqui
+PORT=7070   
+```
+
+Execute as migrações para criar as tabelas no banco:
+
+```bash
+npx sequelize db:migrate
+```
+
+### ▶️ 5. Rodar o servidor
+
+```bash
+npm start
+```
+
+Se tudo estiver certo, o terminal mostrará algo como:
+
+```
+Servidor rodando na porta 7070
+```
+
+### 🌍 6. Acessar a aplicação
+
+Abra o navegador e vá até:
+
+```
+http://localhost:7070/registro
+```
+
+Agora o projeto está pronto para ser usado localmente! 🚀
