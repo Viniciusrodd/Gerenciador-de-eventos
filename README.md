@@ -30,6 +30,7 @@ Atividades extensionistas são iniciativas da faculdade que ajudam a integrar o 
 ### 📅 Criar e gerenciar eventos
 - **Criar eventos:** Usuários autenticados podem criar eventos com data, horário, local e descrição.
 - **Ver eventos:** Todos os eventos são exibidos de forma visual e organizada.
+- **Pesquisar eventos:** Busca de eventos por nome.
 - **Editar eventos:** Organizadores podem editar informações dos eventos criados.
 
 ### 🎟️ Participação nos eventos
@@ -41,7 +42,7 @@ Atividades extensionistas são iniciativas da faculdade que ajudam a integrar o 
 - **Criar grupos:** Usuários podem criar grupos para eventos específicos.
 - **Participar de grupos:** Entrada fácil em grupos de interesse.
 - **Eventos privados:** Grupos podem ter eventos exclusivos para membros.
-- **Pesquisar grupos:** Busca por grupos por nome ou categoria.
+- **Pesquisar grupos:** Busca de grupos por nome.
 - **Editar grupos:** Criadores podem modificar informações do grupo.
 
 ---
