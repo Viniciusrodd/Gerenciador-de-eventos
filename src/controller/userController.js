@@ -3,11 +3,14 @@ const express = require('express');
 const router = express.Router();
 const recordModel = require('../models/recordModel');
 const eventModel = require('../models/eventModel');
+const groupModel = require('../models/groupsModel');
+const userGroupsModel = require('../models/userGroupsModel');
+const participationModel = require('../models/participation');
+const conection = require('../database/conection');
 const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const sequelize = require('sequelize');
-
 
 //config do multer
 const storage = multer.memoryStorage();  // Isso armazena os arquivos na memória
@@ -19,23 +22,45 @@ router.post('/deleteAccount', async (req, res) =>{
     const userIdvar = req.session.user.id;
 
     try{
-        await recordModel.destroy({
-            where: {
-                id: userIdvar
-            }
+        // Inicia uma transação para garantir a atomicidade do processo
+        await conection.transaction(async (t) => {
+            // Deleta participações do usuário em grupos, se existirem
+            await userGroupsModel.destroy({
+                where: { userId: userIdvar },
+                transaction: t,
+            });
+
+            // Deleta os grupos que o usuário criou, se existirem
+            await groupModel.destroy({
+                where: { creatorId: userIdvar },
+                transaction: t,
+            });
+
+            // Deleta as participações do usuário em eventos, se existirem
+            await participationModel.destroy({
+                where: { userId: userIdvar },
+                transaction: t,
+            });
+
+            // Deleta os eventos criados pelo usuário, se existirem
+            await eventModel.destroy({
+                where: { userId: userIdvar },
+                transaction: t,
+            });
+
+            // Finalmente, deleta o registro do usuário
+            await recordModel.destroy({
+                    where: { id: userIdvar },
+                    transaction: t,
+                });
         });
 
-        await eventModel.destroy({
-            where: {
-                userId: userIdvar
-            }
-        });
-
-        console.log('Profile deleted with success');
+        console.log('Perfil deletado com sucesso');
         return res.redirect('/login');
     }
     catch(error){
-        res.status(500).send('Delete profile process failed');
+        console.log('Delete profile process failed', error);
+        return res.status(500).send('Delete profile process failed', error);
     };
 });
 
