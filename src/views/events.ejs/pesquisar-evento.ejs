@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisar-eventos</title>
+    <link rel="stylesheet" href="../../css/homepageCss/homepage.css">
+    <link rel="stylesheet" href="../../css/homepageCss/homepageMobile.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="../../imagens/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="div-pai">
+        <header>
+            <h1 class="titulo">Gerência</h1>
+            <div id="header-image">
+    
+            </div>
+            <h1 class="titulo">Eventos</h1>
+        </header>
+
+        <hr class="hr-header">
+        <div id="container-titulo-homepage">
+            <h1 id="titulo-homepage">Pesquisar eventos</h1>
+        </div>
+        <hr class="hr-header">
+
+        <div id="container-homepage">
+            <div id="container-publications">
+                <form action="/eventosPesquisa" method="GET" id="formSearch">
+                    <input type="text" name="search" id="isearch" placeholder="Nome do evento..." value="<%= searchQuery %>">
+                    <button id="btt-participation" class="btt-participation-perso">Pesquisar</button>
+                </form>
+
+
+                <% dadosEvents.forEach((dadosEvents) =>{ %> 
+                    <div id="publications-homepage">
+                        <div id="event-banner">
+                            <% if (dadosEvents.imageBase64) { %>
+                                <img id="img-banner" src="<%= dadosEvents.imageEvent %>" alt="">
+                            <% } else { %>
+                                <img id="img-banner" src="../../imagens/SEM FOTO DE EVENTO.png" alt="">
+                            <% } %>
+
+                            <div id="event-title">
+                                <div id="event-data">
+                                    <p class="p-event-data"><%= dadosEvents.day %></p>
+                                    <hr>
+                                    <p class="p-event-data"><%= dadosEvents.month %></p>
+                                </div>
+                            
+                                <p id="p-event-title"><%= dadosEvents.nome %></p>
+                            </div>
+                            
+                            <% if(dadosEvents.records.profileimage) { %>
+                                <div id="profile-image">
+                                    <img src="<%= dadosEvents.records.profileimage %>" id="profile">              
+                                </div>
+                            <% } else { %>
+                                <div id="profile-image">
+                                    <img src="../../../imagens/user.jpg" id="profile">              
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <div id="event-info-container">
+                            <ul>
+                                <li>
+                                    <i class="material-icons">mail</i>
+                                    <%= dadosEvents.tipo %> - Organizado por @<%= dadosEvents.organizador %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">schedule</i>
+                                    <%= dadosEvents.day %>/<%= dadosEvents.month %>/<%= dadosEvents.year %> 
+                                    das <%= dadosEvents.hora_inicio %> às <%= dadosEvents.hora_fim %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">location_on</i>
+                                    <%= dadosEvents.endereco %>
+                                </li>
+                                <hr>
+                                <li>
+                                    <i class="material-icons">description</i>
+                                    Descrição:
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="event-description">
+                            <p id="p-event-description">
+                                <%= dadosEvents.descricao %>
+                            </p>
+                        </div>
+
+                        <% if(eventsParticipate.some((data) => data.eventId == dadosEvents.id) || dadosEvents.userId == userId) { %>
+                            <p id="p-participation">Você já participa desse grupo</p>
+                            <!--
+                            <form action="/editarEvento" method="get">
+                                <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
+                                <button id="btt-edit">
+                                    Editar seu evento
+                                </button>
+                            </form>
+                            -->
+                        <% } else { %>
+                            <form action="/participate" method="post">
+                                <input type="hidden" name="eventId" value="<%= dadosEvents.id %>">
+                                <input type="hidden" name="userId" value="<%= userId %>">
+                                <button id="btt-participate">Participar</button>
+                            </form>    
+                        <% } %>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

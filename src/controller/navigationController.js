@@ -126,7 +126,7 @@ router.get('/homepage', userAuth, async (req, res) =>{
             where: {
                 userId: userIdSession
             }
-        })
+        });
         
         res.render('homepage', {
             dadosEvents: eventData,
@@ -388,10 +388,10 @@ router.get('/criarGrupos', userAuth, (req, res) => {
 
 //SEARCH GROUP VIEW
 router.get('/gruposPesquisa', userAuth, async (req, res) =>{
-    try{
-        const searchQuery = req.query.search; //group name of search at frontend
-        const userId = req.session.user.id;
-        
+    const searchQuery = req.query.search; //group name of search at frontend
+    const userId = req.session.user.id;
+
+    try{        
         let groups;
         if(searchQuery){
             groups = await groupsModel.findAll({
@@ -659,6 +659,100 @@ router.get('/editarGrupo', userAuth, async (req, res) => {
         console.log('Internal server error at rendering group edit view', error);
         return res.status(500).send('Internal server error at rendering group edit view', error);
     };
+});
+
+
+//SEARCH EVENTS VIEW
+router.get('/eventosPesquisa', userAuth, async (req, res) => {
+    const searchQuery = req.query.search; //group name of search at frontend
+    const userId = req.session.user.id;
+
+    try{
+        let events;
+        if(searchQuery){
+            events = await eventModel.findAll({
+                order: [[ 'id', 'DESC' ]],
+                where: {
+                    nome: {
+                        [Op.like]: `%${searchQuery}%`
+                    }
+                },
+                include: [
+                    {
+                        model: recordModel,
+                        as: 'records', // Alias usado na associação
+                        attributes: ['fullName', 'userName', 'image'],
+                    }
+                ],
+            });
+        }else{
+            events = await eventModel.findAll({
+                order: [[ 'id', 'DESC' ]],
+                include: [
+                    {
+                        model: recordModel,
+                        as: 'records', // Alias usado na associação
+                        attributes: ['fullName', 'userName', 'image'],
+                    }
+                ],
+            });
+        }
+
+        if(!events || events.length === 0){
+            res.redirect('/eventosPesquisa');
+        }
+
+        events.forEach(event => {
+            if (event.records && event.records.image) {
+                // Convertendo a imagem da tabela records para base64
+                event.records.profileimage = Buffer.from(event.records.image).toString('base64');
+                event.records.profileimage = `data:image/jpeg;base64,${event.records.profileimage}`;
+            }
+
+            if (event.image) {
+                event.imageBase64 = Buffer.from(event.image).toString('base64');
+                event.imageEvent = `data:image/jpeg;base64,${event.imageBase64}`;
+            }
+
+            // Trabalhando com a data
+            const eventDate = moment(event.data).tz('America/Sao_Paulo', true);
+            event.day = eventDate.date();
+            event.month = eventDate.month() + 1;
+            event.year = eventDate.year();
+
+            // Trabalhando com o horário
+            if (event.hora_inicio) {
+                const startTime = moment(event.hora_inicio, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                event.startHours = startTime.hours();
+                event.startMinutes = startTime.minutes();
+                event.startSeconds = startTime.seconds();
+            }
+
+            if (event.hora_fim) {
+                const endTime = moment(event.hora_fim, 'HH:mm:ss').tz('America/Sao_Paulo', true);
+                event.endHours = endTime.hours();
+                event.endMinutes = endTime.minutes();
+                event.endSeconds = endTime.seconds();
+            }
+        });
+
+        const eventsParticipate = await participationModel.findAll({
+            where: {
+                userId
+            }
+        })    
+
+        res.render('../views/events.ejs/pesquisar-evento', {
+            dadosEvents: events,
+            userId,
+            eventsParticipate,
+            searchQuery: searchQuery || ''
+        });
+    }
+    catch(error){
+        console.log('Error at rendering search events view', error);
+        return res.status(500).send('Error at rendering search events view', error);
+    }
 });
 
 

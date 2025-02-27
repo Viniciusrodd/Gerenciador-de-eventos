@@ -92,6 +92,65 @@ header{
 }
 
 
+/*PESQUISAR-GRUPO*/
+
+
+#formSearch{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#p-participation{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#isearch{
+    height: 50px;
+    width: 69vw;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+    margin-bottom: 0px;
+    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(47, 10, 33, 0.3) -10px 10px,
+    rgba(60, 19, 45, 0.2) -15px 15px, rgba(82, 25, 61, 0.1) -20px 20px, 
+    rgba(240, 46, 170, 0.05) -25px 25px;
+}
+
+#isearch:focus{
+    outline: none;
+}
+
+#btt-participation{
+    height: 50px;
+    width: 100%;
+    margin-top: 40px;
+    border: none;
+    background-color: rgb(246, 35, 35);
+    color: white;
+    font-size: 19px;
+    border-radius: 10px;
+    padding: 0px 20px 0px 20px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+#btt-participation:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.378);
+    background-color: rgba(246, 35, 35, 0.937);
+    outline: none;
+    transform: scale(1.02);
+}
+
+.btt-participation-perso{
+    width: 100% !important;
+    margin-top: 15px !important;
+    margin-bottom: 20px;
+}
+
+
 /*CONTAINER-HOMEPAGE*/
 
 
