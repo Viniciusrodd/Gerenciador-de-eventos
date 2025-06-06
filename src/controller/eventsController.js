@@ -181,7 +181,7 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         })
         .then(() => {
             console.log('Event created with success!');
-            res.redirect('/meusEventos');
+            res.redirect(`/acessarGrupo/${groupId}`);
         })
         .catch((error) => {
             console.error('Error at created event:', error);
@@ -204,7 +204,7 @@ router.post('/createEvent', upload.single('imagem'), (req, res) =>{
         })
         .then(() => {
             console.log('Event created with success! (without image)');
-            res.redirect('/meusEventos');
+            res.redirect(`/acessarGrupo/${groupId}`);
         })
         .catch((error) => {
             console.error('Erro at create event (without image):', error);
